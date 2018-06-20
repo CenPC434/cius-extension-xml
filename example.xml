@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  
+  This is very rough and sketchy proposal for machine readable format 
+  for describing CIUS and/or Extensions to core EU invoice 
+  
+  -->
+<c:config xmlns:c="urn:x-namespace:yet:to:be:determined"
+          xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+          xmlns="http://www.w3.org/1999/xhtml"
+          cius="true"
+          extension="false">
+  
+  <!-- meta element contains basic metainformation about CIUS/Extension -->
+  <c:meta>
+    <!-- Identifier as described in "7.6 Identification of core invoice usage specifications" -->
+    <c:name>klingon-invoice</c:name>
+    
+    <!-- Version of CIUS/Extension -->
+    <c:version>1.0</c:version>
+    
+    <!-- Human readable name of CIUS/Extension -->
+    <c:title>Klingon National CIUS</c:title>
+    
+    <!-- Author of extension, any HTML markup can be used inside element -->
+    <c:publisher>
+      Organization that created CIUS/Extension<br/>
+      <address>
+        Some street<br/>
+        Some town<br/>
+        Some country
+      </address>
+    </c:publisher>
+    
+    <!-- Governor of extension -->
+    <c:governor>
+      Organization that maintains CIUS/Extension
+    </c:governor>
+    
+    <!-- Country where CIUS/Extension is used -->
+    <c:country>Any</c:country>
+    
+    <!-- Sector where CIUS/Extension is used -->
+    <c:sector>Any</c:sector>
+    
+    <!-- Contact email for sending inquiries -->
+    <c:email>info@ciusauthor.cz</c:email>
+    
+    <!-- Short description/purpose of spec -->
+    <c:abstract>Restricts the business process scope of the EN with reference to Klingon planet removal business processes.</c:abstract>
+  </c:meta>
+  
+  <!-- desc can contain arbitrary HTML with human prose describing CIUS/Extension -->
+  <c:desc>
+    <p>Lorem ipsum</p>
+    <p>Lorem ipsum</p>
+  </c:desc>
+
+  <!-- In this place document contains allowed specification of CIUS as described in
+       "7.2.3. Allowed specifications of CIUS" -->
+  
+  <!-- Example of making payment due date mandatory in CIUS -->
+  <c:cardinality term="BT-9" minOccurs="1">
+    <!-- minOccurs/maxOccurs attributes can be used to change default cardinality in core model -->
+    
+    <!-- Human readale description of constraint -->
+    <c:desc>
+      For many reasons payment due date is mandatory in Klingon CIUS
+    </c:desc>
+    
+    <!-- Author of CIUS might provide implementation of constraint for some syntaxes using some technology (e.g. XSD, Schematron)
+         Implementers are however free to use different implementation if it provides consistent results -->
+    
+    <!-- Implementation of rule in Schematron for UBL syntax -->
+    <c:implementation syntax="UBL">
+      <sch:rule context="*:Invoice">
+        <sch:assert test="*:DueDate">Payment Due Date must be specified when contracting with Klingons</sch:assert>
+      </sch:rule>
+    </c:implementation>
+  </c:cardinality>
+  
+  <!-- Additional elements for other types of constraints described in 7.2.3 will be supported:
+        <c:term>
+        <c:datatype>
+        <c:codelist>
+        <c:rule>
+        <c:valuedomain>
+        But this would require some thinking as many change types described in TS are overlapping or actually identical
+    -->
+
+</c:config>
