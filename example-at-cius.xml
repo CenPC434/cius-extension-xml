@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  
+  This is very rough and sketchy proposal for machine readable format 
+  for describing CIUS and/or Extensions to core EU invoice 
+
+  In this example Austrian National CIUS is shown using proposed syntax
+  
+  This is just example and working draft with no official standing
+
+  -->
+<c:config xmlns:c="urn:x-namespace:yet:to:be:determined"
+          xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+          xmlns="http://www.w3.org/1999/xhtml"
+          cius="true"
+          extension="false">
+  
+  <!-- meta element contains basic metainformation about CIUS/Extension -->
+  <c:meta>
+    <!-- Common abbreviation used when referred to the CIUS/Extension -->
+    <c:name>CIUS-AT-NAT</c:name>
+    
+    <!-- Human readable name of CIUS/Extension -->
+    <c:title>Austrian National Core Invoice Usage Specification</c:title>
+
+    <!-- Identifier as described in "7.6 Identification of core invoice usage specifications" -->
+    <c:id>urn:cen.eu:en16931:2017#compliant#urn:erechnung.gv.at:CIUS-AT-NAT:1.0.0</c:id>
+    
+    <!-- Version of CIUS/Extension -->
+    <c:version>1.0.0 DRAFT</c:version>
+    
+    <!-- Date of publication of CIUS/Extension -->
+    <c:date>2018-06-18</c:date>
+    
+    <!-- Author of extension, any HTML markup can be used inside element -->
+    <c:publisher>
+      Philip Helger, Austrian Federal Computing Centre (BRZ), <a href="mailto:philip.helger@brz.gv.at">philip.helger@brz.gv.at</a>
+    </c:publisher>
+    
+    <!-- Governor of extension -->
+    <c:governor>
+      Austrian Ministry of Finance (BMF)
+    </c:governor>
+    
+    <!-- Country where CIUS/Extension is used -->
+    <c:country>AT</c:country>
+    
+    <!-- Sector where CIUS/Extension is used -->
+    <c:sector>Any</c:sector>
+    
+    <!-- Contact email for sending inquiries -->
+    <c:email>philip.helger@brz.gv.at</c:email>
+    
+    <!-- Short description/purpose of spec -->
+    <c:abstract>This CIUS-AT-NAT builds on top of the European Norm EN 16931-1:2017.
+      All rules of the underlying specification apply with the addition of the rules stated in this document.</c:abstract>
+  </c:meta>
+  
+  <!-- desc can contain arbitrary HTML with human prose describing CIUS/Extension -->
+  <c:desc>
+    <!-- Empty in this example. -->
+  </c:desc>
+
+  <!-- In this place document contains allowed specification of CIUS as described in
+       "7.2.3. Allowed specifications of CIUS" -->
+  <c:rules>
+    <c:cardinality term="BT-35" minOccurs="1">
+      <c:desc>Postal address line 1 becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-50" minOccurs="1">
+      <c:desc>Postal address line 1 becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-64" minOccurs="1">
+      <c:desc>Postal address line 1 becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-75" minOccurs="1">
+      <c:desc>Postal address line 1 becomes mandatory</c:desc>
+    </c:cardinality>
+    
+    <c:cardinality term="BT-37" minOccurs="1">
+      <c:desc>Postal address city becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-52" minOccurs="1">
+      <c:desc>Postal address city becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-66" minOccurs="1">
+      <c:desc>Postal address city becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-77" minOccurs="1">
+      <c:desc>Postal address city becomes mandatory</c:desc>
+    </c:cardinality>
+    
+    <c:cardinality term="BT-38" minOccurs="1">
+      <c:desc>Postal address post code becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-53" minOccurs="1">
+      <c:desc>Postal address post code becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-67" minOccurs="1">
+      <c:desc>Postal address post code becomes mandatory</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-78" minOccurs="1">
+      <c:desc>Postal address post code becomes mandatory</c:desc>
+    </c:cardinality>
+    
+    <c:cardinality term="BT-72" minOccurs="1">
+      <c:desc>Actual delivery date or invoicing period must be provided</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-73" minOccurs="1">
+      <c:desc>Actual delivery date or invoicing period must be provided</c:desc>
+    </c:cardinality>
+    <c:cardinality term="BT-74" minOccurs="1">
+      <c:desc>Actual delivery date or invoicing period must be provided</c:desc>
+    </c:cardinality>
+    
+    <c:cardinality term="BT-96" minOccurs="1">
+      <c:desc>Document level allowance VAT rate becomes mandatory</c:desc>
+    </c:cardinality>
+  
+    <c:cardinality term="BT-103" minOccurs="1">
+      <c:desc>Document level charge VAT rate becomes mandatory</c:desc>
+    </c:cardinality>
+    
+    <c:cardinality term="BT-124" maxOccurs="0">
+      <c:desc>External document location is not supported</c:desc>
+    </c:cardinality>
+    
+    <!-- 
+      I think that section "7.3 What may be specified in a CIUS" does not allow such type of constraint
+      But such constraint is sensible so perhaps we should send defect report against EN 16931-1:2017
+    -->
+    <c:technical>
+      <c:desc>The size of all attached documents together may not exceed 15MB</c:desc>
+    </c:technical>
+  
+    <c:cardinality term="BT-152" minOccurs="1">
+      <c:desc>Invoiced item VAT rate becomes mandatory</c:desc>
+    </c:cardinality>
+    
+    
+    <!-- Additional elements for other types of constraints described in 7.2.3 will be supported:
+          <c:term>
+          <c:datatype>
+          <c:codelist>
+          <c:rule>
+          <c:valuedomain>        
+          But this would require some thinking as many change types described in TS are overlapping or actually identical
+      -->
+  </c:rules>
+
+</c:config>
