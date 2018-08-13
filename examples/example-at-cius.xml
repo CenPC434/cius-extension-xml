@@ -64,79 +64,89 @@
   <!-- In this place document contains allowed specification of CIUS as described in
        "7.2.3. Allowed specifications of CIUS" -->
   <c:rules>
-    <c:cardinality term="BT-35" minOccurs="1">
+    <c:rule id="BR-AT-1">
       <c:desc>Postal address line 1 becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-50" minOccurs="1">
-      <c:desc>Postal address line 1 becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-64" minOccurs="1">
-      <c:desc>Postal address line 1 becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-75" minOccurs="1">
-      <c:desc>Postal address line 1 becomes mandatory</c:desc>
-    </c:cardinality>
+      <c:cardinality minOccurs="1">
+        <c:term>BT-35</c:term>
+        <c:term>BT-50</c:term>
+        <c:term>BT-64</c:term>
+        <c:term>BT-75</c:term>
+      </c:cardinality>
+      <!--
+      Concrete implementation of this rule in Schematron or XSD can be specified inside c:implementation element
+      <c:implementation syntax="UBL">
+        <sch:rule context="...">
+          <sch:assert test="...">Postal address line 1 must be specified</sch:assert>
+        </sch:rule>
+      </c:implementation>
+      -->      
+    </c:rule>
     
-    <c:cardinality term="BT-37" minOccurs="1">
+    <c:rule id="BR-AT-2">
       <c:desc>Postal address city becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-52" minOccurs="1">
-      <c:desc>Postal address city becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-66" minOccurs="1">
-      <c:desc>Postal address city becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-77" minOccurs="1">
-      <c:desc>Postal address city becomes mandatory</c:desc>
-    </c:cardinality>
-    
-    <c:cardinality term="BT-38" minOccurs="1">
+      <c:cardinality minOccurs="1">
+        <c:term>BT-37</c:term>
+        <c:term>BT-52</c:term>
+        <c:term>BT-66</c:term>
+        <c:term>BT-77</c:term>
+      </c:cardinality>
+    </c:rule>
+
+    <c:rule id="BR-AT-3">
       <c:desc>Postal address post code becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-53" minOccurs="1">
-      <c:desc>Postal address post code becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-67" minOccurs="1">
-      <c:desc>Postal address post code becomes mandatory</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-78" minOccurs="1">
-      <c:desc>Postal address post code becomes mandatory</c:desc>
-    </c:cardinality>
-    
-    <c:cardinality term="BT-72" minOccurs="1">
+      <c:cardinality minOccurs="1">
+        <c:term>BT-38</c:term>
+        <c:term>BT-53</c:term>
+        <c:term>BT-67</c:term>
+        <c:term>BT-78</c:term>
+      </c:cardinality>
+    </c:rule>
+
+    <c:rule id="BR-AT-4">
       <c:desc>Actual delivery date or invoicing period must be provided</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-73" minOccurs="1">
-      <c:desc>Actual delivery date or invoicing period must be provided</c:desc>
-    </c:cardinality>
-    <c:cardinality term="BT-74" minOccurs="1">
-      <c:desc>Actual delivery date or invoicing period must be provided</c:desc>
-    </c:cardinality>
-    
-    <c:cardinality term="BT-96" minOccurs="1">
+      <c:cardinality minOccurs="1">
+        <c:term>BT-72</c:term>
+        <c:term>BT-73</c:term>
+        <c:term>BT-74</c:term>
+      </c:cardinality>
+    </c:rule>
+
+    <c:rule id="BR-AT-5">
       <c:desc>Document level allowance VAT rate becomes mandatory</c:desc>
-    </c:cardinality>
-  
-    <c:cardinality term="BT-103" minOccurs="1">
+      <c:cardinality minOccurs="1">
+        <c:term>BT-96</c:term>
+      </c:cardinality>
+    </c:rule>
+
+    <c:rule id="BR-AT-6">
       <c:desc>Document level charge VAT rate becomes mandatory</c:desc>
-    </c:cardinality>
+      <c:cardinality minOccurs="1">
+        <c:term>BT-103</c:term>
+      </c:cardinality>
+    </c:rule>
     
-    <c:cardinality term="BT-124" maxOccurs="0">
+    <c:rule id="BR-AT-7">
       <c:desc>External document location is not supported</c:desc>
-    </c:cardinality>
+      <c:cardinality maxOccurs="0">
+        <c:term>BT-124</c:term>
+      </c:cardinality>
+    </c:rule>
     
     <!-- 
       I think that section "7.3 What may be specified in a CIUS" does not allow such type of constraint
       But such constraint is sensible so perhaps we should send defect report against EN 16931-1:2017
     -->
-    <c:technical>
+    <c:rule id="BR-AT-8">
       <c:desc>The size of all attached documents together may not exceed 15MB</c:desc>
-    </c:technical>
+      <c:technical/>
+    </c:rule>
   
-    <c:cardinality term="BT-152" minOccurs="1">
+    <c:rule id="BR-AT-9">
       <c:desc>Invoiced item VAT rate becomes mandatory</c:desc>
-    </c:cardinality>
-    
+      <c:cardinality minOccurs="1">
+        <c:term>BT-152</c:term>
+      </c:cardinality>
+    </c:rule>
     
     <!-- Additional elements for other types of constraints described in 7.2.3 will be supported:
           <c:term>

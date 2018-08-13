@@ -89,10 +89,10 @@
                                     <Boolean>true</Boolean>
                                 </field>
                                 <field name="outputFile">
-                                    <File>example.html</File>
+                                    <File>${pdu}/examples/example.html</File>
                                 </field>
                                 <field name="outputResource">
-                                    <String>example.html</String>
+                                    <String>${pdu}/examples/example.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>
@@ -175,10 +175,10 @@
                                     <Boolean>true</Boolean>
                                 </field>
                                 <field name="outputFile">
-                                    <File>example-at-cius.html</File>
+                                    <File>${pdu}/examples/example-at-cius.html</File>
                                 </field>
                                 <field name="outputResource">
-                                    <String>example-at-cius.html</String>
+                                    <String>${pdu}/examples/example-at-cius.html</String>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean>false</Boolean>

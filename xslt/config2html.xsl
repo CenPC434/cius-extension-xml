@@ -76,27 +76,27 @@
 
   <xsl:template match="c:rules">
     <h2>New rules imposed by this specification</h2>
-    <xsl:apply-templates select="c:cardinality | c:technical | c:term | c:datatype | c:codelist | c:rule | c:valuedomain"/>
+    <xsl:apply-templates/>
   </xsl:template>
 
-  <xsl:template match="c:cardinality">
+  <xsl:template match="c:rule">
     <div class="rule">
       <xsl:apply-templates select="c:desc"/>
     </div>
   </xsl:template>
 
-  <xsl:template match="c:technical">
-    <div class="rule">
-      <xsl:apply-templates select="c:desc"/>
-    </div>
-  </xsl:template>
-
-  <!-- Put reference to business term at the start of description -->
-  <xsl:template match="text()[parent::c:desc/parent::c:cardinality][not(preceding-sibling::text())]" mode="#all">
-    [{parent::c:desc/parent::c:cardinality/@term}]
+  <!-- Put reference to business rule at the start of description -->
+  <xsl:template match="text()[parent::c:desc/parent::c:rule][not(preceding-sibling::text())]" mode="#all" priority="10">
+    [{parent::c:desc/parent::c:rule/@id}]
     <xsl:next-match/>
   </xsl:template>
 
+  <!-- Put list of affected terms at the end of description -->
+  <xsl:template match="text()[parent::c:desc/parent::c:rule][not(following-sibling::text())]" mode="#all">    
+    <xsl:next-match/>
+    [<xsl:value-of select="ancestor::c:rule//c:term" separator=", "/>]
+  </xsl:template>
+  
   <xsl:template name="gen-identification-clause">
     <p>An identification of the specification containing the total set of rules regarding semantic content,
       cardinalities and business rules to which the data contained in the instance document conforms is reported
