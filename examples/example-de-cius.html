@@ -1,0 +1,385 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>CIUS-DE-NAT — Standard XRechnung Version XRechnung 1.1 | Fassung vom 30.11.2017</title><style>
+          html { 
+            font-family: Calibri, Arial, sans-serif;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 50em;
+          }
+          h1, h2, h3 { color: navy; }
+          dt { color: navy; font-weight: bold; }                    
+        </style></head>
+   <body>
+      
+      
+      
+      <h1>CIUS-DE-NAT</h1>
+      <h1>Standard XRechnung Version XRechnung 1.1 | Fassung vom 30.11.2017</h1>
+      <dl>
+         <dt>Publisher:</dt>
+         <dd> Koordinierungsstelle für IT-Standards, <a href="mailto:kosit@finanzen.bremen.de">kosit@finanzen.bremen.de</a>
+            
+         </dd>
+         <dt>Governed by:</dt>
+         <dd> IT-Planungsrat </dd>
+         <dt>Version:</dt>
+         <dd>1.1</dd>
+         <dt>Date of publication:</dt>
+         <dd>2017-11-30</dd>
+      </dl>
+      <h2>Introduction</h2>
+      <div class="abstract">This CIUS-DE-NAT builds on top of the European Norm EN 16931-1:2017. All rules of
+         the underlying specification apply with the addition of the rules stated in this document.
+      </div>
+      <h2>Indetifying CIUS-DE-NAT</h2>
+      <p>An identification of the specification containing the total set of rules regarding
+         semantic content,
+         cardinalities and business rules to which the data contained in the instance document
+         conforms is reported
+         in BT-24 “Specification identification”. The identifier for this CIUS is:
+      </p>
+      <table border="1">
+         <tr>
+            <td>BT-24</td>
+            <td>1..1</td>
+            <td>Specification identification</td>
+            <td>urn:ce.eu:en16931:2017:xoev-de:kosit:standard:xrechnung_1.1</td>
+         </tr>
+      </table>
+      <p>According to the e-Invoice instance document syntax the specification identification
+         will be:
+      </p>
+      <p>UBL 2.1:</p><pre>&lt;cbc:CustomizationID&gt;urn:ce.eu:en16931:2017:xoev-de:kosit:standard:xrechnung_1.1&lt;/cbc:CustomizationID&gt;</pre><p>CII 16B:</p><pre>&lt;rsm:ExchangedDocumentContext&gt; 
+  &lt;ram:GuidelineSpecifiedDocumentContextParameter&gt;
+    &lt;ram:ID&gt;urn:ce.eu:en16931:2017:xoev-de:kosit:standard:xrechnung_1.1&lt;/ram:ID&gt;
+  &lt;/ram:GuidelineSpecifiedDocumentContextParameter&gt;
+&lt;/rsm:ExchangedDocumentContext&gt;</pre>
+      
+      
+      <div class="description">
+         
+         
+      </div>
+      
+      
+      <h2>New rules imposed by this specification</h2>
+      
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-1]
+            Eine Rechnung (INVOICE) muss Angaben zu „PAYMENT INSTRUCTIONS“ (BG-16) enthalten.
+            [BG-16]
+            
+         </div>
+         <div class="description">
+            [BR-DE-1]
+            An invoice (INVOICE) must contain information on „PAYMENT INSTRUCTIONS“ (BG-16).
+            [BG-16]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-2]
+            Die Gruppe „SELLER CONTACT“ (BG-6) muss übermittelt werden.
+            [BG-6]
+            
+         </div>
+         <div class="description">
+            [BR-DE-2]
+            TBD
+            [BG-6]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-3]
+            Das Element „Seller city“ (BT-37) muss übermittelt werden.
+            [BT-37]
+            
+         </div>
+         <div class="description">
+            [BR-DE-3]
+            TBD
+            [BT-37]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-4]
+            Das Element „Seller post code“ (BT-38) muss übermittelt werden.
+            [BT-38]
+            
+         </div>
+         <div class="description">
+            [BR-DE-4]
+            TBD
+            [BT-38]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-5]
+            Das Element „Seller contact point“ (BT-41) muss übermittelt werden.
+            [BT-41]
+            
+         </div>
+         <div class="description">
+            [BR-DE-5]
+            TBD
+            [BT-41]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-6]
+            Das Element „Seller contact telephone number“ (BT-42) muss übermittelt werden.
+            [BT-42]
+            
+         </div>
+         <div class="description">
+            [BR-DE-6]
+            TBD
+            [BT-42]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-7]
+            Das Element „Seller contact email address“ (BT-43) muss übermittelt werden.
+            [BT-43]
+            
+         </div>
+         <div class="description">
+            [BR-DE-7]
+            TBD
+            [BT-43]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-8]
+            Das Element „Buyer city“ (BT-52) muss übermittelt werden.
+            [BT-52]
+            
+         </div>
+         <div class="description">
+            [BR-DE-8]
+            TBD
+            [BT-52]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-9]
+            Das Element „Buyer post code“ (BT-53) muss übermittelt werden.
+            [BT-53]
+            
+         </div>
+         <div class="description">
+            [BR-DE-9]
+            TBD
+            [BT-53]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-10]
+            Das Element „Deliver to city“ (BT-77) muss übermittelt werden.
+            [BT-77]
+            
+         </div>
+         <div class="description">
+            [BR-DE-10]
+            TBD
+            [BT-77]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-11]
+            Das Element „Deliver to post code“ (BT-78) muss übermittelt werden.
+            [BT-78]
+            
+         </div>
+         <div class="description">
+            [BR-DE-11]
+            TBD
+            [BT-78]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-12]
+            Mit dem Element „Deliver to post code“ (BT-78) muss eine Postleitzahl übermittelt
+            werden.
+            [BT-78]
+            
+         </div>
+         <div class="description">
+            [BR-DE-12]
+            TBD
+            [BT-78]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-13]
+            In der Rechnung müssen Angaben zu einer der drei Gruppen „CREDIT TRANSFER“ (BG-17),
+            „PAYMENT CARD INFORMATION“ (BG-18) oder „DIRECT DEBIT“ (BG-19) übermittelt werden.
+            [BG-17, BG-18, BG-19]
+            
+         </div>
+         <div class="description">
+            [BR-DE-13]
+            TBD
+            [BG-17, BG-18, BG-19]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-14]
+            Das Element „VAT category rate“ (BT-119) muss übermittelt werden.
+            [BT-119]
+            
+         </div>
+         <div class="description">
+            [BR-DE-14]
+            TBD
+            [BT-119]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-15]
+            Das Element „Buyer reference“ (BT-10) muss übermittelt werden.
+            [BT-10]
+            
+         </div>
+         <div class="description">
+            [BR-DE-15]
+            TBD
+            [BT-10]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-16]
+            Das Element „Seller VAT identifier“ (BT-31) muss übermittelt werden, wenn nicht das
+            Element „Seller tax registration identifier“ (BT-32) oder eine Gruppe „SELLER TAX
+            REPRESENTATIVE PARTY“ (BG-11) übermittelt wurden.
+            [BT-31, BT-32, BG-11]
+            
+         </div>
+         <div class="description">
+            [BR-DE-16]
+            TBD
+            [BT-31, BT-32, BG-11]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-17]
+            Mit dem Element „Invoice type code“ (BT-3) sollen ausschließlich folgende Codes aus
+            der Codeliste UNTDID 1001a übermittelt werden: 326 (Partial invoice), 380 (Commercial
+            invoice), 384 (Corrected invoice), 381 (Credit note)
+            [BT-3]
+            
+         </div>
+         <div class="description">
+            [BR-DE-17]
+            TBD
+            [BT-3]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-18]
+            Informationen zur Gewährung von Skonto oder zur Berechnung von Verzugszinsen müssen
+            wie folgt im Element „Payment terms“ (BT-20) jeweils in einer eigenen Zeile übermittelt
+            werden: Anzugeben ist im ersten Segment „SKONTO“ oder „VERZUG“, im zweiten „TAGE=n“,
+            im dritten „PROZENT=n“, wobei die Segmente jeweils von einer „#“ umfasst sind. Prozentzahlen
+            sind mit Punkt getrennt von zwei Nachkommastellen anzugeben. Liegt dem zu berechnenden
+            Betrag nicht BT-115, „fälliger Betrag“ zugrunde, sondern nur ein Teil des fälligen
+            Betrags der Rechnung, ist der Grundwert zur Berechnung von Skonto oder Verzugszins
+            als viertes Segment „BASISBETRAG=n“ mit dem semantischen Datentyp Amount anzugeben.
+            [BT-20, BT-115]
+            
+         </div>
+         <div class="description">
+            [BR-DE-18]
+            TBD
+            [BT-20, BT-115]
+            
+         </div>
+      </div>
+      
+      
+      <div class="rule">
+         <div class="description">
+            [BR-DE-19]
+            The size of all attached documents together may not exceed 15MB
+            []
+            
+         </div>
+      </div>
+      
+      
+      
+   </body>
+</html>

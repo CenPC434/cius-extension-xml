@@ -64,6 +64,42 @@
   <!-- In this place document contains allowed specification of CIUS as described in
        "7.2.3. Allowed specifications of CIUS" -->
   <c:rules>
+    
+    <!-- 
+    CIUS is specified as a set of business rules in c:rule element
+    Each rule can put several types of constraints on any number of business terms 
+    
+    The constraints are as follows:
+    
+    <c:cardinality minOccurs="M" maxOccurs="N">
+      <c:term>BT-XYZ</c:term>
+    </c:cardinality>
+      - allows changing cardinality of term occurence, term can be made mandatory, can be forbidden 
+        or maximum occurences can be changed from infinity to smaller number, typically 1
+        
+    <c:codelist>
+      <c:term>BT-XYZ</c:term>
+      <c:value>A</c:value>
+      <c:value>B</c:value>
+    </c:codelist>
+      - allows to specify codelist for values allowed inside business term
+
+    <c:format>
+      <c:term>BT-XYZ</c:term>
+    </c:format>
+      - allows to specify format (i.e. maximal lenght, pattern, etc.) for term
+      - concrete validation implementatin can be provided in c:implementation element
+      - c:format only identified which terms should have restricted format
+
+    <c:technical>
+      - defines that there is some technical constraint like maximal size of document
+      - it's not necessary to link such constraint to term 
+      
+    <c:other>
+      - some other restriction, for example co-occurence
+
+    -->
+    
     <c:rule id="BR-AT-1">
       <c:desc>Postal address line 1 becomes mandatory</c:desc>
       <c:cardinality minOccurs="1">
@@ -148,14 +184,6 @@
       </c:cardinality>
     </c:rule>
     
-    <!-- Additional elements for other types of constraints described in 7.2.3 will be supported:
-          <c:term>
-          <c:datatype>
-          <c:codelist>
-          <c:rule>
-          <c:valuedomain>        
-          But this would require some thinking as many change types described in TS are overlapping or actually identical
-      -->
   </c:rules>
 
 </c:config>
