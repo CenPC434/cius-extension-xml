@@ -3,6 +3,7 @@
 This repo contains draft of machine readable format for describing CIUS and extensions of EU invoice (EN 16931-1:2017)
 
 * `examples/` -- folder with sample data
+
   `*.xml` -- sample configuration files
 
   `*.html` -- human readable rendering of configuration files
