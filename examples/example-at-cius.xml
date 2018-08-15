@@ -87,6 +87,7 @@
 
     <c:format>
       <c:term>BT-XYZ</c:term>
+      <c:pattern>[A-Z]{2}[0-9]{10}</c:pattern>
     </c:format>
       - allows to specify format (i.e. maximal lenght, pattern, etc.) for term
       - concrete validation implementatin can be provided in c:implementation element
