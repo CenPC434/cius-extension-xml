@@ -11,6 +11,7 @@
   This example uses prevoius work of AT National CIUS provided by Philip Helger	
 
   -->
+<?xml-model href="../schema/ce-config.rnc"?>
 <c:config xmlns:c="urn:x-namespace:yet:to:be:determined"
   xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml" cius="true"
   extension="false">
@@ -216,7 +217,7 @@
 
     <c:rule id="BR-DE-19">
       <c:desc>The size of all attached documents together may not exceed 15MB</c:desc>
-      <c:technical/>  
+      <c:technical/>
     </c:rule>
   </c:rules>
 

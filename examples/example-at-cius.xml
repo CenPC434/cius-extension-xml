@@ -9,6 +9,7 @@
   This is just example and working draft with no official standing
 
   -->
+<?xml-model href="../schema/ce-config.rnc"?>
 <c:config xmlns:c="urn:x-namespace:yet:to:be:determined"
           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -19,7 +20,7 @@
   <c:meta>
     <!-- Common abbreviation used when referred to the CIUS/Extension -->
     <c:name>CIUS-AT-NAT</c:name>
-    
+
     <!-- Human readable name of CIUS/Extension -->
     <c:title>Austrian National Core Invoice Usage Specification</c:title>
 

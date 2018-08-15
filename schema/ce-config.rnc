@@ -3,25 +3,45 @@ namespace c = "urn:x-namespace:yet:to:be:determined"
 namespace html = "http://www.w3.org/1999/xhtml"
 
 start =
+  # CIUS or extension configuration
   element c:config {
+    # Covers this configuration CIUS?
     attribute cius { xsd:boolean },
+    # Covers this configuration extension?
     attribute extension { xsd:boolean },
+    
+    # Metadata
     element c:meta {
+      # Short identifier
       element c:name { text },
+      # Name of CUIS/extension
       element c:title { text },
+      # Identifier as defined in 7.6 Identification of core invoice usage specifications
       element c:id { text },
+      # Version number
       element c:version { text },
+      # Date of publicartion
       element c:date { xsd:date },
+      # Publisher
       element c:publisher { html-rtf },
+      # Governonr
       element c:governor { html-rtf },
-      element c:country { text },
-      element c:sector { text },
+      # Country to which CIUS/extension applies
+      element c:country { text }?,
+      # Sector to which CIUS/extension applies
+      element c:sector { text }?,
+      # Contact email for any questions and bug reports against CUIS/extension
       element c:email { text },
+      # Short description of CIUS/extensions
       element c:abstract { html-rtf }
     },
+    # Text description
     desc,
+    # Business rules imposed by CIUS/extension
     element c:rules {
+      # Business rule
       element c:rule {
+        # Unique ID for business rule (BR-{country}-{id} pattern is recommended)
         attribute id { text },
         desc+,
         (cardinality | technical | codelist | format | other)+,
@@ -30,21 +50,26 @@ start =
     }
   }
 
+# Human readable description can contain mix of text and HTML markup if formatting is needed
 desc = element c:desc { attribute xml:lang { text }?, html-rtf }
 
+# Constaint on cardinality
 cardinality = element c:cardinality {
   attribute maxOccurs { xsd:integer | "unbounded" }?,
   attribute minOccurs { xsd:integer }?,
   term+
   }
-  
+
+# Technical constaint
 technical = element c:technical { empty }
 
+# Codelist
 codelist = element c:codelist {
   term+,
   value+
   }
-  
+
+# Restricted format 
 format = element c:format {
   term+,
   pattern+
@@ -55,10 +80,13 @@ other = element c:other {
   term+
   }  
   
+# Pattern for allowed values expressed as a regular expression (W3C XML Schema syntax is supported)
 pattern = element c:pattern { text }
-  
+
+# Allowed value
 value = element c:value { text }
-  
+
+# Reference to business term (i.e. BT-NN)
 term = element c:term { text }
 
 html-rtf = text & any-html*
