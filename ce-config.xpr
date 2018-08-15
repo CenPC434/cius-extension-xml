@@ -6,6 +6,14 @@
             <serialized version="20.0" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
+                        <String>code.insight.use.all.relaxng.annotations.as.documentation</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
+                        <String>key.editor.cc.annotations.option.pane</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
                             <scenarioAssociation>

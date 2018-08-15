@@ -50,50 +50,66 @@ start =
     }
   }
 
-# Human readable description can contain mix of text and HTML markup if formatting is needed
-desc = element c:desc { attribute xml:lang { text }?, html-rtf }
+desc =
+  # Human readable description can contain mix of text and HTML markup if formatting is needed
+  element c:desc { attribute xml:lang { text }?, html-rtf }
 
-# Constaint on cardinality
-cardinality = element c:cardinality {
-  attribute maxOccurs { xsd:integer | "unbounded" }?,
-  attribute minOccurs { xsd:integer }?,
-  term+
+
+cardinality = 
+  # Constaint on cardinality
+  element c:cardinality {
+    attribute maxOccurs { xsd:integer | "unbounded" }?,
+    attribute minOccurs { xsd:integer }?,
+    term+
   }
 
-# Technical constaint
-technical = element c:technical { empty }
+technical =
+  # Technical constaint
+  element c:technical { empty }
 
-# Codelist
-codelist = element c:codelist {
-  term+,
-  value+
+codelist =
+  # Codelist
+  element c:codelist {
+    term+,
+    value+
   }
 
-# Restricted format 
-format = element c:format {
-  term+,
-  pattern+
+format =
+  # Restricted format
+  element c:format {
+    term+,
+    pattern+
   }
   
-# FIXME: what should be content model here
-other = element c:other {
-  term+
+other =
+  # FIXME: what should be content model here
+  element c:other {
+    term+
   }  
   
-# Pattern for allowed values expressed as a regular expression (W3C XML Schema syntax is supported)
-pattern = element c:pattern { text }
+pattern =
+  # Pattern for allowed values expressed as a regular expression (W3C XML Schema syntax is supported)
+  element c:pattern { text }
 
-# Allowed value
-value = element c:value { text }
+value =
+  # Allowed value
+  element c:value { text }
 
-# Reference to business term (i.e. BT-NN)
-term = element c:term { text }
+term =
+  # Reference to business term (i.e. BT-NN)
+  element c:term { text }
 
 html-rtf = text & any-html*
 
 any-html = element html:* { any-attribute*, (any-html* & text) }
 any-attribute = attribute * { text }
 
-implementation = element c:implementation { attribute syntax { "UBL" | "CII" }, any }
+implementation =
+  # Technical implementation of constraint in any schema language, usually in Schematron
+  element c:implementation {
+    # To which syntax implementation applies?
+    attribute syntax { "UBL" | "CII" }, 
+    any 
+  }
 
 any = element * { any-attribute*, (any* & text) }
