@@ -116,6 +116,11 @@
           <sch:assert test="...">Postal address line 1 must be specified</sch:assert>
         </sch:rule>
       </c:implementation>
+      <c:implementation syntax="CII">
+        <sch:rule context="...">
+          <sch:assert test="...">Postal address line 1 must be specified</sch:assert>
+        </sch:rule>
+      </c:implementation>
       -->      
     </c:rule>
     
