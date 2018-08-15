@@ -1,0 +1,71 @@
+default namespace = "http://www.w3.org/1999/xhtml"
+namespace c = "urn:x-namespace:yet:to:be:determined"
+namespace html = "http://www.w3.org/1999/xhtml"
+
+start =
+  element c:config {
+    attribute cius { xsd:boolean },
+    attribute extension { xsd:boolean },
+    element c:meta {
+      element c:name { text },
+      element c:title { text },
+      element c:id { text },
+      element c:version { text },
+      element c:date { xsd:date },
+      element c:publisher { html-rtf },
+      element c:governor { html-rtf },
+      element c:country { text },
+      element c:sector { text },
+      element c:email { text },
+      element c:abstract { html-rtf }
+    },
+    desc,
+    element c:rules {
+      element c:rule {
+        attribute id { text },
+        desc+,
+        (cardinality | technical | codelist | format | other)+,
+        implementation*
+      }+
+    }
+  }
+
+desc = element c:desc { attribute xml:lang { text }?, html-rtf }
+
+cardinality = element c:cardinality {
+  attribute maxOccurs { xsd:integer | "unbounded" }?,
+  attribute minOccurs { xsd:integer }?,
+  term+
+  }
+  
+technical = element c:technical { empty }
+
+codelist = element c:codelist {
+  term+,
+  value+
+  }
+  
+format = element c:format {
+  term+,
+  pattern+
+  }
+  
+# FIXME: what should be content model here
+other = element c:other {
+  term+
+  }  
+  
+pattern = element c:pattern { text }
+  
+value = element c:value { text }
+  
+term = element c:term { text }
+
+html-rtf = text & any-html*
+
+any-html = element html:* { any-attribute*, (any-html* & text) }
+any-attribute = attribute * { text }
+
+implementation = element c:implementation { attribute syntax { "UBL" | "CII" }, any }
+
+any = element * { any-attribute*, (any* & text) }
