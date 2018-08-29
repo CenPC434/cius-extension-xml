@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.w3.org/XML/1998/namespace" xmlns:c="urn:x-namespace:yet:to:be:determined">
+  <xs:import namespace="urn:x-namespace:yet:to:be:determined" schemaLocation="ce-config.xsd"/>
+  <xs:attribute name="lang"/>
+</xs:schema>

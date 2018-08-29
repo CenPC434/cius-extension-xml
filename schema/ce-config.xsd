@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  targetNamespace="urn:x-namespace:yet:to:be:determined"
+  xmlns:c="urn:x-namespace:yet:to:be:determined">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <xs:element name="config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="c:meta"/>
+        <xs:element ref="c:desc"/>
+        <xs:element ref="c:rules"/>
+      </xs:sequence>
+      <!-- CIUS (TRUE) or Extension (FALSE)-->
+      <xs:attribute name="type" use="required" type="xs:boolean"/>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="meta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="c:nameShort"/>
+        <xs:element ref="c:nameLong"/>
+        <xs:element ref="c:nameTechnical"/>
+        <xs:element ref="c:version"/>
+        <xs:element ref="c:date"/>
+        <xs:element ref="c:publisher"/>
+        <xs:element ref="c:governor"/>
+        <xs:element minOccurs="0" ref="c:country"/>
+        <xs:element minOccurs="0" ref="c:sector"/>
+        <xs:element ref="c:email"/>
+        <xs:element ref="c:abstract"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- A short descriptive name based on a common semantic -->
+  <xs:element name="nameShort" type="xs:string"/>
+  <!-- A descriptive name for general reference-->
+  <xs:element name="nameLong" type="xs:string"/>
+  <!-- Technical name (identifier) as described in "7.6 Identification of core invoice usage specifications"-->
+  <xs:element name="nameTechnical" type="xs:string"/>
+  <!-- NEW: Version of CIUS/Extension -->
+  <xs:element name="version" type="xs:string"/>
+  <!-- NEW: Date of publication of CIUS/Extension -->
+  <xs:element name="date" type="xs:date"/>
+  <!-- The party who formally publishes the specification.-->
+  <xs:element name="publisher" type="c:html-rtf"/>
+  <!-- The party who provides the specification its authority.-->
+  <xs:element name="governor" type="c:html-rtf"/>
+  <!--  One or more country codes, which the requirements the specification supports.-->
+  <xs:element name="country" type="xs:string"/>
+  <!-- The industry sector, which requirements the specification supports.-->
+  <xs:element name="sector" type="xs:string"/>
+  <!-- Contact to publisher.-->
+  <xs:element name="email" type="xs:string"/>
+  <!-- A brief description of what the specification is intended for.-->
+  <xs:element name="abstract" type="c:html-rtf"/>
+
+  <xs:element name="rules">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="c:rule"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="rule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="c:desc"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element ref="c:cardinality"/>
+          <xs:element ref="c:technical"/>
+          <xs:element ref="c:codelist"/>
+          <xs:element ref="c:format"/>
+          <xs:element ref="c:other"/>
+        </xs:choice>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="c:implementation"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="desc">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="c:html-rtf">
+          <xs:attribute ref="xml:lang"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="cardinality">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="c:term"/>
+      </xs:sequence>
+      <xs:attribute name="maxOccurs">
+        <xs:simpleType>
+          <xs:union memberTypes="xs:integer">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="unbounded"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="minOccurs" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="technical">
+    <xs:complexType/>
+  </xs:element>
+  
+  <xs:element name="codelist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="c:term"/>
+        <xs:element maxOccurs="unbounded" ref="c:value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="format">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="c:term"/>
+        <xs:element maxOccurs="unbounded" ref="c:pattern"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="other">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="c:term"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="pattern" type="xs:string"/>
+  <xs:element name="value" type="xs:string"/>
+  <xs:element name="term" type="xs:string"/>
+  
+  <xs:complexType name="html-rtf" mixed="true">
+    <xs:group minOccurs="0" maxOccurs="unbounded" ref="c:any-html"/>
+  </xs:complexType>
+  <xs:group name="any-html">
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="any-attribute">
+    <xs:anyAttribute processContents="skip"/>
+  </xs:attributeGroup>
+  <xs:element name="implementation">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="c:any">
+          <xs:attribute name="syntax" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="UBL"/>
+                <xs:enumeration value="CII"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="any">
+    <xs:sequence>
+      <xs:any processContents="skip"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

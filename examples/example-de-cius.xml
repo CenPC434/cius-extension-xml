@@ -11,10 +11,9 @@
   This example uses prevoius work of AT National CIUS provided by Philip Helger	
 
   -->
-<?xml-model href="../schema/ce-config.rnc"?>
+<?xml-model href="../schema/ce-config.xsd"?>
 <c:config xmlns:c="urn:x-namespace:yet:to:be:determined"
-  xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml" cius="true"
-  extension="false">
+  xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml" type="true">
 
   <!-- meta element contains basic metainformation about CIUS/Extension -->
   <c:meta>
@@ -39,7 +38,7 @@
     </c:publisher>
 
     <!-- Governor of extension -->
-    <c:governor> IT-Planungsrat </c:governor>
+    <c:governor>T-Planungsrat</c:governor>
 
     <!-- Country where CIUS/Extension is used -->
     <c:country>DE</c:country>
