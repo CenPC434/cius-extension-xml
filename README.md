@@ -11,9 +11,6 @@ This repo contains draft of machine readable format for describing CIUS and exte
 * `xslt` -- auxiliary transformations
   `config2html.xsl` -- XSLT transformation that can render any XML configuration file into HTML
 
-* `schema` -- schama for configuration files 
+* `schema` -- schema for CIUS and Extension configuration files 
 
 If you find some bug or there is something missing please file a new issue https://github.com/CenPC434/ce-config/issues
-
-
-
