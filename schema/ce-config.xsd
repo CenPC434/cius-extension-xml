@@ -7,12 +7,40 @@
   <xs:attribute name="language" type="xs:normalizedString"/>
   <xs:attribute name="cius-specific" type="xs:boolean"/>
 
+
+
+  <xs:complexType name="html-rtf" mixed="true">
+    <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
+  </xs:complexType>
+
+
+  <xs:group name="any-html">
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
+    </xs:sequence>
+  </xs:group>
+
+
+  <xs:attributeGroup name="any-attribute">
+    <xs:anyAttribute processContents="skip"/>
+  </xs:attributeGroup>
+
+  <xs:complexType name="any">
+    <xs:sequence>
+      <xs:any processContents="skip"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+
+
   <xs:element name="metadata">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="c:nameShort"/>
         <xs:element ref="c:nameLong"/>
         <xs:element ref="c:nameTechnical"/>
+        <!-- This should be equal to business term "Specification identification" -->
         <xs:element ref="c:version"/>
         <xs:element ref="c:date"/>
         <xs:element ref="c:publisher"/>
@@ -50,21 +78,20 @@
   <!-- Contact to publisher.-->
   <xs:element name="email" type="xs:normalizedString"/>
   <!-- A brief description of what the specification is intended for.-->
-  <xs:element name="abstract" type="c:html-rtf"/>
+  <xs:element name="abstract" type="c:htmlType"/>
 
 
   <!-- According to https://www.w3.org/International/questions/qa-when-xmllang it is NOT recommended to use xml>lang for natural language content of elements -->
-  <xs:element name="description">
-    <xs:complexType>
-      <xs:complexContent>
-        <xs:extension base="c:html-rtf">
-          <xs:attribute ref="c:language"/>
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-  </xs:element>
+  <xs:complexType name="htmlType">
+    <xs:complexContent>
+      <xs:extension base="c:html-rtf">
+        <xs:attribute ref="c:language"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 
-
+  <xs:element name="definition" type="c:htmlType"/>
+  <xs:element name="description" type="c:htmlType"/>
 
   <xs:element name="cardinality">
     <xs:complexType>
@@ -83,91 +110,127 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="usage-note" type="c:html-rtf"/>
+  <xs:element name="usage-note" type="c:htmlType"/>
 
 
   <xs:element name="technical">
     <xs:complexType/>
   </xs:element>
 
-  <xs:element name="codelist">
+  <xs:complexType name="codeListType">
+    <xs:sequence>
+      <!-- white listing subset of CEN codelist -->
+      <xs:element name="allowed-codes" type="xs:token"/>
+    </xs:sequence>
+
+    <!-- Shamelessly adopted and adpted from UBL 2.1 -->
+    <xs:attribute name="listAgencyID" type="xs:normalizedString" use="optional"/>
+
+    <xs:attribute name="listAgencyName" type="xs:string" use="optional"/>
+
+    <xs:attribute name="listName" type="xs:string" use="optional"/>
+
+    <xs:attribute name="listVersionID" type="xs:normalizedString" use="optional"/>
+
+    <xs:attribute name="name" type="xs:string" use="optional"/>
+
+    <xs:attribute ref="c:language" use="optional"/>
+
+    <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
+
+    <xs:attribute name="listSchemeURI" type="xs:anyURI" use="optional"/>
+
+  </xs:complexType>
+
+  <xs:element name="codelist" type="c:codeListType"/>
+
+  <xs:element name="value-domain">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="c:term"/>
-        <xs:element maxOccurs="unbounded" ref="c:value"/>
-      </xs:sequence>
+      <xs:attribute name="length" type="xs:nonNegativeInteger"/>
+      <xs:attribute name="format" type="xs:string"/>
+      <xs:attribute name="fraction-digit" type="xs:nonNegativeInteger"/>
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="format">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="c:term"/>
-        <xs:element maxOccurs="unbounded" ref="c:pattern"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+  <xs:element name="semantic-definition" type="c:htmlType"/>
+
 
   <xs:element name="other">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="c:term"/>
+        <xs:element maxOccurs="unbounded" ref="c:description"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="pattern" type="xs:string"/>
-  <xs:element name="value" type="xs:string"/>
-  <xs:element name="term" type="xs:normalizedString"/>
 
-  <xs:complexType name="html-rtf" mixed="true">
-    <xs:group minOccurs="0" maxOccurs="unbounded" ref="c:any-html"/>
-  </xs:complexType>
-  <xs:group name="any-html">
-    <xs:sequence>
-      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
-    </xs:sequence>
-  </xs:group>
-  <xs:attributeGroup name="any-attribute">
-    <xs:anyAttribute processContents="skip"/>
-  </xs:attributeGroup>
-  <xs:element name="implementation">
+  <xs:element name="syntax-bindings">
     <xs:complexType>
-      <xs:complexContent>
-        <xs:extension base="c:any">
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
           <xs:attribute name="syntax" use="required">
             <xs:simpleType>
-              <xs:restriction base="xs:token">
-                <xs:enumeration value="UBL"/>
-                <xs:enumeration value="CII"/>
+              <xs:restriction base="xs:normalizedString">
+                <xs:enumeration value="ubl-invoice"/>
+                <xs:enumeration value="ubl-creditnote"/>
+                <xs:enumeration value="cii"/>
               </xs:restriction>
             </xs:simpleType>
           </xs:attribute>
         </xs:extension>
-      </xs:complexContent>
+      </xs:simpleContent>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="any">
-    <xs:sequence>
-      <xs:any processContents="skip"/>
-    </xs:sequence>
-  </xs:complexType>
+
+  <xs:element name="schematron">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:any namespace="http://purl.oclc.org/dsdl/schematron" processContents="lax"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:simpleType name="restrictedSemanticDataTypeType">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="Binary"/>
+      <xs:enumeration value="Date"/>
+      <xs:enumeration value="Decimal"/>
+      <xs:enumeration value="Amount"/>
+      <xs:enumeration value="Unit price amount"/>
+      <xs:enumeration value="Quantity"/>
+      <xs:enumeration value="Percentage"/>
+      <xs:enumeration value="Identifier"/>
+      <xs:enumeration value="Document reference"/>
+      <xs:enumeration value="Code"/>
+      <xs:enumeration value="Text"/>
+      <xs:enumeration value="Binary object"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="semanticStringTypeType">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="String"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="semanticDataTypeType">
+    <xs:union memberTypes="c:restrictedSemanticDataTypeType c:semanticStringTypeType"/>
+  </xs:simpleType>
+
+  <xs:element name="semantic-datatype" type="c:restrictedSemanticDataTypeType"/>
 
 
   <xs:complexType name="coreElementType" abstract="true">
     <xs:sequence>
-      <xs:element maxOccurs="1" ref="c:description"/>
-      <xs:choice maxOccurs="1">
-        <xs:element ref="c:cardinality"/>
-        <xs:element ref="c:description"/>
-
-      </xs:choice>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="c:implementation"/>
+      <xs:element ref="c:definition"/>
+      <xs:element ref="c:cardinality"/>
+      <xs:element ref="c:syntax-bindings"/>
     </xs:sequence>
+
     <xs:attribute name="id" use="required" type="xs:ID"/>
     <xs:attribute name="level" use="required" type="xs:nonNegativeInteger"/>
     <xs:attribute ref="c:cius-specific" use="required"/>
-
   </xs:complexType>
 
   <xs:complexType name="businessGroupType">
@@ -183,18 +246,29 @@
         <xs:sequence>
           <xs:element ref="c:usage-note" maxOccurs="1"/>
         </xs:sequence>
-        <!-- This can be enhanced to contain simplytype and rules on the ids -->
+        <!-- This can be enhanced to contain simpleType and rules on the ids -->
         <xs:attribute name="business-group" use="optional" type="xs:IDREF"/>
-        <!-- This can be enhanced to restrict to enumeration of allowed semantic datatypes -->
-        <xs:attribute name="semantic-datatype" use="required" type="xs:normalizedString"/>
+        
+        <xs:attribute name="semantic-datatype" use="required" type="c:semanticDataTypeType"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
   <xs:element name="core-element" type="c:coreElementType" abstract="true"/>
-  <xs:element name="busines-term" type="c:coreElementType" substitutionGroup="c:core-element"/>
-  <xs:element name="business-group" type="c:coreElementType" substitutionGroup="c:core-element"/>
+  <xs:element name="busines-term" type="c:businessTermType" substitutionGroup="c:core-element"/>
+  <xs:element name="business-group" type="c:businessGroupType" substitutionGroup="c:core-element"/>
 
+
+  <xs:complexType name="restrictionType">
+    <xs:sequence>
+      <xs:element ref="c:cardinality" minOccurs="0"/>
+      <xs:element ref="c:codelist" minOccurs="0"/>
+      <xs:element ref="c:value-domain" minOccurs="0"/>
+      <xs:element ref="c:semantic-definition" minOccurs="0"/>
+      <xs:element ref="c:semantic-datatype" minOccurs="0"/>
+
+    </xs:sequence>
+  </xs:complexType>
 
   <xs:element name="information-elements">
     <xs:complexType>
@@ -204,18 +278,17 @@
     </xs:complexType>
   </xs:element>
 
-
   <xs:element name="rule">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="1" ref="c:description"/>
-
-        <xs:element minOccurs="0" maxOccurs="1" ref="c:implementation"/>
+        <xs:element ref="c:description" maxOccurs="1"/>
+        <xs:element name="restrictions" type="c:restrictionType" minOccurs="0"/>
+        <xs:element ref="c:schematron" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:ID"/>
       <xs:attribute name="core-elements" type="xs:IDREFS" use="optional"/>
       <xs:attribute ref="c:cius-specific" use="required"/>
-      
+
     </xs:complexType>
   </xs:element>
 
@@ -232,8 +305,9 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="c:metadata"/>
+        <!-- maybe to redundant to the abstract elem within metadata -->
         <xs:element ref="c:description"/>
-        <xs:element ref="c:information-elements"/>
+        <xs:element ref="c:information-elements" minOccurs="0"/>
         <xs:element ref="c:business-rules"/>
       </xs:sequence>
       <!-- CIUS (TRUE) or Extension (FALSE)-->
