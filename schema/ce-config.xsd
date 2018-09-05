@@ -40,8 +40,8 @@
         <xs:element ref="c:nameShort"/>
         <xs:element ref="c:nameLong"/>
         <xs:element ref="c:nameTechnical"/>
-        <!-- This should be equal to business term "Specification identification" -->
         <xs:element ref="c:version"/>
+        <xs:element ref="c:status"/>
         <xs:element ref="c:date"/>
         <xs:element ref="c:publisher"/>
         <xs:element ref="c:governor"/>
@@ -53,30 +53,38 @@
     </xs:complexType>
   </xs:element>
 
-  <!-- renyo: change most to normalized string then users do not need to implement own whitespace normalization -->
+  <!-- renzo: change most to normalized string then users do not need to implement own whitespace normalization -->
 
   <!-- A short descriptive name based on a common semantic -->
   <xs:element name="nameShort" type="xs:normalizedString"/>
+  
   <!-- A descriptive name for general reference-->
   <xs:element name="nameLong" type="xs:normalizedString"/>
-  <!-- Technical name (identifier) as described in "7.6 Identification of core invoice usage specifications"-->
+  
+  <!-- Technical name (identifier) as described in "7.6 Identification of core invoice usage specifications"  (This should be concat with the version equal to business term "Specification identification")-->
   <xs:element name="nameTechnical" type="xs:normalizedString"/>
-  <!-- NEW: Version of CIUS/Extension -->
+  
+  <!-- NEW: Version of CIUS/Extension (This should be concat with the technical name equal to business term "Specification identification")-->
   <xs:element name="version" type="xs:normalizedString"/>
+  
   <!-- NEW: Date of publication of CIUS/Extension -->
   <xs:element name="date" type="xs:date"/>
+  
   <!-- The party who formally publishes the specification.-->
   <xs:element name="publisher" type="xs:normalizedString"/>
+  
   <!-- The party who provides the specification its authority.-->
   <xs:element name="governor" type="xs:normalizedString"/>
-  <!--  One or more country codes, which the requirements the specification supports.-->
-
-  <!-- renzo: Better use ISO country codes -->
+  
+  <!--  One or more ISO country codes, which the requirements the specification supports.-->
   <xs:element name="country" type="xs:normalizedString"/>
+  
   <!-- The industry sector, which requirements the specification supports.-->
   <xs:element name="sector" type="xs:normalizedString"/>
+  
   <!-- Contact to publisher.-->
   <xs:element name="email" type="xs:normalizedString"/>
+  
   <!-- A brief description of what the specification is intended for.-->
   <xs:element name="abstract" type="c:htmlType"/>
 
