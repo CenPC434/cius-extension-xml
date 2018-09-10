@@ -88,6 +88,8 @@
   <!-- A brief description of what the specification is intended for.-->
   <xs:element name="abstract" type="c:htmlType"/>
 
+  <!-- The development, production status of the CIUS or Extension-->
+  <xs:element name="status" type="xs:normalizedString"/>
 
   <!-- According to https://www.w3.org/International/questions/qa-when-xmllang it is NOT recommended to use xml>lang for natural language content of elements -->
   <xs:complexType name="htmlType">
