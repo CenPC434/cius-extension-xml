@@ -265,7 +265,7 @@
   </xs:complexType>
 
   <xs:element name="core-element" type="c:coreElementType" abstract="true"/>
-  <xs:element name="busines-term" type="c:businessTermType" substitutionGroup="c:core-element"/>
+  <xs:element name="business-term" type="c:businessTermType" substitutionGroup="c:core-element"/>
   <xs:element name="business-group" type="c:businessGroupType" substitutionGroup="c:core-element"/>
 
 
@@ -276,7 +276,7 @@
       <xs:element ref="c:value-domain" minOccurs="0"/>
       <xs:element ref="c:semantic-definition" minOccurs="0"/>
       <xs:element ref="c:semantic-datatype" minOccurs="0"/>
-
+      <xs:element ref="c:other"/>
     </xs:sequence>
   </xs:complexType>
 
