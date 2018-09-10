@@ -7,8 +7,6 @@
   <xs:attribute name="language" type="xs:normalizedString"/>
   <xs:attribute name="cius-specific" type="xs:boolean"/>
 
-
-
   <xs:complexType name="html-rtf" mixed="true">
     <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
   </xs:complexType>
@@ -26,7 +24,7 @@
   </xs:attributeGroup>
 
   <xs:complexType name="any">
-    <xs:sequence>
+    <xs:sequence maxOccurs="unbounded">
       <xs:any processContents="skip"/>
     </xs:sequence>
   </xs:complexType>
@@ -71,7 +69,7 @@
   <xs:element name="date" type="xs:date"/>
   
   <!-- The party who formally publishes the specification.-->
-  <xs:element name="publisher" type="xs:normalizedString"/>
+  <xs:element name="publisher" type="c:html-rtf"/>
   
   <!-- The party who provides the specification its authority.-->
   <xs:element name="governor" type="xs:normalizedString"/>
@@ -86,7 +84,7 @@
   <xs:element name="email" type="xs:normalizedString"/>
   
   <!-- A brief description of what the specification is intended for.-->
-  <xs:element name="abstract" type="c:htmlType"/>
+  <xs:element name="abstract" type="c:html-rtf"/>
 
   <!-- The development, production status of the CIUS or Extension-->
   <xs:element name="status" type="xs:normalizedString"/>
@@ -168,7 +166,7 @@
   <xs:element name="other">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="c:description"/>
+        <xs:element name="description" maxOccurs="unbounded" type="c:any"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -276,7 +274,7 @@
       <xs:element ref="c:value-domain" minOccurs="0"/>
       <xs:element ref="c:semantic-definition" minOccurs="0"/>
       <xs:element ref="c:semantic-datatype" minOccurs="0"/>
-      <xs:element ref="c:other"/>
+      <xs:element ref="c:other" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -291,13 +289,17 @@
   <xs:element name="rule">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="c:description" maxOccurs="1"/>
+        <xs:element ref="c:description" maxOccurs="unbounded"/>
         <xs:element name="restrictions" type="c:restrictionType" minOccurs="0"/>
         <xs:element ref="c:schematron" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:ID"/>
-      <xs:attribute name="core-elements" type="xs:IDREFS" use="optional"/>
-      <xs:attribute ref="c:cius-specific" use="required"/>
+      <xs:attribute name="core-elements" use="optional">
+        <xs:simpleType>
+          <xs:list itemType="xs:normalizedString"></xs:list>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute ref="c:cius-specific" use="optional"/>
 
     </xs:complexType>
   </xs:element>
