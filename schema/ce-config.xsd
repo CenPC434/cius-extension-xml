@@ -55,34 +55,34 @@
 
   <!-- A short descriptive name based on a common semantic -->
   <xs:element name="nameShort" type="xs:normalizedString"/>
-  
+
   <!-- A descriptive name for general reference-->
   <xs:element name="nameLong" type="xs:normalizedString"/>
-  
+
   <!-- Technical name (identifier) as described in "7.6 Identification of core invoice usage specifications"  (This should be concat with the version equal to business term "Specification identification")-->
   <xs:element name="nameTechnical" type="xs:normalizedString"/>
-  
+
   <!-- NEW: Version of CIUS/Extension (This should be concat with the technical name equal to business term "Specification identification")-->
   <xs:element name="version" type="xs:normalizedString"/>
-  
+
   <!-- NEW: Date of publication of CIUS/Extension -->
   <xs:element name="date" type="xs:date"/>
-  
+
   <!-- The party who formally publishes the specification.-->
   <xs:element name="publisher" type="c:html-rtf"/>
-  
+
   <!-- The party who provides the specification its authority.-->
   <xs:element name="governor" type="xs:normalizedString"/>
-  
+
   <!--  One or more ISO country codes, which the requirements the specification supports.-->
   <xs:element name="country" type="xs:normalizedString"/>
-  
+
   <!-- The industry sector, which requirements the specification supports.-->
   <xs:element name="sector" type="xs:normalizedString"/>
-  
+
   <!-- Contact to publisher.-->
   <xs:element name="email" type="xs:normalizedString"/>
-  
+
   <!-- A brief description of what the specification is intended for.-->
   <xs:element name="abstract" type="c:html-rtf"/>
 
@@ -100,9 +100,13 @@
 
   <xs:element name="definition" type="c:htmlType"/>
   <xs:element name="description" type="c:htmlType"/>
+  <xs:element name="term"/>
 
   <xs:element name="cardinality">
     <xs:complexType>
+      <xs:sequence>
+        <xs:element name="term" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
       <xs:attribute name="maxOccurs">
         <xs:simpleType>
           <xs:union memberTypes="xs:nonNegativeInteger">
@@ -122,34 +126,30 @@
 
 
   <xs:element name="technical">
-    <xs:complexType/>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="c:term" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
   </xs:element>
 
   <xs:complexType name="codeListType">
     <xs:sequence>
+      <xs:element ref="c:term"/>
       <!-- white listing subset of CEN codelist -->
       <xs:element name="allowed-codes" type="xs:token"/>
     </xs:sequence>
-
     <!-- Shamelessly adopted and adpted from UBL 2.1 -->
     <xs:attribute name="listAgencyID" type="xs:normalizedString" use="optional"/>
-
     <xs:attribute name="listAgencyName" type="xs:string" use="optional"/>
-
     <xs:attribute name="listName" type="xs:string" use="optional"/>
-
     <xs:attribute name="listVersionID" type="xs:normalizedString" use="optional"/>
-
     <xs:attribute name="name" type="xs:string" use="optional"/>
-
     <xs:attribute ref="c:language" use="optional"/>
-
     <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
-
     <xs:attribute name="listSchemeURI" type="xs:anyURI" use="optional"/>
-
   </xs:complexType>
-
+  
   <xs:element name="codelist" type="c:codeListType"/>
 
   <xs:element name="value-domain">
@@ -160,7 +160,13 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="semantic-definition" type="c:htmlType"/>
+  <xs:element name="semantic-definition" type="c:htmlType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="c:term"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 
 
   <xs:element name="other">
@@ -256,7 +262,7 @@
         </xs:sequence>
         <!-- This can be enhanced to contain simpleType and rules on the ids -->
         <xs:attribute name="business-group" use="optional" type="xs:IDREF"/>
-        
+
         <xs:attribute name="semantic-datatype" use="required" type="c:semanticDataTypeType"/>
       </xs:extension>
     </xs:complexContent>
@@ -269,12 +275,12 @@
 
   <xs:complexType name="restrictionType">
     <xs:sequence>
-      <xs:element ref="c:cardinality" minOccurs="0"/>
-      <xs:element ref="c:codelist" minOccurs="0"/>
-      <xs:element ref="c:value-domain" minOccurs="0"/>
-      <xs:element ref="c:semantic-definition" minOccurs="0"/>
-      <xs:element ref="c:semantic-datatype" minOccurs="0"/>
-      <xs:element ref="c:other" minOccurs="0"/>
+      <xs:element ref="c:cardinality" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:codelist" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:value-domain" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:semantic-definition" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:semantic-datatype" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:other" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -294,11 +300,11 @@
         <xs:element ref="c:schematron" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:ID"/>
-      <xs:attribute name="core-elements" use="optional">
-        <xs:simpleType>
-          <xs:list itemType="xs:normalizedString"></xs:list>
-        </xs:simpleType>
-      </xs:attribute>
+      <!-- information given within the attribute will be given explicitly within the restriction element -->
+      <!-- <xs:attribute name="core-elements" use="optional">-->
+      <!-- <xs:simpleType><xs:list itemType="xs:normalizedString"/></xs:simpleType>-->
+      <!--</xs:attribute>-->
+
       <xs:attribute ref="c:cius-specific" use="optional"/>
 
     </xs:complexType>
