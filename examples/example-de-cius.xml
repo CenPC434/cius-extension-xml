@@ -26,12 +26,15 @@
 
     <!-- Identifier as described in "7.6 Identification of core invoice usage specifications" -->
     <c:nameTechnical>urn:ce.eu:en16931:2017:xoev-de:kosit:standard:xrechnung_1.1</c:nameTechnical>
+    
+    <!-- Underlying Specification -->
+    <c:underlyingSpecification>urn:ce.eu:en16931:2017</c:underlyingSpecification>
 
     <!-- Version of CIUS/Extension -->
     <c:version>1.1</c:version>
 
-    <!-- Status of CIUS/Extension -->
-    <c:status>1.1</c:status>
+    <!-- The status of the specification (PLANNED, DEVELOPMENT, ACTIVE, REVOKED) -->
+    <c:status>Active</c:status>
 
     <!-- Date of publication of CIUS/Extension -->
     <c:date>2017-11-30</c:date>
@@ -42,7 +45,7 @@
     </c:publisher>
 
     <!-- Governor of extension -->
-    <c:governor>T-Planungsrat</c:governor>
+    <c:governor>IT-Planungsrat</c:governor>
 
     <!-- Country where CIUS/Extension is used -->
     <c:country>DE</c:country>
@@ -51,12 +54,15 @@
     <c:sector>Public Administration</c:sector>
 
     <!-- Contact email for sending inquiries -->
-    <c:email>kosit@finanzen.bremen.de</c:email>
+    <c:contact>kosit@finanzen.bremen.de</c:contact>
 
     <!-- Short description/purpose of spec -->
     <c:abstract>This CIUS-DE-NAT builds on top of the European Norm EN 16931-1:2017. All rules of
       the underlying specification apply with the addition of the rules stated in this
       document.</c:abstract>
+    
+    <!-- A hyperlink to more detailed information about the specification. Preferably that should include contact information. -->
+    <c:furtherInformation>https://www.xoev.de/de/xrechnung</c:furtherInformation>
   </c:metadata>
 
   <!-- desc can contain arbitrary HTML with human prose describing CIUS/Extension -->

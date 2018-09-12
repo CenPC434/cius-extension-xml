@@ -11,13 +11,11 @@
     <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
   </xs:complexType>
 
-
   <xs:group name="any-html">
     <xs:sequence>
       <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
     </xs:sequence>
   </xs:group>
-
 
   <xs:attributeGroup name="any-attribute">
     <xs:anyAttribute processContents="skip"/>
@@ -29,7 +27,9 @@
     </xs:sequence>
   </xs:complexType>
 
-
+  <!---\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-->
+  <!--                          Metadata                                                                                            -->
+  <!---\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-->
 
 
   <xs:element name="metadata">
@@ -38,6 +38,7 @@
         <xs:element ref="c:nameShort"/>
         <xs:element ref="c:nameLong"/>
         <xs:element ref="c:nameTechnical"/>
+        <xs:element ref="c:underlyingSpecification"/>
         <xs:element ref="c:version"/>
         <xs:element ref="c:status"/>
         <xs:element ref="c:date"/>
@@ -45,51 +46,83 @@
         <xs:element ref="c:governor"/>
         <xs:element minOccurs="0" ref="c:country"/>
         <xs:element minOccurs="0" ref="c:sector"/>
-        <xs:element ref="c:email"/>
+        <xs:element ref="c:contact"/>
         <xs:element ref="c:abstract"/>
+        <xs:element ref="c:furtherInformation"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
-  <!-- renzo: change most to normalized string then users do not need to implement own whitespace normalization -->
 
   <!-- A short descriptive name based on a common semantic -->
   <xs:element name="nameShort" type="xs:normalizedString"/>
-
   <!-- A descriptive name for general reference-->
   <xs:element name="nameLong" type="xs:normalizedString"/>
-
   <!-- Technical name (identifier) as described in "7.6 Identification of core invoice usage specifications"  (This should be concat with the version equal to business term "Specification identification")-->
   <xs:element name="nameTechnical" type="xs:normalizedString"/>
-
-  <!-- NEW: Version of CIUS/Extension (This should be concat with the technical name equal to business term "Specification identification")-->
+  <!-- The specification that is used as base. A valid instance according to a CIUS specification must also be valid according to its underlying specification. If not it is an extension. -->
+  <xs:element name="underlyingSpecification" type="xs:normalizedString"/>
+  <!-- Version of the specification (This should be concat with the technical name equal to business term "Specification identification")-->
   <xs:element name="version" type="xs:normalizedString"/>
-
-  <!-- NEW: Date of publication of CIUS/Extension -->
+  <!-- The status of the specification (PLANNED, DEVELOPMENT, ACTIVE, REVOKED)-->
+  <xs:element name="status" type="xs:normalizedString"/>
+  <!-- Date of publication of CIUS/Extension -->
   <xs:element name="date" type="xs:date"/>
-
   <!-- The party who formally publishes the specification.-->
   <xs:element name="publisher" type="c:html-rtf"/>
-
   <!-- The party who provides the specification its authority.-->
   <xs:element name="governor" type="xs:normalizedString"/>
-
   <!--  One or more ISO country codes, which the requirements the specification supports.-->
   <xs:element name="country" type="xs:normalizedString"/>
-
   <!-- The industry sector, which requirements the specification supports.-->
   <xs:element name="sector" type="xs:normalizedString"/>
-
-  <!-- Contact to publisher.-->
-  <xs:element name="email" type="xs:normalizedString"/>
-
+  <!-- e-Mail contact to publisher.-->
+  <xs:element name="contact" type="xs:normalizedString"/>
   <!-- A brief description of what the specification is intended for.-->
   <xs:element name="abstract" type="c:html-rtf"/>
+  <!-- A hyperlink to more detailed information about the specification. Preferably that should include contact information. -->
+  <xs:element name="furtherInformation" type="xs:string"/>
 
-  <!-- The development, production status of the CIUS or Extension-->
-  <xs:element name="status" type="xs:normalizedString"/>
 
-  <!-- According to https://www.w3.org/International/questions/qa-when-xmllang it is NOT recommended to use xml>lang for natural language content of elements -->
+  <!---\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-->
+  <!--                          Data                                                                                                -->
+  <!---\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-->
+
+  <xs:element name="business-rules">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="c:rule" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="rule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="c:description" maxOccurs="unbounded"/>
+        <xs:element name="restrictions" type="c:restrictionType" minOccurs="0"/>
+        <xs:element ref="c:schematron" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:ID"/>
+      <xs:attribute ref="c:cius-specific" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="restrictionType">
+    <xs:sequence>
+      <xs:element ref="c:cardinality" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:codelist" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:value-domain" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:semantic-definition" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:semantic-datatype" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:other" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+
+
+
   <xs:complexType name="htmlType">
     <xs:complexContent>
       <xs:extension base="c:html-rtf">
@@ -149,7 +182,7 @@
     <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
     <xs:attribute name="listSchemeURI" type="xs:anyURI" use="optional"/>
   </xs:complexType>
-  
+
   <xs:element name="codelist" type="c:codeListType"/>
 
   <xs:element name="value-domain">
@@ -160,7 +193,7 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="semantic-definition" type="c:htmlType">
+  <xs:element name="semantic-definition">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="c:term"/>
@@ -241,7 +274,6 @@
       <xs:element ref="c:cardinality"/>
       <xs:element ref="c:syntax-bindings"/>
     </xs:sequence>
-
     <xs:attribute name="id" use="required" type="xs:ID"/>
     <xs:attribute name="level" use="required" type="xs:nonNegativeInteger"/>
     <xs:attribute ref="c:cius-specific" use="required"/>
@@ -252,7 +284,6 @@
       <xs:extension base="c:coreElementType"/>
     </xs:complexContent>
   </xs:complexType>
-
 
   <xs:complexType name="businessTermType">
     <xs:complexContent>
@@ -273,17 +304,6 @@
   <xs:element name="business-group" type="c:businessGroupType" substitutionGroup="c:core-element"/>
 
 
-  <xs:complexType name="restrictionType">
-    <xs:sequence>
-      <xs:element ref="c:cardinality" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="c:codelist" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="c:value-domain" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="c:semantic-definition" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="c:semantic-datatype" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="c:other" minOccurs="0" maxOccurs="1"/>
-    </xs:sequence>
-  </xs:complexType>
-
   <xs:element name="information-elements">
     <xs:complexType>
       <xs:sequence maxOccurs="unbounded">
@@ -292,31 +312,7 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="rule">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="c:description" maxOccurs="unbounded"/>
-        <xs:element name="restrictions" type="c:restrictionType" minOccurs="0"/>
-        <xs:element ref="c:schematron" minOccurs="0"/>
-      </xs:sequence>
-      <xs:attribute name="id" use="required" type="xs:ID"/>
-      <!-- information given within the attribute will be given explicitly within the restriction element -->
-      <!-- <xs:attribute name="core-elements" use="optional">-->
-      <!-- <xs:simpleType><xs:list itemType="xs:normalizedString"/></xs:simpleType>-->
-      <!--</xs:attribute>-->
 
-      <xs:attribute ref="c:cius-specific" use="optional"/>
-
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="business-rules">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="c:rule" maxOccurs="unbounded"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
 
   <!-- Where to define extensions? as type attribute or as on element? -->
   <xs:element name="cius">
