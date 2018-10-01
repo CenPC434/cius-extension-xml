@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
-  
-  This is very rough and sketchy proposal for machine readable format 
-  for describing CIUS and/or Extensions to core EU invoice 
+
+  This is very rough and sketchy proposal for machine readable format
+  for describing CIUS and/or Extensions to core EU invoice
 
   In this example German National CIUS (XRechnung) is shown using proposed syntax
-  
+
   This is just example and working draft with no official standing
 
-  This example uses prevoius work of AT National CIUS provided by Philip Helger	
+  This example uses prevoius work of AT National CIUS provided by Philip Helger
 
   -->
 <?xml-model href="../schema/ce-config.xsd"?>
@@ -28,18 +28,18 @@
 
     <!-- Version of CIUS/Extension -->
     <c:version>1.1</c:version>
-    
+
     <!-- Status of CIUS/Extension -->
     <c:status>1.1</c:status>
-    
+
     <!-- Date of publication of CIUS/Extension -->
-    <c:date>2017-11-30</c:date>   
+    <c:date>2017-11-30</c:date>
 
     <!-- Author of extension, any HTML markup can be used inside element -->
     <c:publisher>Koordinierungsstelle für IT-Standards, <html:a
       href="mailto:kosit@finanzen.bremen.de">kosit@finanzen.bremen.de</html:a>
-    </c:publisher>   
- 
+    </c:publisher>
+
     <!-- Governor of extension -->
     <c:governor>T-Planungsrat</c:governor>
 
@@ -61,7 +61,7 @@
     <!-- Empty in this example. -->
   </c:description>
 
-  <c:business-rules> 
+  <c:business-rules>
     <!-- The following set of rules are a technical representation of the set of rules given by the German CIUS XRechnung-->
     <c:rule id="BR-DE-1" core-elements="BG-16">
     	<c:description c:language="de">Eine Rechnung (INVOICE) muss Angaben zu „PAYMENT INSTRUCTIONS“ (BG-16) enthalten.</c:description>
@@ -81,7 +81,7 @@
     	<c:description c:language="de">Das Element „Seller city“ (BT-37) muss übermittelt werden.</c:description>
     	<c:description c:language="en">TBD</c:description>
       <c:restrictions><c:cardinality minOccurs="1"/></c:restrictions>
-       
+
     </c:rule>
 
     <c:rule id="BR-DE-4" core-elements="BT-38">
@@ -139,7 +139,7 @@
         <c:cardinality minOccurs="1"/>
       </c:restrictions>
     </c:rule>
-    
+
     <c:rule id="BR-DE-11" core-elements="BT-78">
      	<c:description c:language="de">Das Element „Deliver to post code“ (BT-78) muss übermittelt werden.</c:description>
     	<c:description c:language="en">TBD</c:description>
@@ -160,16 +160,16 @@
     	<c:description c:language="de">In der Rechnung müssen Angaben zu einer der drei Gruppen „CREDIT TRANSFER“ (BG-17), „PAYMENT CARD INFORMATION“ (BG-18) oder „DIRECT DEBIT“ (BG-19) übermittelt werden.</c:description>
     	<c:description c:language="en">TBD</c:description>
       <c:restrictions>
-        <c:other> 
+        <c:other>
           <c:description>
-            <c:term>BG-17</c:term> 
+            <c:term>BG-17</c:term>
             <c:term>BG-18</c:term>
             <c:term>BG-19</c:term>
           </c:description>
-          
-        </c:other>  
+
+        </c:other>
       </c:restrictions>
-      
+
     </c:rule>
 
     <c:rule id="BR-DE-14" core-elements="BT-119">
@@ -233,7 +233,7 @@
         </c:other>
       </c:restrictions>
     </c:rule>
-    
+
   </c:business-rules>
 
 </c:cius>
