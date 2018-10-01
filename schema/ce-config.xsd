@@ -4,6 +4,11 @@
   targetNamespace="urn:x-namespace:yet:to:be:determined"
   xmlns:c="urn:x-namespace:yet:to:be:determined">
 
+  <!-- Import xml: namespace to inlcude xml:lang attribute -->
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd" />
+
+
   <xs:group name="any-html">
     <xs:sequence>
       <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
@@ -55,7 +60,8 @@
   <!-- Natural language of xml text content -->
   <!-- According to
     https://www.w3.org/International/questions/qa-when-xmllang.en
-    it is NOT recommended to use xml:lang for natural language content of elements -->
+    it is NOT recommended to use xml:lang for natural language content of
+    external elements -->
   <xs:attribute name="language" type="xs:normalizedString"/>
 
   <!-- Indicates wheter an element is CIUS specific. -->
@@ -90,7 +96,7 @@
   <xs:complexType name="htmlType">
     <xs:complexContent>
       <xs:extension base="c:html-rtf">
-        <xs:attribute ref="c:language"/>
+        <xs:attribute ref="xml:lang" use="required" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
