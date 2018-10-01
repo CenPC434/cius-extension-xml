@@ -1,27 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
   targetNamespace="urn:x-namespace:yet:to:be:determined"
   xmlns:c="urn:x-namespace:yet:to:be:determined">
 
+
+  <!-- 
+   | Global simpleType Definitions
+   -->
+  
+  <!-- All semantic datatypes as defined by CEN except String type -->
+  <xs:simpleType name="restrictedSemanticDataTypeType">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="Binary"/>
+      <xs:enumeration value="Date"/>
+      <xs:enumeration value="Decimal"/>
+      <xs:enumeration value="Amount"/>
+      <xs:enumeration value="Unit price amount"/>
+      <xs:enumeration value="Quantity"/>
+      <xs:enumeration value="Percentage"/>
+      <xs:enumeration value="Identifier"/>
+      <xs:enumeration value="Document reference"/>
+      <xs:enumeration value="Code"/>
+      <xs:enumeration value="Text"/>
+      <xs:enumeration value="Binary object"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- String semantic datatype as defined by CEN -->
+  <xs:simpleType name="semanticStringTypeType">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="String"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- All semantic datatypes as defined by CEN -->
+  <xs:simpleType name="semanticDataTypeType">
+    <xs:union
+      memberTypes="c:restrictedSemanticDataTypeType c:semanticStringTypeType"/>
+  </xs:simpleType>
+  
+  <!-- 
+   | Global Attribute Definitions
+   -->
+
   <!-- Natural language of xml text content -->
   <xs:attribute name="language" type="xs:normalizedString"/>
+
+  <!-- Indicates wheter an element is CIUS specific -->
   <xs:attribute name="cius-specific" type="xs:boolean"/>
 
-  <xs:complexType name="html-rtf" mixed="true">
-    <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
-  </xs:complexType>
-
-
-  <xs:group name="any-html">
-    <xs:sequence>
-      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
-    </xs:sequence>
-  </xs:group>
-
-
+  <!-- 
   <xs:attributeGroup name="any-attribute">
     <xs:anyAttribute processContents="skip"/>
   </xs:attributeGroup>
+   -->
+
+  <!-- 
+   | Global complexType Definitions
+   -->
+  
+  <xs:complexType name="html-rtf" mixed="true">
+    <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
+  </xs:complexType>
 
   <xs:complexType name="any">
     <xs:sequence maxOccurs="unbounded">
@@ -29,30 +70,100 @@
     </xs:sequence>
   </xs:complexType>
 
+  <!-- According to https://www.w3.org/International/questions/qa-when-xmllang it is NOT recommended to use xml>lang for natural language content of elements -->
+  <xs:complexType name="htmlType">
+    <xs:complexContent>
+      <xs:extension base="c:html-rtf">
+        <xs:attribute ref="c:language"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
 
+  <xs:group name="any-html">
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
+    </xs:sequence>
+  </xs:group>
+  
+  <xs:complexType name="codeListType">
+    <xs:sequence>
+      <!-- white listing subset of CEN codelist codes -->
+      <xs:element name="allowed-codes" type="xs:token"/>
+    </xs:sequence>
+    
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
+    <xs:attribute name="listAgencyID" type="xs:normalizedString" use="optional"/>
+    
+    <xs:attribute name="listAgencyName" type="xs:string" use="optional"/>
+    
+    <xs:attribute name="listName" type="xs:string" use="optional"/>
+    
+    <xs:attribute name="listVersionID" type="xs:normalizedString" use="optional"/>
+    
+    <xs:attribute name="name" type="xs:string" use="optional"/>
+    
+    <xs:attribute ref="c:language" use="optional"/>
+    
+    <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
+    
+    <xs:attribute name="listSchemeURI" type="xs:anyURI" use="optional"/>
+    
+  </xs:complexType>
+  
+  <xs:complexType name="restrictionType">
+    <xs:sequence>
+      <xs:element ref="c:cardinality" minOccurs="0"/>
+      <xs:element ref="c:codelist" minOccurs="0"/>
+      <xs:element ref="c:value-domain" minOccurs="0"/>
+      <xs:element ref="c:semantic-definition" minOccurs="0"/>
+      <xs:element ref="c:semantic-datatype" minOccurs="0"/>
+      <xs:element ref="c:other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
 
-
-  <xs:element name="metadata">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="c:nameShort"/>
-        <xs:element ref="c:nameLong"/>
-        <xs:element ref="c:nameTechnical"/>
-        <xs:element ref="c:version"/>
-        <xs:element ref="c:status"/>
-        <xs:element ref="c:date"/>
-        <xs:element ref="c:publisher"/>
-        <xs:element ref="c:governor"/>
-        <xs:element minOccurs="0" ref="c:country"/>
-        <xs:element minOccurs="0" ref="c:sector"/>
-        <xs:element ref="c:email"/>
-        <xs:element ref="c:abstract"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-
+  <!-- General abstract XML type with common elements and attributes for Business Terms and Business Rules -->
+  <xs:complexType name="coreElementType" abstract="true">
+    <xs:sequence>
+      <xs:element ref="c:definition"/>
+      <xs:element ref="c:cardinality"/>
+      <xs:element ref="c:syntax-bindings"/>
+    </xs:sequence>
+    
+    <xs:attribute name="id" use="required" type="xs:ID"/>
+    <xs:attribute name="level" use="required" type="xs:nonNegativeInteger"/>
+    <xs:attribute ref="c:cius-specific" use="required"/>
+  </xs:complexType>
+  
+  <xs:complexType name="businessGroupType">
+    <xs:complexContent>
+      <xs:extension base="c:coreElementType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="businessTermType">
+    <xs:complexContent>
+      <xs:extension base="c:coreElementType">
+        <xs:sequence>
+          <xs:element ref="c:usage-note" maxOccurs="1"/>
+        </xs:sequence>
+        <!-- This can be enhanced to contain simpleType and rules on the ids -->
+        <xs:attribute name="business-group" use="optional" type="xs:IDREF"/>
+        
+        <xs:attribute name="semantic-datatype" use="required"
+          type="c:semanticDataTypeType"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  
+  <!-- 
+   | Global Element Definitions
+   -->
+  
   <!-- renzo: change most to normalized string then users do not need to implement own whitespace normalization -->
-
+  
   <!-- A short descriptive name based on a common semantic -->
   <xs:element name="nameShort" type="xs:normalizedString"/>
   
@@ -85,18 +196,30 @@
   
   <!-- A brief description of what the specification is intended for.-->
   <xs:element name="abstract" type="c:html-rtf"/>
-
+  
   <!-- The development, production status of the CIUS or Extension-->
   <xs:element name="status" type="xs:normalizedString"/>
+  
+  
+  <xs:element name="metadata">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="c:nameShort"/>
+        <xs:element ref="c:nameLong"/>
+        <xs:element ref="c:nameTechnical"/>
+        <xs:element ref="c:version"/>
+        <xs:element ref="c:status"/>
+        <xs:element ref="c:date"/>
+        <xs:element ref="c:publisher"/>
+        <xs:element ref="c:governor"/>
+        <xs:element minOccurs="0" ref="c:country"/>
+        <xs:element minOccurs="0" ref="c:sector"/>
+        <xs:element ref="c:email"/>
+        <xs:element ref="c:abstract"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 
-  <!-- According to https://www.w3.org/International/questions/qa-when-xmllang it is NOT recommended to use xml>lang for natural language content of elements -->
-  <xs:complexType name="htmlType">
-    <xs:complexContent>
-      <xs:extension base="c:html-rtf">
-        <xs:attribute ref="c:language"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
 
   <xs:element name="definition" type="c:htmlType"/>
   <xs:element name="description" type="c:htmlType"/>
@@ -125,31 +248,7 @@
     <xs:complexType/>
   </xs:element>
 
-  <xs:complexType name="codeListType">
-    <xs:sequence>
-      <!-- white listing subset of CEN codelist -->
-      <xs:element name="allowed-codes" type="xs:token"/>
-    </xs:sequence>
-
-    <!-- Shamelessly adopted and adpted from UBL 2.1 -->
-    <xs:attribute name="listAgencyID" type="xs:normalizedString" use="optional"/>
-
-    <xs:attribute name="listAgencyName" type="xs:string" use="optional"/>
-
-    <xs:attribute name="listName" type="xs:string" use="optional"/>
-
-    <xs:attribute name="listVersionID" type="xs:normalizedString" use="optional"/>
-
-    <xs:attribute name="name" type="xs:string" use="optional"/>
-
-    <xs:attribute ref="c:language" use="optional"/>
-
-    <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
-
-    <xs:attribute name="listSchemeURI" type="xs:anyURI" use="optional"/>
-
-  </xs:complexType>
-
+  
   <xs:element name="codelist" type="c:codeListType"/>
 
   <xs:element name="value-domain">
@@ -193,90 +292,26 @@
   <xs:element name="schematron">
     <xs:complexType>
       <xs:sequence>
-        <xs:any namespace="http://purl.oclc.org/dsdl/schematron" processContents="lax"/>
+        <xs:any namespace="http://purl.oclc.org/dsdl/schematron"
+          processContents="lax"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
-
-  <xs:simpleType name="restrictedSemanticDataTypeType">
-    <xs:restriction base="xs:normalizedString">
-      <xs:enumeration value="Binary"/>
-      <xs:enumeration value="Date"/>
-      <xs:enumeration value="Decimal"/>
-      <xs:enumeration value="Amount"/>
-      <xs:enumeration value="Unit price amount"/>
-      <xs:enumeration value="Quantity"/>
-      <xs:enumeration value="Percentage"/>
-      <xs:enumeration value="Identifier"/>
-      <xs:enumeration value="Document reference"/>
-      <xs:enumeration value="Code"/>
-      <xs:enumeration value="Text"/>
-      <xs:enumeration value="Binary object"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="semanticStringTypeType">
-    <xs:restriction base="xs:normalizedString">
-      <xs:enumeration value="String"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="semanticDataTypeType">
-    <xs:union memberTypes="c:restrictedSemanticDataTypeType c:semanticStringTypeType"/>
-  </xs:simpleType>
-
   <xs:element name="semantic-datatype" type="c:restrictedSemanticDataTypeType"/>
 
 
-  <xs:complexType name="coreElementType" abstract="true">
-    <xs:sequence>
-      <xs:element ref="c:definition"/>
-      <xs:element ref="c:cardinality"/>
-      <xs:element ref="c:syntax-bindings"/>
-    </xs:sequence>
 
-    <xs:attribute name="id" use="required" type="xs:ID"/>
-    <xs:attribute name="level" use="required" type="xs:nonNegativeInteger"/>
-    <xs:attribute ref="c:cius-specific" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="businessGroupType">
-    <xs:complexContent>
-      <xs:extension base="c:coreElementType"/>
-    </xs:complexContent>
-  </xs:complexType>
-
-
-  <xs:complexType name="businessTermType">
-    <xs:complexContent>
-      <xs:extension base="c:coreElementType">
-        <xs:sequence>
-          <xs:element ref="c:usage-note" maxOccurs="1"/>
-        </xs:sequence>
-        <!-- This can be enhanced to contain simpleType and rules on the ids -->
-        <xs:attribute name="business-group" use="optional" type="xs:IDREF"/>
-        
-        <xs:attribute name="semantic-datatype" use="required" type="c:semanticDataTypeType"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-
+  <!-- Basis for substitution group  -->
   <xs:element name="core-element" type="c:coreElementType" abstract="true"/>
-  <xs:element name="business-term" type="c:businessTermType" substitutionGroup="c:core-element"/>
-  <xs:element name="business-group" type="c:businessGroupType" substitutionGroup="c:core-element"/>
+
+  <xs:element name="business-term" type="c:businessTermType"
+    substitutionGroup="c:core-element"/>
+
+  <xs:element name="business-group" type="c:businessGroupType"
+    substitutionGroup="c:core-element"/>
 
 
-  <xs:complexType name="restrictionType">
-    <xs:sequence>
-      <xs:element ref="c:cardinality" minOccurs="0"/>
-      <xs:element ref="c:codelist" minOccurs="0"/>
-      <xs:element ref="c:value-domain" minOccurs="0"/>
-      <xs:element ref="c:semantic-definition" minOccurs="0"/>
-      <xs:element ref="c:semantic-datatype" minOccurs="0"/>
-      <xs:element ref="c:other" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
 
   <xs:element name="information-elements">
     <xs:complexType>
@@ -286,24 +321,32 @@
     </xs:complexType>
   </xs:element>
 
+  <!-- A business rule description -->
   <xs:element name="rule">
     <xs:complexType>
       <xs:sequence>
+        <!-- Natural language description of Business Rule-->
         <xs:element ref="c:description" maxOccurs="unbounded"/>
-        <xs:element name="restrictions" type="c:restrictionType" minOccurs="0"/>
+        <!-- One or many restrictions defined by this rule -->
+        <xs:element name="restriction" type="c:restrictionType" minOccurs="0"
+          maxOccurs="unbounded"/>
+        <!-- A schematron rule implementing the Business Rule -->
         <xs:element ref="c:schematron" minOccurs="0"/>
       </xs:sequence>
+
       <xs:attribute name="id" use="required" type="xs:ID"/>
       <xs:attribute name="core-elements" use="optional">
         <xs:simpleType>
-          <xs:list itemType="xs:normalizedString"></xs:list>
+          <xs:list itemType="xs:normalizedString"/>
         </xs:simpleType>
       </xs:attribute>
+      <!-- If it is a CIUS specific restriction -->
       <xs:attribute ref="c:cius-specific" use="optional"/>
 
     </xs:complexType>
   </xs:element>
 
+  <!-- The set of busines rules  (either all or the rules with CIUS specific restrictions) -->
   <xs:element name="business-rules">
     <xs:complexType>
       <xs:sequence>
@@ -312,18 +355,19 @@
     </xs:complexType>
   </xs:element>
 
-  <!-- Where to define extensions? as type attribute or as on element? -->
+  <!-- The root element of a CIUS description -->
   <xs:element name="cius">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="c:metadata"/>
-        <!-- maybe to redundant to the abstract elem within metadata -->
+        <!-- maybe redundant to the abstract elem within metadata -->
         <xs:element ref="c:description"/>
         <xs:element ref="c:information-elements" minOccurs="0"/>
         <xs:element ref="c:business-rules"/>
       </xs:sequence>
       <!-- CIUS (TRUE) or Extension (FALSE)-->
-      <!-- renzo: I would not use a bollean for extensibibilty eitehr enum or token -->
+      <!-- renzo: I would not use a boolean for extensibibilty either a enum or token. -->
+      <!-- Maybe best is to make an own extension element -->
       <xs:attribute name="type" use="required" type="xs:boolean"/>
 
     </xs:complexType>
