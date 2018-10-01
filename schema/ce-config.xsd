@@ -61,7 +61,7 @@
   <!-- According to
     https://www.w3.org/International/questions/qa-when-xmllang.en
     it is NOT recommended to use xml:lang for natural language content of
-    external elements -->
+    external elements. Hence definition of own language attribute. -->
   <xs:attribute name="language" type="xs:normalizedString"/>
 
   <!-- Indicates wheter an element is CIUS specific. -->
@@ -81,6 +81,8 @@
    | Global complexType Definitions
    -->
 
+<!-- Inlcude html content but no xml:lang attribute required. Use htmlType if
+    xml:lang is requires -->
   <xs:complexType name="html-rtf" mixed="true">
     <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
   </xs:complexType>
@@ -92,7 +94,8 @@
     </xs:sequence>
   </xs:complexType>
 
-  <!-- According to https://www.w3.org/International/questions/qa-when-xmllang it is NOT recommended to use xml>lang for natural language content of elements -->
+  <!-- According to
+    https://www.w3.org/International/questions/qa-when-xmllang.en it is recommended to use xml:lang for natural language content of elements -->
   <xs:complexType name="htmlType">
     <xs:complexContent>
       <xs:extension base="c:html-rtf">
@@ -220,7 +223,7 @@
   <!-- e-Mail contact to publisher.-->
   <xs:element name="contact" type="xs:normalizedString"/>
   <!-- A brief description of what the specification is intended for.-->
-  <xs:element name="abstract" type="c:html-rtf"/>
+  <xs:element name="abstract" type="c:htmlType"/>
   <!-- A hyperlink to more detailed information about the specification. Preferably that should include contact information. -->
   <xs:element name="furtherInformation" type="xs:anyURI"/>
 

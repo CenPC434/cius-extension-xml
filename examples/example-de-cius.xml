@@ -58,7 +58,7 @@
     <c:contact>kosit@finanzen.bremen.de</c:contact>
 
     <!-- Short description/purpose of spec -->
-    <c:abstract>This CIUS-DE-NAT builds on top of the European Norm EN 16931-1:2017. All rules of
+    <c:abstract xml:lang="en">This CIUS-DE-NAT builds on top of the European Norm EN 16931-1:2017. All rules of
       the underlying specification apply with the addition of the rules stated in this
       document.</c:abstract>
     
