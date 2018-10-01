@@ -4,11 +4,18 @@
   targetNamespace="urn:x-namespace:yet:to:be:determined"
   xmlns:c="urn:x-namespace:yet:to:be:determined">
 
+  <xs:group name="any-html">
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
+    </xs:sequence>
+  </xs:group>
+
   <!-- 
    | Global simpleType Definitions
    -->
-  
+
   <!-- All semantic datatypes as defined by CEN except String type -->
+  <!-- See EN 16931-1:2017 chapter 6.5 -->
   <xs:simpleType name="restrictedSemanticDataTypeType">
     <xs:restriction base="xs:normalizedString">
       <xs:enumeration value="Binary"/>
@@ -25,28 +32,37 @@
       <xs:enumeration value="Binary object"/>
     </xs:restriction>
   </xs:simpleType>
-  
+
   <!-- String semantic datatype as defined by CEN -->
+  <!-- See EN 16931-1:2017 chapter 6.5 -->
   <xs:simpleType name="semanticStringTypeType">
     <xs:restriction base="xs:normalizedString">
       <xs:enumeration value="String"/>
     </xs:restriction>
   </xs:simpleType>
-  
+
   <!-- All semantic datatypes as defined by CEN -->
+  <!-- See EN 16931-1:2017 chapter 6.5 -->
   <xs:simpleType name="semanticDataTypeType">
     <xs:union
       memberTypes="c:restrictedSemanticDataTypeType c:semanticStringTypeType"/>
   </xs:simpleType>
-  
+
   <!-- 
    | Global Attribute Definitions
    -->
 
   <!-- Natural language of xml text content -->
+  <!-- According to
+    https://www.w3.org/International/questions/qa-when-xmllang.en
+    it is NOT recommended to use xml:lang for natural language content of elements -->
   <xs:attribute name="language" type="xs:normalizedString"/>
 
-  <!-- Indicates wheter an element is CIUS specific -->
+  <!-- Indicates wheter an element is CIUS specific. -->
+  <!-- It is a qualitativ
+    indicator although this might also be automatically deduced from comparisons
+    to main EN specification
+  -->
   <xs:attribute name="cius-specific" type="xs:boolean"/>
 
   <!-- 
@@ -58,7 +74,7 @@
   <!-- 
    | Global complexType Definitions
    -->
-  
+
   <xs:complexType name="html-rtf" mixed="true">
     <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
   </xs:complexType>
@@ -78,39 +94,34 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  
 
-  <xs:group name="any-html">
-    <xs:sequence>
-      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
-    </xs:sequence>
-  </xs:group>
-  
+  <!-- Defining reference with meatdata to a CEN codelist -->
   <xs:complexType name="codeListType">
     <xs:sequence>
       <!-- white listing subset of CEN codelist codes -->
       <xs:element name="allowed-codes" type="xs:token"/>
     </xs:sequence>
-    
+
     <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="listAgencyID" type="xs:normalizedString" use="optional"/>
-    
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="listAgencyName" type="xs:string" use="optional"/>
-    
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="listName" type="xs:string" use="optional"/>
-    
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="listVersionID" type="xs:normalizedString" use="optional"/>
-    
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="name" type="xs:string" use="optional"/>
-    
+    <!-- Main language of external codelist -->
     <xs:attribute ref="c:language" use="optional"/>
-    
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
-    
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="listSchemeURI" type="xs:anyURI" use="optional"/>
-    
   </xs:complexType>
-  
+
+  <!-- Restrictions defined on terms and by rules -->
+  <!-- See EN 16931-1:2017 chapter 7 -->
   <xs:complexType name="restrictionType">
     <xs:sequence>
       <xs:element ref="c:cardinality" minOccurs="0"/>
@@ -127,43 +138,48 @@
     <xs:sequence>
       <xs:element ref="c:definition"/>
       <xs:element ref="c:cardinality"/>
-      <xs:element ref="c:syntax-bindings"/>
+      <!-- optionally define the syntax binding of the BT or BG -->
+      <xs:element ref="c:syntax-bindings" minOccurs="0"/>
     </xs:sequence>
-    
+    <!-- ID of the term or group e.g. BT-1 or BG-11 -->
     <xs:attribute name="id" use="required" type="xs:ID"/>
+    <!-- The nesting level within Business Groups -->
     <xs:attribute name="level" use="required" type="xs:nonNegativeInteger"/>
+    <!-- Does it contian CIUS specific restrictions? -->
     <xs:attribute ref="c:cius-specific" use="required"/>
   </xs:complexType>
-  
+
+  <!-- The Business Group type -->
   <xs:complexType name="businessGroupType">
     <xs:complexContent>
       <xs:extension base="c:coreElementType"/>
     </xs:complexContent>
   </xs:complexType>
-  
-  
+
+  <!-- The Business Term type -->
   <xs:complexType name="businessTermType">
     <xs:complexContent>
       <xs:extension base="c:coreElementType">
         <xs:sequence>
+          <!-- Notes on how to use this BT -->
           <xs:element ref="c:usage-note" maxOccurs="1"/>
         </xs:sequence>
         <!-- This can be enhanced to contain simpleType and rules on the ids -->
         <xs:attribute name="business-group" use="optional" type="xs:IDREF"/>
-        
+        <!-- The semantic datatype of this BT -->
         <xs:attribute name="semantic-datatype" use="required"
           type="c:semanticDataTypeType"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  
-  
+
+
   <!-- 
    | Global Element Definitions
    -->
-  
+
   <!-- renzo: change most to normalized string then users do not need to implement own whitespace normalization -->
-  
+
   <!-- A short descriptive name based on a common semantic -->
   <xs:element name="nameShort" type="xs:normalizedString"/>
   <!-- A descriptive name for general reference-->
@@ -174,8 +190,17 @@
   <xs:element name="underlyingSpecification" type="xs:normalizedString"/>
   <!-- Version of the specification (This should be concat with the technical name equal to business term "Specification identification")-->
   <xs:element name="version" type="xs:normalizedString"/>
-  <!-- The status of the specification (PLANNED, DEVELOPMENT, ACTIVE, REVOKED)-->
-  <xs:element name="status" type="xs:normalizedString"/>
+  <!-- The status of the specification -->
+  <xs:element name="status" >
+    <xs:simpleType>
+      <xs:restriction base="xs:normalizedString">
+        <xs:enumeration value="planned"/>
+        <xs:enumeration value="development"/>
+        <xs:enumeration value="active"/>
+        <xs:enumeration value="revoked"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
   <!-- Date of publication of CIUS/Extension -->
   <xs:element name="date" type="xs:date"/>
   <!-- The party who formally publishes the specification.-->
@@ -192,7 +217,7 @@
   <xs:element name="abstract" type="c:html-rtf"/>
   <!-- A hyperlink to more detailed information about the specification. Preferably that should include contact information. -->
   <xs:element name="furtherInformation" type="xs:anyURI"/>
-  
+
   <xs:element name="metadata">
     <xs:complexType>
       <xs:sequence>
@@ -213,8 +238,8 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
-  
+
+
   <xs:element name="definition" type="c:htmlType"/>
   <xs:element name="description" type="c:htmlType"/>
   <xs:element name="term"/>
@@ -250,7 +275,7 @@
     </xs:complexType>
   </xs:element>
 
-  
+
   <xs:element name="codelist" type="c:codeListType"/>
 
   <xs:element name="value-domain">
@@ -364,6 +389,7 @@
   </xs:element>
 
   <!-- The root element of a CIUS description -->
+  <!-- See EN 16931-1:2017 chapter 7 -->
   <xs:element name="cius">
     <xs:complexType>
       <xs:sequence>
