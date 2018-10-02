@@ -6,7 +6,7 @@
 
   <!-- Import xml: namespace to inlcude xml:lang attribute -->
   <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-    schemaLocation="http://www.w3.org/2001/xml.xsd" />
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
 
 
   <xs:group name="any-html">
@@ -81,7 +81,7 @@
    | Global complexType Definitions
    -->
 
-<!-- Inlcude html content but no xml:lang attribute required. Use htmlType if
+  <!-- Inlcude html content but no xml:lang attribute required. Use htmlType if
     xml:lang is requires -->
   <xs:complexType name="html-rtf" mixed="true">
     <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
@@ -99,7 +99,7 @@
   <xs:complexType name="htmlType">
     <xs:complexContent>
       <xs:extension base="c:html-rtf">
-        <xs:attribute ref="xml:lang" use="required" />
+        <xs:attribute ref="xml:lang" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -200,7 +200,7 @@
   <!-- Version of the specification (This should be concat with the technical name equal to business term "Specification identification")-->
   <xs:element name="version" type="xs:normalizedString"/>
   <!-- The status of the specification -->
-  <xs:element name="status" >
+  <xs:element name="status">
     <xs:simpleType>
       <xs:restriction base="xs:normalizedString">
         <xs:enumeration value="planned"/>
@@ -227,6 +227,7 @@
   <!-- A hyperlink to more detailed information about the specification. Preferably that should include contact information. -->
   <xs:element name="furtherInformation" type="xs:anyURI"/>
 
+  <!-- Metadata section describing with general infomation about the CIUS  -->
   <xs:element name="metadata">
     <xs:complexType>
       <xs:sequence>
@@ -239,8 +240,8 @@
         <xs:element ref="c:date"/>
         <xs:element ref="c:publisher"/>
         <xs:element ref="c:governor"/>
-        <xs:element minOccurs="0" ref="c:country"/>
-        <xs:element minOccurs="0" ref="c:sector"/>
+        <xs:element ref="c:country" minOccurs="0"/>
+        <xs:element ref="c:sector" minOccurs="0"/>
         <xs:element ref="c:contact"/>
         <xs:element ref="c:abstract"/>
         <xs:element ref="c:furtherInformation"/>
@@ -253,6 +254,7 @@
   <xs:element name="description" type="c:htmlType"/>
   <xs:element name="term"/>
 
+  <!--  -->
   <xs:element name="cardinality">
     <xs:complexType>
       <xs:sequence>
