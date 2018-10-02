@@ -53,23 +53,6 @@
       memberTypes="c:restrictedSemanticDataTypeType c:semanticStringTypeType"/>
   </xs:simpleType>
 
-  <!-- 
-   | Global Attribute Definitions
-   -->
-
-  <!-- Natural language of xml text content -->
-  <!-- According to
-    https://www.w3.org/International/questions/qa-when-xmllang.en
-    it is NOT recommended to use xml:lang for natural language content of
-    external elements. Hence definition of own language attribute. -->
-  <xs:attribute name="language" type="xs:normalizedString"/>
-
-  <!-- Indicates wheter an element is CIUS specific. -->
-  <!-- It is a qualitativ
-    indicator although this might also be automatically deduced from comparisons
-    to main EN specification
-  -->
-  <xs:attribute name="cius-specific" type="xs:boolean"/>
 
   <!-- 
   <xs:attributeGroup name="any-attribute">
@@ -122,7 +105,12 @@
     <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="name" type="xs:string" use="optional"/>
     <!-- Main language of external codelist -->
-    <xs:attribute ref="c:language" use="optional"/>
+    <!-- Natural language of xml text content -->
+    <!-- According to
+    https://www.w3.org/International/questions/qa-when-xmllang.en
+    it is NOT recommended to use xml:lang for natural language content of
+    external elements. Hence definition of own language attribute. -->
+    <xs:attribute name="language" type="xs:normalizedString" use="optional"/>
     <!-- Shamelessly adopted and adapted from UBL 2.1 -->
     <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
     <!-- Shamelessly adopted and adapted from UBL 2.1 -->
@@ -155,7 +143,7 @@
     <!-- The nesting level within Business Groups -->
     <xs:attribute name="level" use="required" type="xs:nonNegativeInteger"/>
     <!-- Does it contian CIUS specific restrictions? -->
-    <xs:attribute ref="c:cius-specific" use="required"/>
+    <xs:attribute name="cius-specific" type="xs:boolean" use="required"/>
   </xs:complexType>
 
   <!-- The Business Group type -->
@@ -413,7 +401,7 @@
         </xs:simpleType>
       </xs:attribute>
       <!-- If it is a CIUS specific restriction -->
-      <xs:attribute ref="c:cius-specific" use="optional"/>
+      <xs:attribute name="cius-specific" type="xs:boolean" use="required"/>
 
     </xs:complexType>
   </xs:element>
