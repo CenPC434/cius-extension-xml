@@ -182,6 +182,34 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <!-- Type of the root element cius and base for the restriction of
+    extensionType -->
+  <xs:complexType name="ciusType">
+    <xs:sequence>
+      <xs:element ref="c:metadata"/>
+      <!-- maybe redundant to the abstract elem within metadata -->
+      <xs:element ref="c:description"/>
+      <xs:element ref="c:information-elements" minOccurs="0"/>
+      <xs:element ref="c:business-rules"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Type of the root element extension a restriction of
+    ciusType -->
+  <xs:complexType name="extensionType">
+    <xs:complexContent>
+      <xs:restriction base="c:ciusType">
+        <xs:sequence>
+          <xs:element ref="c:metadata"/>
+          <!-- maybe redundant to the abstract elem within metadata -->
+          <xs:element ref="c:description"/>
+          <xs:element ref="c:information-elements"/>
+          <xs:element ref="c:business-rules"/>
+        </xs:sequence>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
 
   <!-- 
    | Global Element Definitions
@@ -399,23 +427,14 @@
     </xs:complexType>
   </xs:element>
 
+
+
   <!-- The root element of a CIUS description -->
   <!-- See EN 16931-1:2017 chapter 7 -->
-  <xs:element name="cius">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="c:metadata"/>
-        <!-- maybe redundant to the abstract elem within metadata -->
-        <xs:element ref="c:description"/>
-        <xs:element ref="c:information-elements" minOccurs="0"/>
-        <xs:element ref="c:business-rules"/>
-      </xs:sequence>
-      <!-- CIUS (TRUE) or Extension (FALSE)-->
-      <!-- renzo: I would not use a boolean for extensibibilty either a enum or token. -->
-      <!-- Maybe best is to make an own extension element -->
-      <xs:attribute name="type" use="required" type="xs:boolean"/>
+  <xs:element name="cius" type="c:ciusType"/>
 
-    </xs:complexType>
-  </xs:element>
+  <xs:element name="extension" type="c:extensionType"> </xs:element>
+
+
 
 </xs:schema>
