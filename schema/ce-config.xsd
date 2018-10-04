@@ -8,6 +8,35 @@
   <xs:import namespace="http://www.w3.org/XML/1998/namespace"
     schemaLocation="http://www.w3.org/2001/xml.xsd"/>
 
+  <xs:attributeGroup name="codelistNoListNameAttributeGroup">
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
+    <xs:attribute name="listAgencyID" type="xs:normalizedString" use="optional"/>
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
+    <xs:attribute name="listAgencyName" type="xs:string" use="optional"/>
+
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
+    <xs:attribute name="listVersionID" type="xs:normalizedString" use="optional"/>
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
+    <xs:attribute name="name" type="xs:string" use="optional"/>
+    <!-- Main language of external codelist -->
+    <!-- Natural language of xml text content -->
+    <!-- According to
+    https://www.w3.org/International/questions/qa-when-xmllang.en
+    it is NOT recommended to use xml:lang for natural language content of
+    external elements. Hence definition of own language attribute. -->
+    <xs:attribute name="language" type="xs:normalizedString" use="optional"/>
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
+    <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
+    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
+    <xs:attribute name="listSchemeURI" type="xs:anyURI" use="optional"/>
+  </xs:attributeGroup>
+
+
+  <xs:attributeGroup name="codelistRequiredListNameAttributeGroup">
+    <xs:attributeGroup ref="c:codelistNoListNameAttributeGroup"/>
+    <xs:attribute name="listName" type="xs:string" use="required"/>
+
+  </xs:attributeGroup>
 
   <xs:group name="any-html">
     <xs:sequence>
@@ -53,18 +82,11 @@
       memberTypes="c:restrictedSemanticDataTypeType c:semanticStringTypeType"/>
   </xs:simpleType>
 
-
-  <!-- 
-  <xs:attributeGroup name="any-attribute">
-    <xs:anyAttribute processContents="skip"/>
-  </xs:attributeGroup>
-   -->
-
   <!-- 
    | Global complexType Definitions
    -->
 
-  <!-- Inlcude html content but no xml:lang attribute required. Use htmlType if
+  <!-- Include html content but no xml:lang attribute required. Use htmlType if
     xml:lang is requires -->
   <xs:complexType name="html-rtf" mixed="true">
     <xs:group ref="c:any-html" minOccurs="0" maxOccurs="1"/>
@@ -87,34 +109,26 @@
     </xs:complexContent>
   </xs:complexType>
 
+
   <!-- Defining reference with meatdata to a CEN codelist -->
   <xs:complexType name="codeListType">
+    <xs:attributeGroup ref="c:codelistNoListNameAttributeGroup"/>
+  </xs:complexType>
+
+
+  <!-- Defining reference with meatdata to a CEN codelist -->
+  <xs:complexType name="codeWhiteListType">
     <xs:sequence>
       <!-- white listing subset of CEN codelist codes -->
       <xs:element name="allowed-codes" type="xs:token"/>
     </xs:sequence>
+    <xs:attributeGroup ref="c:codelistNoListNameAttributeGroup"/>
+  </xs:complexType>
 
-    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
-    <xs:attribute name="listAgencyID" type="xs:normalizedString" use="optional"/>
-    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
-    <xs:attribute name="listAgencyName" type="xs:string" use="optional"/>
-    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
-    <xs:attribute name="listName" type="xs:string" use="optional"/>
-    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
-    <xs:attribute name="listVersionID" type="xs:normalizedString" use="optional"/>
-    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
-    <xs:attribute name="name" type="xs:string" use="optional"/>
-    <!-- Main language of external codelist -->
-    <!-- Natural language of xml text content -->
-    <!-- According to
-    https://www.w3.org/International/questions/qa-when-xmllang.en
-    it is NOT recommended to use xml:lang for natural language content of
-    external elements. Hence definition of own language attribute. -->
-    <xs:attribute name="language" type="xs:normalizedString" use="optional"/>
-    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
-    <xs:attribute name="listURI" type="xs:anyURI" use="optional"/>
-    <!-- Shamelessly adopted and adapted from UBL 2.1 -->
-    <xs:attribute name="listSchemeURI" type="xs:anyURI" use="optional"/>
+  <!-- Defining reference with meatdata to a CEN codelist -->
+  <xs:complexType name="codeListRistrictionType">
+    <xs:attributeGroup ref="c:codelistRequiredListNameAttributeGroup"/>
+    <xs:attribute name="removed" type="xs:boolean" fixed="true" use="required"/>
   </xs:complexType>
 
   <!-- Restrictions defined on terms and by rules -->
@@ -130,18 +144,28 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="synonymType">
+    <xs:simpleContent>
+      <xs:extension base="xs:normalizedString">
+        <xs:attribute ref="xml:lang" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <!-- General abstract XML type with common elements and attributes for Business Terms and Business Rules -->
   <xs:complexType name="coreElementType" abstract="true">
     <xs:sequence>
-      <xs:element ref="c:definition"/>
-      <xs:element ref="c:cardinality"/>
+      <xs:element name="synonym" type="c:synonymType" minOccurs="0"
+        maxOccurs="unbounded"/>
+      <xs:element ref="c:definition" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="c:cardinality" minOccurs="0"/>
       <!-- optionally define the syntax binding of the BT or BG -->
       <xs:element ref="c:syntax-bindings" minOccurs="0"/>
     </xs:sequence>
     <!-- ID of the term or group e.g. BT-1 or BG-11 -->
     <xs:attribute name="id" use="required" type="xs:ID"/>
     <!-- The nesting level within Business Groups -->
-    <xs:attribute name="level" use="required" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="level" use="optional" type="xs:nonNegativeInteger"/>
     <!-- Does it contian CIUS specific restrictions? -->
     <xs:attribute name="cius-specific" type="xs:boolean" use="required"/>
   </xs:complexType>
@@ -159,12 +183,15 @@
       <xs:extension base="c:coreElementType">
         <xs:sequence>
           <!-- Notes on how to use this BT -->
-          <xs:element ref="c:usage-note" maxOccurs="1"/>
+          <xs:element ref="c:usage-note" minOccurs="0"/>
+          <xs:element name="codelist-restriction" type="c:codeListRistrictionType"
+            minOccurs="0"/>
+          <xs:element name="codelist-values" type="c:codeWhiteListType" minOccurs="0"/>
         </xs:sequence>
         <!-- This can be enhanced to contain simpleType and rules on the ids -->
         <xs:attribute name="business-group" use="optional" type="xs:IDREF"/>
         <!-- The semantic datatype of this BT -->
-        <xs:attribute name="semantic-datatype" use="required"
+        <xs:attribute name="semantic-datatype" use="optional"
           type="c:semanticDataTypeType"/>
       </xs:extension>
     </xs:complexContent>
@@ -273,9 +300,10 @@
   <!--  -->
   <xs:element name="cardinality">
     <xs:complexType>
-      <xs:sequence>
+      <!--<xs:sequence>
         <xs:element name="term" minOccurs="1" maxOccurs="unbounded"/>
-      </xs:sequence>
+      </xs:sequence>-->
+      <xs:attribute name="term" type="xs:normalizedString" use="optional"/>
       <xs:attribute name="maxOccurs">
         <xs:simpleType>
           <xs:union memberTypes="xs:nonNegativeInteger">
@@ -288,6 +316,7 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="minOccurs" type="xs:nonNegativeInteger"/>
+      
     </xs:complexType>
   </xs:element>
 
@@ -303,7 +332,7 @@
   </xs:element>
 
 
-  <xs:element name="codelist" type="c:codeListType"/>
+  <xs:element name="codelist" type="c:codeWhiteListType"/>
 
   <xs:element name="value-domain">
     <xs:complexType>
