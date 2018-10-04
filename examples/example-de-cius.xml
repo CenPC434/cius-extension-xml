@@ -9,7 +9,7 @@
   This is just example and working draft with no official standing
 
   This example uses prevoius work of AT National CIUS provided by Philip Helger
-
+ 
   -->
 <?xml-model href="../schema/ce-config.xsd"?>
 <c:cius xmlns:c="urn:x-namespace:yet:to:be:determined"
@@ -70,9 +70,9 @@
     <!-- Empty in this example. -->
   </c:description>
 
+  <!-- The following set of rules are a technical representation of the set of rules given by the German CIUS XRechnung-->
   <c:business-rules>
-    <!-- The following set of rules are a technical representation of the set of rules given by the German CIUS XRechnung-->
-    <c:rule id="BR-DE-1">
+    <c:rule id="BR-DE-1" >
       <c:description xml:lang="de">Eine Rechnung (INVOICE) muss Angaben zu
         „PAYMENT INSTRUCTIONS“ (BG-16) enthalten.</c:description>
       <c:description xml:lang="en">The INVOICE shall contain information on
