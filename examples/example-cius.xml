@@ -92,7 +92,7 @@
 
   <!-- Now describing business rules of CIUS -->
   <business-rules>
-    <!-- Allowed change:  Add new non-conflicting business for existing element(s)-->
+    <!-- Allowed change:  Add new non-conflicting business rule for existing element(s)-->
     <rule id="BR-501" cius-specific="true">
       <description xml:lang="en">Add a new non-conflicting business rule. It is
         semantically more restrictive on business term BT-318 and only allows

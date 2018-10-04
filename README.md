@@ -80,7 +80,7 @@ and guaranty compliance:
   * Remove one of multiple defined lists
   * Mark defined values as not allowed   
 * **Business rules**
-  * Add new non-conflicting business for existing element(s)
+  * Add new non-conflicting business rule for existing element(s)
   * Make an existing business rule more restrictive
 * **Value domain for an information element**
   * Restrict text or byte array length
