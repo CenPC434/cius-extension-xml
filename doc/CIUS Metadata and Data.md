@@ -6,7 +6,7 @@ Comparision of available sources describing / utilizing Metadata related to CIUS
 
 1. CEF Website
 1. CEN TC 434 Deliverable: CIUS Methodology
-1. Existing aproaches for machine readable CIUS from DE and AT
+1. Existing approaches for machine readable CIUS from DE and AT
 
 
 |Semantic|CEF|CEN|DE/AT|
