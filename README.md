@@ -93,6 +93,6 @@ and guaranty compliance:
 An example showing all possible changes which are are allowed according to CEN
 16931-1:2017 with fictive date is given in this [XML Instance](./examples/example-cius.xml).
 
-A real CIUS is the [German CIUS XRechnung]([XML Instance](./examples/example-de-cius.xml).) 
+A real CIUS is the [German CIUS XRechnung](./examples/example-de-cius.xml). 
 
     
