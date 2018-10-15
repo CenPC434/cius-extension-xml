@@ -109,7 +109,7 @@
 
     <!-- Allowed change: Make an existing business rule more restrictive  -->
     <rule id="BR-1" cius-specific="true">
-      <description xml:lang="en">Makes existing BR-1 rule more restrivtive by
+      <description xml:lang="en">Makes existing BR-1 rule more restrictive by
         restricting cardinality to maximum 1</description>
       <restrictions>
         <cardinality term="BT-301" minOccurs="1" maxOccurs="1"/>
