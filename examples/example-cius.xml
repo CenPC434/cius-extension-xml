@@ -50,6 +50,7 @@
     <business-term id="BT-301" cius-specific="true" semantic-datatype="Amount">
       <usage-note xml:lang="en">Only a specefic narrow Amount between 1 and 2 is
         allowed</usage-note>
+      <cardinality minOccurs="1"/>
     </business-term>
 
     <!-- Allowed change: Add synonyms  -->
