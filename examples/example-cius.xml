@@ -48,9 +48,10 @@
 
     <!-- Allowed change: Make semantic definition narrower -->
     <business-term id="BT-301" cius-specific="true" semantic-datatype="Amount">
+      <cardinality minOccurs="1"/>
       <usage-note xml:lang="en">Only a specefic narrow Amount between 1 and 2 is
         allowed</usage-note>
-      <cardinality minOccurs="1"/>
+      
     </business-term>
 
     <!-- Allowed change: Add synonyms  -->
@@ -94,7 +95,7 @@
   <!-- Now describing business rules of CIUS -->
   <business-rules>
     <!-- Allowed change:  Add new non-conflicting business rule for existing element(s)-->
-    <rule id="BR-501" cius-specific="true">
+    <rule id="BR-XX-500" cius-specific="true">
       <description xml:lang="en">Add a new non-conflicting business rule. It is
         semantically more restrictive on business term BT-318 and only allows
         values 1 2 3 4 from codelist-2</description>
@@ -109,7 +110,7 @@
     </rule>
 
     <!-- Allowed change: Make an existing business rule more restrictive  -->
-    <rule id="BR-1" cius-specific="true">
+    <rule id="BR-XX-501" cius-specific="true">
       <description xml:lang="en">Makes existing BR-1 rule more restrictive by
         restricting cardinality to maximum 1</description>
       <restrictions>
@@ -118,7 +119,7 @@
     </rule>
 
     <!-- Allowed change: Restrict text or byte array length -->
-    <rule id="BR-502" cius-specific="true">
+    <rule id="BR-XX-502" cius-specific="true">
       <description xml:lang="en">restricting length</description>
       <restrictions>
         <value-domain length="10"/>
@@ -126,7 +127,7 @@
     </rule>
 
     <!-- Allowed change: Require defined structured values -->
-    <rule id="BR-503" cius-specific="true" core-elements="BT-10">
+    <rule id="BR-XX-503" cius-specific="true" core-elements="BT-10">
       <description xml:lang="en">Give a format description which is more
         restrictive on BT-10</description>
       <restrictions>
@@ -135,7 +136,7 @@
     </rule>
 
     <!-- Allowed change: Restrict allowed fraction digits -->
-    <rule id="BR-504" cius-specific="true">
+    <rule id="BR-XX-504" cius-specific="true">
       <description xml:lang="en">Just being rigid</description>
       <restrictions>
         <value-domain fraction-digit="1"/>
