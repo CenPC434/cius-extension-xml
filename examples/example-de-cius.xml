@@ -14,7 +14,7 @@
 <?xml-model href="../schema/ce-config.xsd"?>
 <c:cius xmlns:c="urn:x-namespace:yet:to:be:determined"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:html="http://www.w3.org/1999/xhtml" >
+  xmlns:html="http://www.w3.org/1999/xhtml">
 
   <!-- meta element contains basic metainformation about CIUS/Extension -->
   <c:metadata>
@@ -78,7 +78,7 @@
       <c:description xml:lang="en">The INVOICE shall contain information on
         PAYMENT INSTRUCTIONS (BG-16).</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BG-16"/>        
+        <c:cardinality minOccurs="1" term="BG-16"/>
 
       </c:restrictions>
     </c:rule>
@@ -181,7 +181,7 @@
         shall be transmitted.</c:description>
 
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-78"/>        
+        <c:cardinality minOccurs="1" term="BT-78"/>
       </c:restrictions>
     </c:rule>
 
@@ -255,7 +255,7 @@
       </c:restrictions>
     </c:rule>
 
-    <c:rule id="BR-DE-17" core-elements="BT-3" cius-specific="true">
+    <c:rule id="BR-DE-17"  cius-specific="true">
       <c:description xml:lang="de">Mit dem Element „Invoice type code“ (BT-3)
         sollen ausschließlich folgende Codes aus der Codeliste UNTDID 1001
         übermittelt werden: 326 (Partial invoice), 380 (Commercial invoice), 384

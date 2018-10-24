@@ -40,18 +40,19 @@
   <!-- Examples demonstrating ALL allowed changes in reference to core
     information model -->
   <information-elements>
-    <!-- id=BG-100 refers to a fictive BG-100 in core information model -->
-    <business-group id="BG-100" level="1" cius-specific="true">
-      <!-- Allowed change: Mark conditional information element not to be used  -->
-      <cardinality minOccurs="0" maxOccurs="0"/>
-    </business-group>
+    
+
+
+    <!-- Allowed change: Add explanatory text -->
+    <business-term id="BT-303" cius-specific="true">
+      <usage-note xml:lang="en">Very explanatory additonal text
+        here.</usage-note>
+    </business-term>
 
     <!-- Allowed change: Make semantic definition narrower -->
     <business-term id="BT-301" cius-specific="true" semantic-datatype="Amount">
-      <cardinality minOccurs="1"/>
       <usage-note xml:lang="en">Only a specefic narrow Amount between 1 and 2 is
         allowed</usage-note>
-      
     </business-term>
 
     <!-- Allowed change: Add synonyms  -->
@@ -61,11 +62,6 @@
       <synonym xml:lang="de">Yet another name for BT-2 in German language</synonym>
     </business-term>
 
-    <!-- Allowed change: Add explanatory text -->
-    <business-term id="BT-303" cius-specific="true">
-      <usage-note xml:lang="en">Very explanatory additonal text
-        here.</usage-note>
-    </business-term>
 
     <!-- Allowed change: Make a conditional element mandatory -->
     <business-term id="BT-304" cius-specific="true">
@@ -90,6 +86,14 @@
         <allowed-codes>1 2 3 4</allowed-codes>
       </codelist-values>
     </business-term>
+    
+    <!-- id=BG-100 refers to a fictive BG-100 in core information model -->
+    <!-- evtl. erstmal rausnehmen, obwohl NORM zulaesst Regeln auf GB Ebene yu
+      definieren -->
+    <business-group id="BG-100" level="1" cius-specific="true">
+      <!-- Allowed change: Mark conditional information element not to be used  -->
+      <cardinality minOccurs="0" maxOccurs="0"/>
+    </business-group>
   </information-elements>
 
   <!-- Now describing business rules of CIUS -->
@@ -100,10 +104,10 @@
         semantically more restrictive on business term BT-318 and only allows
         values 1 2 3 4 from codelist-2</description>
       <restrictions>
-        <codelist name="codelist-2">
+        <codelist name="codelist-2" term="BT-10">
           <allowed-codes>1 2 3 4</allowed-codes>
         </codelist>
-        <semantic-definition>
+        <semantic-definition term="BT-10">
           <term>BT-318</term>
         </semantic-definition>
       </restrictions>
@@ -122,16 +126,16 @@
     <rule id="BR-XX-502" cius-specific="true">
       <description xml:lang="en">restricting length</description>
       <restrictions>
-        <value-domain length="10"/>
+        <value-domain length="10" term="BT-10"/>
       </restrictions>
     </rule>
 
     <!-- Allowed change: Require defined structured values -->
-    <rule id="BR-XX-503" cius-specific="true" core-elements="BT-10">
+    <rule id="BR-XX-503" cius-specific="true">
       <description xml:lang="en">Give a format description which is more
         restrictive on BT-10</description>
       <restrictions>
-        <value-domain format="10s%"/>
+        <value-domain format="10s%" term="BT-10"/>
       </restrictions>
     </rule>
 
@@ -139,7 +143,7 @@
     <rule id="BR-XX-504" cius-specific="true">
       <description xml:lang="en">Just being rigid</description>
       <restrictions>
-        <value-domain fraction-digit="1"/>
+        <value-domain fraction-digit="1" term="BT-10"/>
       </restrictions>
     </rule>
   </business-rules>

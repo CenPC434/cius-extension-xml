@@ -35,7 +35,14 @@
   <xs:attributeGroup name="codelistRequiredListNameAttributeGroup">
     <xs:attributeGroup ref="c:codelistNoListNameAttributeGroup"/>
     <xs:attribute name="listName" type="xs:string" use="required"/>
+  </xs:attributeGroup>
 
+  <xs:attributeGroup name="terms">
+    <xs:attribute name="term" use="optional">
+      <xs:simpleType>
+        <xs:list itemType="xs:normalizedString"/>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
 
   <xs:group name="any-html">
@@ -64,7 +71,7 @@
       <xs:enumeration value="Code"/>
       <xs:enumeration value="Text"/>
       <xs:enumeration value="Binary object"/>
-    </xs:restriction>
+    </xs:restriction>  
   </xs:simpleType>
 
   <!-- String semantic datatype as defined by CEN -->
@@ -123,6 +130,7 @@
       <xs:element name="allowed-codes" type="xs:token"/>
     </xs:sequence>
     <xs:attributeGroup ref="c:codelistNoListNameAttributeGroup"/>
+    <xs:attributeGroup ref="c:terms"/>
   </xs:complexType>
 
   <!-- Defining reference with meatdata to a CEN codelist -->
@@ -184,9 +192,10 @@
         <xs:sequence>
           <!-- Notes on how to use this BT -->
           <xs:element ref="c:usage-note" minOccurs="0"/>
-          <xs:element name="codelist-restriction" type="c:codeListRistrictionType"
+          <xs:element name="codelist-restriction"
+            type="c:codeListRistrictionType" minOccurs="0"/>
+          <xs:element name="codelist-values" type="c:codeWhiteListType"
             minOccurs="0"/>
-          <xs:element name="codelist-values" type="c:codeWhiteListType" minOccurs="0"/>
         </xs:sequence>
         <!-- This can be enhanced to contain simpleType and rules on the ids -->
         <xs:attribute name="business-group" use="optional" type="xs:IDREF"/>
@@ -303,7 +312,8 @@
       <!--<xs:sequence>
         <xs:element name="term" minOccurs="1" maxOccurs="unbounded"/>
       </xs:sequence>-->
-      <xs:attribute name="term" type="xs:normalizedString" use="optional"/>
+      <xs:attributeGroup ref="c:terms"/>
+      
       <xs:attribute name="maxOccurs">
         <xs:simpleType>
           <xs:union memberTypes="xs:nonNegativeInteger">
@@ -316,7 +326,7 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="minOccurs" type="xs:nonNegativeInteger"/>
-      
+
     </xs:complexType>
   </xs:element>
 
@@ -339,6 +349,7 @@
       <xs:attribute name="length" type="xs:nonNegativeInteger"/>
       <xs:attribute name="format" type="xs:string"/>
       <xs:attribute name="fraction-digit" type="xs:nonNegativeInteger"/>
+      <xs:attributeGroup ref="c:terms"/>
     </xs:complexType>
   </xs:element>
 
@@ -347,6 +358,7 @@
       <xs:sequence>
         <xs:element ref="c:term"/>
       </xs:sequence>
+      <xs:attributeGroup ref="c:terms"/>
     </xs:complexType>
   </xs:element>
 
@@ -356,6 +368,7 @@
       <xs:sequence>
         <xs:element name="description" maxOccurs="unbounded" type="c:any"/>
       </xs:sequence>
+      <xs:attributeGroup ref="c:terms"/>
     </xs:complexType>
   </xs:element>
 
@@ -387,7 +400,15 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="semantic-datatype" type="c:restrictedSemanticDataTypeType"/>
+  <xs:element name="semantic-datatype" >
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="c:restrictedSemanticDataTypeType">
+          <xs:attributeGroup ref="c:terms"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
 
 
 
@@ -424,11 +445,13 @@
       </xs:sequence>
 
       <xs:attribute name="id" use="required" type="xs:ID"/>
+      <!-- as for time being 
       <xs:attribute name="core-elements" use="optional">
         <xs:simpleType>
           <xs:list itemType="xs:normalizedString"/>
         </xs:simpleType>
       </xs:attribute>
+      -->
       <!-- If it is a CIUS specific restriction -->
       <xs:attribute name="cius-specific" type="xs:boolean" use="required"/>
 
