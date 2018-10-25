@@ -175,7 +175,7 @@
     <!-- The nesting level within Business Groups -->
     <xs:attribute name="level" use="optional" type="xs:nonNegativeInteger"/>
     <!-- Does it contian CIUS specific restrictions? -->
-    <xs:attribute name="cius-specific" type="xs:boolean" use="required"/>
+    <xs:attribute name="cius-specific" type="xs:boolean" use="optional"/>
   </xs:complexType>
 
   <!-- The Business Group type -->
@@ -216,6 +216,14 @@
       <xs:element ref="c:information-elements" minOccurs="0"/>
       <xs:element ref="c:business-rules"/>
     </xs:sequence>
+    <xs:attribute name="type" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:normalizedString">
+          <xs:enumeration value="restriction"/>
+          <xs:enumeration value="extension"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:complexType>
 
   <!-- Type of the root element extension a restriction of
@@ -356,7 +364,7 @@
   <xs:element name="semantic-definition">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="c:term"/>
+        <xs:element ref="c:term" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attributeGroup ref="c:terms"/>
     </xs:complexType>
@@ -453,7 +461,7 @@
       </xs:attribute>
       -->
       <!-- If it is a CIUS specific restriction -->
-      <xs:attribute name="cius-specific" type="xs:boolean" use="required"/>
+      <xs:attribute name="cius-specific" type="xs:boolean" use="optional"/>
 
     </xs:complexType>
   </xs:element>
