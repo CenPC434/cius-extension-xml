@@ -7,13 +7,15 @@
 <!-- Fulfils criterium: instances shall be fully compliant see README.md for
   more details -->
 <config xmlns="urn:x-namespace:yet:to:be:determined" type="cius">
-  <metadata>
-    <nameShort>cius demonstration</nameShort>
-    <nameLong>A demonstration of how to define a CIUS using this XML structure</nameLong>
+  <meta>
+    <shortName>cius demonstration</shortName>
+    <name>A demonstration of how to define a CIUS using this XML structure</name>
     <!-- Fulfils criterium: shall be uniquely identifiable and may include version information -->
-    <nameTechnical>cius:demonstrandum</nameTechnical>
+    <id>cius:demonstrandum</id>
+    <!-- Optional ID of CIUS that is been further extended -->
+    <extends>cius:xxx</extends>
     <!-- Fulfils criterium: shall give a clear statement about its underlying specifications -->
-    <underlyingSpecification>EN16931-1:2017</underlyingSpecification>
+    <specification>EN16931-1:2017</specification>
     <!-- Fulfils criterium: shall be uniquely identifiable and may include version information -->
     <version>0.3</version>
     <status>development</status>
@@ -26,8 +28,8 @@
     <abstract xml:lang="en">This document serves the purpose to demonstrate how
       a EN16931-1:2017 compliant description of a CIUS is made possible by this
       XML structure as defined by an XSD</abstract>
-    <furtherInformation>https://github.com/itplr-kosit/ce-config/blob/cius-rule-and-bt-model/schema/ce-config.xsd</furtherInformation>
-  </metadata>
+    <link>https://github.com/itplr-kosit/ce-config/blob/cius-rule-and-bt-model/schema/ce-config.xsd</link>
+  </meta>
 
   <!-- Fulfils criterium: give a clear statement on the business function or legal requirements -->
   <description xml:lang="en">The function of this CIUS demonstration instance is

@@ -11,13 +11,19 @@ start =
     # Metadata
     element c:meta {
       # Short identifier
-      element c:name { text },
+      element c:shortName { text },
       # Name of CUIS/extension
-      element c:title { text },
+      element c:name { text },
       # Identifier as defined in 7.6 Identification of core invoice usage specifications
       element c:id { text },
+      # Identifier of specification that is being extended
+      element c:extends { text }?,
+      # Underlying specification
+      element c:specification { text },
       # Version number
       element c:version { text },
+      # Status of CUIZS/extension
+      element c:status { "planned" | "development" | "active" | "revoked" },
       # Date of publicartion
       element c:date { xsd:date },
       # Publisher
@@ -29,9 +35,11 @@ start =
       # Sector to which CIUS/extension applies
       element c:sector { text }?,
       # Contact email for any questions and bug reports against CUIS/extension
-      element c:email { text },
+      element c:contact { text },
       # Short description of CIUS/extensions
-      element c:abstract { html-rtf }
+      element c:abstract { attribute xml:lang { text }?, html-rtf },
+      # Link for more information
+      element c:link { xsd:anyURI }?
     },
     # Text description
     desc,
