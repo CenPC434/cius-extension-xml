@@ -15,7 +15,7 @@
   <xsl:template match="/c:config">
     <html>
       <head>
-        <title>{c:meta/c:name} — {c:meta/c:title}</title>
+        <title>{c:meta/c:shortName} — {c:meta/c:name}</title>
         <style xsl:expand-text="no">
           html { 
             font-family: Calibri, Arial, sans-serif;
@@ -34,8 +34,8 @@
   </xsl:template>
 
   <xsl:template match="c:meta">
+    <h1>{c:shortName}</h1>
     <h1>{c:name}</h1>
-    <h1>{c:title}</h1>
 
     <dl>
       <dt>Publisher:</dt>
@@ -54,7 +54,7 @@
     <h2>Introduction</h2>
     <xsl:apply-templates select="c:abstract"/>
 
-    <h2>Indetifying {c:name}</h2>
+    <h2>Indetifying {c:contact}</h2>
     <xsl:call-template name="gen-identification-clause"/>
   </xsl:template>
 
@@ -68,7 +68,7 @@
     </div>
   </xsl:template>
 
-  <xsl:template match="c:desc">
+  <xsl:template match="c:description">
     <div class="description">
       <xsl:apply-templates mode="htmlize"/>
     </div>
@@ -81,18 +81,18 @@
 
   <xsl:template match="c:rule">
     <div class="rule">
-      <xsl:apply-templates select="c:desc"/>
+      <xsl:apply-templates select="c:description"/>
     </div>
   </xsl:template>
 
   <!-- Put reference to business rule at the start of description -->
-  <xsl:template match="text()[parent::c:desc/parent::c:rule][not(preceding-sibling::text())]" mode="#all" priority="10">
-    [{parent::c:desc/parent::c:rule/@id}]
+  <xsl:template match="text()[parent::c:description/parent::c:rule][not(preceding-sibling::text())]" mode="#all" priority="10">
+    [{parent::c:description/parent::c:rule/@id}]
     <xsl:next-match/>
   </xsl:template>
 
   <!-- Put list of affected terms at the end of description -->
-  <xsl:template match="text()[parent::c:desc/parent::c:rule][not(following-sibling::text())]" mode="#all">    
+  <xsl:template match="text()[parent::c:description/parent::c:rule][not(following-sibling::text())]" mode="#all">    
     <xsl:next-match/>
     [<xsl:value-of select="ancestor::c:rule//c:term" separator=", "/>]
   </xsl:template>
