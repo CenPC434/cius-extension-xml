@@ -73,8 +73,13 @@
         semantically more restrictive on business term BT-318 and only allows
         values 1 2 3 4 from codelist-2</description>
       <restrictions>
-        <codelist name="codelist-2" term="BT-10">
-          <allowed-codes>1 2 3 4</allowed-codes>
+        <codelist>
+          <name>codelist-2</name>
+          <term>BT-10</term>
+          <value>1</value>
+          <value>2</value>
+          <value>3</value>
+          <value>4</value>          
         </codelist>
         <semantic-definition>
           <term>BT-318</term>

@@ -79,6 +79,7 @@ technical =
 codelist =
   # Codelist
   element c:codelist {
+    name?,
     term+,
     value+
   }
@@ -99,6 +100,10 @@ other =
 pattern =
   # Pattern for allowed values expressed as a regular expression (W3C XML Schema syntax is supported)
   element c:pattern { text }
+
+name = 
+  # Name 
+  element c:name { text }
 
 value =
   # Allowed value
