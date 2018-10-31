@@ -93,8 +93,10 @@
       <description xml:lang="en">Makes existing BR-1 rule more restrictive by
         restricting cardinality to maximum 1</description>
       <restrictions>
-        <cardinality term="BT-301 BT-444" minOccurs="1" maxOccurs="1"/>
-
+        <cardinality minOccurs="1" maxOccurs="1">
+          <term>BT-301</term>
+          <term>BT-444</term>
+        </cardinality>
       </restrictions>
     </rule>
 
