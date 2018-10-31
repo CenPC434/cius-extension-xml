@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified"
-  targetNamespace="urn:x-namespace:yet:to:be:determined"
-  xmlns:c="urn:x-namespace:yet:to:be:determined">
+  targetNamespace="urn:cen.eu:en16931:cius-extension:2018"
+  xmlns:c="urn:cen.eu:en16931:cius-extension:2018">
 
   <!-- Import xml: namespace to inlcude xml:lang attribute -->
   <xs:import namespace="http://www.w3.org/XML/1998/namespace"

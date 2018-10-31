@@ -10,7 +10,7 @@
 
   -->
 <?xml-model href="../schema/ce-config.rnc"?>
-<c:config xmlns:c="urn:x-namespace:yet:to:be:determined"
+<c:config xmlns:c="urn:cen.eu:en16931:cius-extension:2018"
   xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml" type="cius">
 
   <!-- meta element contains basic metainformation about CIUS/Extension -->

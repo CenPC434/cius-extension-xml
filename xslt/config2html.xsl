@@ -5,7 +5,7 @@
   -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:c="urn:x-namespace:yet:to:be:determined"
+  xmlns:c="urn:cen.eu:en16931:cius-extension:2018"
   exclude-result-prefixes="xs c"
   expand-text="yes"
   version="3.0">
