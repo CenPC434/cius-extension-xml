@@ -62,7 +62,7 @@ description =
 
 restrictions =
   # Restrictions that are further applied
-  element c:restrictions { (cardinality | technical | codelist | format | other)+ }
+  element c:restrictions { (cardinality | technical | codelist | value | other)+ }
 
 cardinality = 
   # Constaint on cardinality
@@ -81,14 +81,24 @@ codelist =
   element c:codelist {
     name?,
     term+,
-    value+
+    codelist-value+
   }
 
-format =
-  # Restricted format
-  element c:format {
-    term+,
-    pattern+
+value =
+  # Restricted value domain
+  # Restriction can be made using attributes similar to W3C XML Schema facets
+  element c:value {
+    # Regular expression describing allowed values
+    attribute pattern { text }?,
+    # Required length of value
+    attribute length { xsd:nonNegativeInteger }?,
+    # Maximum length of value
+    attribute maxLength { xsd:nonNegativeInteger }?,
+    # Maximal number of fraction digits
+    attribute fractionDigits { xsd:nonNegativeInteger }?,
+    # Maximal number of fraction digits
+    attribute totalDigits { xsd:nonNegativeInteger }?,
+    term+
   }
   
 other =
@@ -105,7 +115,7 @@ name =
   # Name 
   element c:name { text }
 
-value =
+codelist-value =
   # Allowed value
   element c:value { text }
 

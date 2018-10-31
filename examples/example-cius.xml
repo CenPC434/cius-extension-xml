@@ -104,7 +104,9 @@
     <rule id="BR-XX-502" >
       <description xml:lang="en">restricting length</description>
       <restrictions>
-        <value-domain length="10" term="BT-10"/>
+        <value maxLength="10">
+          <term>BT-10</term>
+        </value>
       </restrictions>
     </rule>
 
@@ -113,7 +115,9 @@
       <description xml:lang="en">Give a format description which is more
         restrictive on BT-10</description>
       <restrictions>
-        <value-domain format="10s%" term="BT-10"/>
+        <value pattern="[0-9]{10}">
+          <term>BT-10</term>
+        </value>
       </restrictions>
     </rule>
 
@@ -121,7 +125,9 @@
     <rule id="BR-XX-504" >
       <description xml:lang="en">Just being rigid</description>
       <restrictions>
-        <value-domain fraction-digit="1" term="BT-10"/>
+        <value fractionDigits="1">
+          <term>BT-10</term>
+        </value>
       </restrictions>
     </rule>
   </rules>
