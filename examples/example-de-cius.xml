@@ -11,24 +11,25 @@
   This example uses prevoius work of AT National CIUS provided by Philip Helger
  
   --> 
-<?xml-model href="../schema/ce-config.xsd"?>
-<c:cius type="restriction" xmlns:c="urn:x-namespace:yet:to:be:determined"
+<?xml-model href="../schema/ce-config.rnc"?>
+<c:config xmlns:c="urn:x-namespace:yet:to:be:determined"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:html="http://www.w3.org/1999/xhtml">
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  type="cius">
 
   <!-- meta element contains basic metainformation about CIUS/Extension -->
-  <c:metadata>
+  <c:meta>
     <!-- Common abbreviation used when referred to the CIUS/Extension -->
-    <c:nameShort>CIUS-DE-NAT</c:nameShort>
+    <c:shortName>CIUS-DE-NAT</c:shortName>
 
     <!-- Human readable name of CIUS/Extension -->
-    <c:nameLong>Standard XRechnung</c:nameLong>
+    <c:name>Standard XRechnung</c:name>
 
     <!-- Identifier as described in "7.6 Identification of core invoice usage specifications" -->
-    <c:nameTechnical>urn:ce.eu:en16931:2017:xoev-de:kosit:standard:xrechnung_1.1</c:nameTechnical>
+    <c:id>urn:ce.eu:en16931:2017:xoev-de:kosit:standard:xrechnung_1.1</c:id>
 
     <!-- Underlying Specification -->
-    <c:underlyingSpecification>urn:ce.eu:en16931:2017</c:underlyingSpecification>
+    <c:specification>urn:ce.eu:en16931:2017</c:specification>
 
     <!-- Version of CIUS/Extension -->
     <c:version>1.1</c:version>
@@ -62,8 +63,8 @@
       the addition of the rules stated in this document.</c:abstract>
 
     <!-- A hyperlink to more detailed information about the specification. Preferably that should include contact information. -->
-    <c:furtherInformation>https://www.xoev.de/de/xrechnung</c:furtherInformation>
-  </c:metadata>
+    <c:link>https://www.xoev.de/de/xrechnung</c:link>
+  </c:meta>
 
   <!-- desc can contain arbitrary HTML with human prose describing CIUS/Extension -->
   <c:description xml:lang="en">Text with<html:b>HTML</html:b> content
@@ -71,14 +72,16 @@
   </c:description>
 
   <!-- The following set of rules are a technical representation of the set of rules given by the German CIUS XRechnung-->
-  <c:business-rules>
+  <c:rules>
     <c:rule id="BR-DE-1" >
       <c:description xml:lang="de">Eine Rechnung (INVOICE) muss Angaben zu
         „PAYMENT INSTRUCTIONS“ (BG-16) enthalten.</c:description>
       <c:description xml:lang="en">The INVOICE shall contain information on
         PAYMENT INSTRUCTIONS (BG-16).</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BG-16"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BG-16</c:term>
+        </c:cardinality>
 
       </c:restrictions>
     </c:rule>
@@ -89,7 +92,9 @@
       <c:description xml:lang="en">The group SELLER CONTACT1 (BG-6) shall be
         transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BG-6"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BG-6</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -99,7 +104,9 @@
       <c:description xml:lang="en">The element “Seller city” (BT-37) shall be
         transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-37"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-37</c:term>
+        </c:cardinality>
       </c:restrictions>
 
     </c:rule>
@@ -110,7 +117,9 @@
       <c:description xml:lang="en">The element “Seller post code” (BT-38) shall
         be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-38"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-38</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -120,7 +129,9 @@
       <c:description xml:lang="en">The element “Seller contact point” (BT-41)
         shall be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-41"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-41</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -130,7 +141,9 @@
       <c:description xml:lang="en">The element „Seller contact telephone
         number“(BT-BT) shall be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-42"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-42</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -140,7 +153,9 @@
       <c:description xml:lang="en">The element “Seller contact email address”
         (BT-43) shall be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-43"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-43</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -150,7 +165,9 @@
       <c:description xml:lang="en">The element “Buyer city” (BT-52) shall be
         transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-52"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-52</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -160,7 +177,9 @@
       <c:description xml:lang="en">The element “Buyer post code” (BT-53) shall
         be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-53"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-53</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -170,7 +189,9 @@
       <c:description xml:lang="en">The element “Deliver to city“” (BT-77) shall
         be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-77"/>
+        <c:cardinality minOccurs="1" term="BT-77">
+          <c:term>BT-77</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -181,7 +202,9 @@
         shall be transmitted.</c:description>
 
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-78"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-78</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -191,7 +214,9 @@
       <c:description xml:lang="en">A post code shall be transmitted together
         with the element “Deliver to post code” (BT-78).</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-78"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-78</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -204,12 +229,9 @@
         INFORMATION” (BG-18) or “DIRECT DEBIT” (BG-19).</c:description>
       <c:restrictions>
         <c:other>
-          <c:description>
-            <c:term>BG-17</c:term>
-            <c:term>BG-18</c:term>
-            <c:term>BG-19</c:term>
-          </c:description>
-
+          <c:term>BG-17</c:term>
+          <c:term>BG-18</c:term>
+          <c:term>BG-19</c:term>
         </c:other>
       </c:restrictions>
 
@@ -221,7 +243,9 @@
       <c:description xml:lang="en">The element “VAT category rate” (BT-119)
         shall be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-119"/>
+        <c:cardinality minOccurs="1" term="BT-119">
+          <c:term>BT-119</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -231,7 +255,9 @@
       <c:description xml:lang="en">The element „Buyer reference“ (BT-10) shall
         be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-10"/>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-10</c:term>
+        </c:cardinality>
       </c:restrictions>
     </c:rule>
 
@@ -246,11 +272,9 @@
         is not transmitted.</c:description>
       <c:restrictions>
         <c:other>
-          <c:description>
-            <c:term>BT-31</c:term>
-            <c:term>BT-32</c:term>
-            <c:term>BG-11</c:term>
-          </c:description>
+          <c:term>BT-31</c:term>
+          <c:term>BT-32</c:term>
+          <c:term>BG-11</c:term>
         </c:other>
       </c:restrictions>
     </c:rule>
@@ -266,7 +290,11 @@
         384(Corrected invoice), 381 (Credit note) </c:description>
       <c:restrictions>
         <c:codelist>
-          <c:allowed-codes>326 380 384 381</c:allowed-codes>
+          <c:term>BT-3</c:term>
+          <c:value>326</c:value>
+          <c:value>380</c:value>
+          <c:value>384</c:value>
+          <c:value>381</c:value>
         </c:codelist>
       </c:restrictions>
     </c:rule>
@@ -296,10 +324,8 @@
         late payment. </c:description>
       <c:restrictions>
         <c:other>
-          <c:description>
-            <c:term>BT-20</c:term>
-            <c:term>BT-115</c:term>
-          </c:description>
+          <c:term>BT-20</c:term>
+          <c:term>BT-115</c:term>
         </c:other>
       </c:restrictions>
     </c:rule>
@@ -309,14 +335,10 @@
       <c:description xml:lang="en">The size of all attached documents together
         may not exceed 15MB</c:description>
       <c:restrictions>
-        <c:other>
-          <c:description>
-            <type>technical</type>
-          </c:description>
-        </c:other>
+        <c:technical/>
       </c:restrictions>
     </c:rule>
 
-  </c:business-rules>
+  </c:rules>
 
-</c:cius>
+</c:config>
