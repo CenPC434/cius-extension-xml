@@ -54,7 +54,7 @@
     <h2>Introduction</h2>
     <xsl:apply-templates select="c:abstract"/>
 
-    <h2>Indetifying {c:contact}</h2>
+    <h2>Indetifying {c:shortName}</h2>
     <xsl:call-template name="gen-identification-clause"/>
   </xsl:template>
 
