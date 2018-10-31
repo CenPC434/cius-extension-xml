@@ -37,33 +37,10 @@
     an EN16931-1:2017 compliant CIUS. In addition "A CIUS may specify how it
     creates usage guidelines and restrictions within the core invoice model."
     All CIUSs can use this description on general usage guidelines. Restrictions
-    within the core invoice model can be specified in "infomation-elements"
+    within the core invoice model can be specified in "rules"
     section. </description>
   <!-- Examples demonstrating ALL allowed changes in reference to core
     information model -->
-  
-  <!-- This section is optional and is e.g. motivated by being able to represent
-  the NORM itself in future-->
-  <information-elements>
-    <!-- Allowed change: Add explanatory text -->
-    <business-term id="BT-303" >
-      <usage-note xml:lang="en">Very explanatory additonal text
-        here.</usage-note>
-    </business-term>
-
-    <!-- Allowed change: Make semantic definition narrower -->
-    <business-term id="BT-301"  semantic-datatype="Amount"> 
-      <usage-note xml:lang="en">Only a specefic narrow Amount between 1 and 2 is
-        allowed</usage-note>
-    </business-term>
-
-    <!-- Allowed change: Add synonyms  -->
-    <business-term id="BT-302" >
-      <!-- Many synonyms are possible -->
-      <synonym xml:lang="en">Another name for BT-2</synonym>
-      <synonym xml:lang="de">Yet another name for BT-2 in German language</synonym>
-    </business-term>
-  </information-elements>
 
   <!-- Now describing business rules of CIUS -->
   <rules>
@@ -130,5 +107,41 @@
         </value>
       </restrictions>
     </rule>
+    
+    <!-- Allowed change: Add explanatory text -->
+    <rule id="BR-XX-1001">
+      <description xml:lang="en">Very explanatory additonal text
+        here.</description>
+      <restrictions>
+        <other>
+          <term>BT-303</term>
+        </other>
+      </restrictions>
+    </rule>
+    
+    <!-- Allowed change: Make semantic definition narrower -->
+    <rule id="BR-XX-1002"> 
+      <description xml:lang="en">Only a specefic narrow Amount between 1 and 2 is
+        allowed</description>
+      <restrictions>
+        <value minInclusive="1" maxInclusive="2">
+          <term>BT-301</term>
+        </value>
+      </restrictions>
+    </rule>
+    
+    <!-- Allowed change: Add synonyms  -->
+    <rule id="BR-XX-1003">
+      <description>Term BT-302 synonyms</description>
+      <restrictions>
+        <synonyms>
+          <term>BT-302</term>
+          <!-- Many synonyms are possible -->          
+          <synonym xml:lang="en">Another name for BT-2</synonym>
+          <synonym xml:lang="de">Yet another name for BT-2 in German language</synonym>  
+        </synonyms>
+      </restrictions>
+    </rule>
+    
   </rules>
 </config>

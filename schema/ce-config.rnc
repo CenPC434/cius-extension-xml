@@ -62,7 +62,7 @@ description =
 
 restrictions =
   # Restrictions that are further applied
-  element c:restrictions { (cardinality | technical | codelist | value | other)+ }
+  element c:restrictions { (cardinality | technical | codelist | value | other | synonyms)+ }
 
 cardinality = 
   # Constaint on cardinality
@@ -98,6 +98,10 @@ value =
     attribute fractionDigits { xsd:nonNegativeInteger }?,
     # Maximal number of fraction digits
     attribute totalDigits { xsd:nonNegativeInteger }?,
+    # Minimum allowed value
+    attribute minInclusive { xsd:decimal }?,
+    # Maximum allowed value
+    attribute maxInclusive { xsd:decimal }?,
     term+
   }
   
@@ -122,6 +126,15 @@ codelist-value =
 term =
   # Reference to business term (i.e. BT-NN)
   element c:term { text }
+
+synonyms =
+  # Synonyms of term
+  element c:synonyms { term+, synonym+ }
+  
+synonym =
+  # Synonym of term
+  element c:synonym { attribute xml:lang { text }?, text }
+
 
 html-rtf = text & any-html*
 
