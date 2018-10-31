@@ -11,61 +11,60 @@
   -->
 <?xml-model href="../schema/ce-config.rnc"?>
 <c:config xmlns:c="urn:x-namespace:yet:to:be:determined"
-          xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-          xmlns="http://www.w3.org/1999/xhtml"
-          cius="true"
-          extension="false">
-  
+  xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml" type="cius">
+
   <!-- meta element contains basic metainformation about CIUS/Extension -->
   <c:meta>
     <!-- Common abbreviation used when referred to the CIUS/Extension -->
-    <c:name>CIUS-AT-NAT</c:name>
+    <c:shortName>CIUS-AT-NAT</c:shortName>
 
     <!-- Human readable name of CIUS/Extension -->
-    <c:title>Austrian National Core Invoice Usage Specification</c:title>
+    <c:name>Austrian National Core Invoice Usage Specification</c:name>
 
     <!-- Identifier as described in "7.6 Identification of core invoice usage specifications" -->
     <c:id>urn:cen.eu:en16931:2017#compliant#urn:erechnung.gv.at:CIUS-AT-NAT:1.0.0</c:id>
-    
+
     <!-- Version of CIUS/Extension -->
     <c:version>1.0.0 DRAFT</c:version>
-    
+
+    <!-- Status -->
+    <c:status>active</c:status>
+
     <!-- Date of publication of CIUS/Extension -->
     <c:date>2018-06-18</c:date>
-    
+
     <!-- Author of extension, any HTML markup can be used inside element -->
-    <c:publisher>
-      Philip Helger, Austrian Federal Computing Centre (BRZ), <a href="mailto:philip.helger@brz.gv.at">philip.helger@brz.gv.at</a>
+    <c:publisher> Philip Helger, Austrian Federal Computing Centre (BRZ), <a
+        href="mailto:philip.helger@brz.gv.at">philip.helger@brz.gv.at</a>
     </c:publisher>
-    
+
     <!-- Governor of extension -->
-    <c:governor>
-      Austrian Ministry of Finance (BMF)
-    </c:governor>
-    
+    <c:governor> Austrian Ministry of Finance (BMF) </c:governor>
+
     <!-- Country where CIUS/Extension is used -->
     <c:country>AT</c:country>
-    
+
     <!-- Sector where CIUS/Extension is used -->
     <c:sector>Any</c:sector>
-    
+
     <!-- Contact email for sending inquiries -->
-    <c:email>philip.helger@brz.gv.at</c:email>
-    
+    <c:contact>philip.helger@brz.gv.at</c:contact>
+
     <!-- Short description/purpose of spec -->
-    <c:abstract>This CIUS-AT-NAT builds on top of the European Norm EN 16931-1:2017.
-      All rules of the underlying specification apply with the addition of the rules stated in this document.</c:abstract>
+    <c:abstract>This CIUS-AT-NAT builds on top of the European Norm EN 16931-1:2017. All rules of
+      the underlying specification apply with the addition of the rules stated in this
+      document.</c:abstract>
   </c:meta>
-  
+
   <!-- desc can contain arbitrary HTML with human prose describing CIUS/Extension -->
-  <c:desc>
+  <c:description>
     <!-- Empty in this example. -->
-  </c:desc>
+  </c:description>
 
   <!-- In this place document contains allowed specification of CIUS as described in
        "7.2.3. Allowed specifications of CIUS" -->
   <c:rules>
-    
+
     <!-- 
     CIUS is specified as a set of business rules in c:rule element
     Each rule can put several types of constraints on any number of business terms 
@@ -85,31 +84,35 @@
     </c:codelist>
       - allows to specify codelist for values allowed inside business term
 
-    <c:format>
+    <c:value pattern="[A-Z]{2}[0-9]{10}" maxLength="20">
       <c:term>BT-XYZ</c:term>
-      <c:pattern>[A-Z]{2}[0-9]{10}</c:pattern>
     </c:format>
       - allows to specify format (i.e. maximal lenght, pattern, etc.) for term
       - concrete validation implementatin can be provided in c:implementation element
-      - c:format only identified which terms should have restricted format
+      - c:value only identifies which terms should have restricted format
 
     <c:technical>
       - defines that there is some technical constraint like maximal size of document
       - it's not necessary to link such constraint to term 
       
     <c:other>
-      - some other restriction, for example co-occurence
+      - some other restriction, for example co-occurence, semantic definition
+      
+    <c:synonyms>
+      - synonyms of term
 
     -->
-    
+
     <c:rule id="BR-AT-1">
-      <c:desc>Postal address line 1 becomes mandatory</c:desc>
-      <c:cardinality minOccurs="1">
-        <c:term>BT-35</c:term>
-        <c:term>BT-50</c:term>
-        <c:term>BT-64</c:term>
-        <c:term>BT-75</c:term>
-      </c:cardinality>
+      <c:description>Postal address line 1 becomes mandatory</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-35</c:term>
+          <c:term>BT-50</c:term>
+          <c:term>BT-64</c:term>
+          <c:term>BT-75</c:term>
+        </c:cardinality>
+      </c:restrictions>
       <!--
       Concrete implementation of this rule in Schematron or XSD can be specified inside c:implementation element
       <c:implementation syntax="UBL">
@@ -122,75 +125,91 @@
           <sch:assert test="...">Postal address line 1 must be specified</sch:assert>
         </sch:rule>
       </c:implementation>
-      -->      
+      -->
     </c:rule>
-    
+
     <c:rule id="BR-AT-2">
-      <c:desc>Postal address city becomes mandatory</c:desc>
-      <c:cardinality minOccurs="1">
-        <c:term>BT-37</c:term>
-        <c:term>BT-52</c:term>
-        <c:term>BT-66</c:term>
-        <c:term>BT-77</c:term>
-      </c:cardinality>
+      <c:description>Postal address city becomes mandatory</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-37</c:term>
+          <c:term>BT-52</c:term>
+          <c:term>BT-66</c:term>
+          <c:term>BT-77</c:term>
+        </c:cardinality>
+      </c:restrictions>
     </c:rule>
 
     <c:rule id="BR-AT-3">
-      <c:desc>Postal address post code becomes mandatory</c:desc>
-      <c:cardinality minOccurs="1">
-        <c:term>BT-38</c:term>
-        <c:term>BT-53</c:term>
-        <c:term>BT-67</c:term>
-        <c:term>BT-78</c:term>
-      </c:cardinality>
+      <c:description>Postal address post code becomes mandatory</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-38</c:term>
+          <c:term>BT-53</c:term>
+          <c:term>BT-67</c:term>
+          <c:term>BT-78</c:term>
+        </c:cardinality>
+      </c:restrictions>
     </c:rule>
 
     <c:rule id="BR-AT-4">
-      <c:desc>Actual delivery date or invoicing period must be provided</c:desc>
-      <c:cardinality minOccurs="1">
-        <c:term>BT-72</c:term>
-        <c:term>BT-73</c:term>
-        <c:term>BT-74</c:term>
-      </c:cardinality>
+      <c:description>Actual delivery date or invoicing period must be provided</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-72</c:term>
+          <c:term>BT-73</c:term>
+          <c:term>BT-74</c:term>
+        </c:cardinality>
+      </c:restrictions>
     </c:rule>
 
     <c:rule id="BR-AT-5">
-      <c:desc>Document level allowance VAT rate becomes mandatory</c:desc>
-      <c:cardinality minOccurs="1">
-        <c:term>BT-96</c:term>
-      </c:cardinality>
+      <c:description>Document level allowance VAT rate becomes mandatory</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-96</c:term>
+        </c:cardinality>
+      </c:restrictions>
     </c:rule>
 
     <c:rule id="BR-AT-6">
-      <c:desc>Document level charge VAT rate becomes mandatory</c:desc>
-      <c:cardinality minOccurs="1">
-        <c:term>BT-103</c:term>
-      </c:cardinality>
+      <c:description>Document level charge VAT rate becomes mandatory</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-103</c:term>
+        </c:cardinality>
+      </c:restrictions>
     </c:rule>
-    
+
     <c:rule id="BR-AT-7">
-      <c:desc>External document location is not supported</c:desc>
-      <c:cardinality maxOccurs="0">
-        <c:term>BT-124</c:term>
-      </c:cardinality>
+      <c:description>External document location is not supported</c:description>
+      <c:restrictions>
+        <c:cardinality maxOccurs="0">
+          <c:term>BT-124</c:term>
+        </c:cardinality>
+      </c:restrictions>
     </c:rule>
-    
+
     <!-- 
       I think that section "7.3 What may be specified in a CIUS" does not allow such type of constraint
       But such constraint is sensible so perhaps we should send defect report against EN 16931-1:2017
     -->
     <c:rule id="BR-AT-8">
-      <c:desc>The size of all attached documents together may not exceed 15MB</c:desc>
-      <c:technical/>
+      <c:description>The size of all attached documents together may not exceed 15MB</c:description>
+      <c:restrictions>
+        <c:technical/>  
+      </c:restrictions>      
     </c:rule>
-  
+
     <c:rule id="BR-AT-9">
-      <c:desc>Invoiced item VAT rate becomes mandatory</c:desc>
-      <c:cardinality minOccurs="1">
-        <c:term>BT-152</c:term>
-      </c:cardinality>
+      <c:description>Invoiced item VAT rate becomes mandatory</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-152</c:term>
+        </c:cardinality>
+      </c:restrictions>
     </c:rule>
-    
+
   </c:rules>
 
 </c:config>
