@@ -50,7 +50,7 @@ start =
         # Unique ID for business rule (BR-{country}-{id} pattern is recommended)
         attribute id { text },
         description+,
-        (cardinality | technical | codelist | format | other)+,
+        restrictions?,        
         implementation*
       }+
     }
@@ -60,6 +60,9 @@ description =
   # Human readable description can contain mix of text and HTML markup if formatting is needed
   element c:description { attribute xml:lang { text }?, html-rtf }
 
+restrictions =
+  # Restrictions that are further applied
+  element c:restrictions { (cardinality | technical | codelist | format | other)+ }
 
 cardinality = 
   # Constaint on cardinality
