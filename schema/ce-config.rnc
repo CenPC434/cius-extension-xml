@@ -19,7 +19,7 @@ start =
       # Identifier of specification that is being extended
       element c:extends { text }?,
       # Underlying specification
-      element c:specification { text },
+      element c:specification { text }?,
       # Version number
       element c:version { text },
       # Status of CUIZS/extension
