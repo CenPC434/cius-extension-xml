@@ -5,10 +5,8 @@ namespace html = "http://www.w3.org/1999/xhtml"
 start =
   # CIUS or extension configuration
   element c:config {
-    # Covers this configuration CIUS?
-    attribute cius { xsd:boolean },
-    # Covers this configuration extension?
-    attribute extension { xsd:boolean },
+    # Covers this configuration CIUS or extension?
+    attribute type { "cius" | "extension" },
     
     # Metadata
     element c:meta {

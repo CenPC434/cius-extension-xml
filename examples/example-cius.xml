@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?xml-model href="../schema/ce-config.xsd"?>
+<?xml-model href="../schema/ce-config.rnc"?>
 <!-- This is an example CIUS with fictive examples not reflecting any real
   content. The sole purpose is too demonstrate the features of this XML
   structure -->
 <!-- Fulfils criterium: instances shall be fully compliant see README.md for
   more details -->
-<cius xmlns="urn:x-namespace:yet:to:be:determined" type="restriction">
+<config xmlns="urn:x-namespace:yet:to:be:determined" type="cius">
   <metadata>
     <nameShort>cius demonstration</nameShort>
     <nameLong>A demonstration of how to define a CIUS using this XML structure</nameLong>
@@ -116,4 +116,4 @@
       </restrictions>
     </rule>
   </business-rules>
-</cius>
+</config>
