@@ -189,7 +189,7 @@
       <c:description xml:lang="en">The element “Deliver to city“” (BT-77) shall
         be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-77">
+        <c:cardinality minOccurs="1">
           <c:term>BT-77</c:term>
         </c:cardinality>
       </c:restrictions>
@@ -243,7 +243,7 @@
       <c:description xml:lang="en">The element “VAT category rate” (BT-119)
         shall be transmitted.</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1" term="BT-119">
+        <c:cardinality minOccurs="1">
           <c:term>BT-119</c:term>
         </c:cardinality>
       </c:restrictions>
