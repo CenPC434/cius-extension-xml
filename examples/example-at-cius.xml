@@ -10,8 +10,8 @@
 
   -->
 <?xml-model href="../schema/ce-config.rnc"?>
-<c:config xmlns:c="urn:cen.eu:en16931:cius-extension:2018"
-  xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml" type="cius">
+<c:cius xmlns:c="urn:cen.eu:en16931:cius-extension:2018"
+  xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
 
   <!-- meta element contains basic metainformation about CIUS/Extension -->
   <c:meta>
@@ -212,4 +212,4 @@
 
   </c:rules>
 
-</c:config>
+</c:cius>

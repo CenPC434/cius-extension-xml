@@ -6,7 +6,7 @@
   structure -->
 <!-- Fulfils criterium: instances shall be fully compliant see README.md for
   more details -->
-<config xmlns="urn:cen.eu:en16931:cius-extension:2018" type="cius">
+<cius xmlns="urn:cen.eu:en16931:cius-extension:2018">
   <meta>
     <shortName>cius demonstration</shortName>
     <name>A demonstration of how to define a CIUS using this XML structure</name>
@@ -140,4 +140,4 @@
     </rule>
     
   </rules>
-</config>
+</cius>

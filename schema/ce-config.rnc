@@ -3,10 +3,8 @@ namespace c = "urn:cen.eu:en16931:cius-extension:2018"
 namespace html = "http://www.w3.org/1999/xhtml"
 
 start =
-  # CIUS or extension configuration
-  element c:config {
-    # Covers this configuration CIUS or extension?
-    attribute type { "cius" | "extension" },
+  # CIUS configuration
+  element c:cius {
     
     # Metadata
     element c:meta {
