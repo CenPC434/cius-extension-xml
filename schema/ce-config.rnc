@@ -42,7 +42,7 @@ start =
       element c:link { xsd:anyURI }?
     },
     # Text description
-    description+,
+    description*,
     # Business rules imposed by CIUS/extension
     element c:rules {
       # Business rule
