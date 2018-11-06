@@ -22,7 +22,7 @@ start =
       element c:version { text },
       # Status of CUIZS/extension
       element c:status { "planned" | "development" | "active" | "revoked" },
-      # Date of publicartion
+      # Date of publication
       element c:date { xsd:date },
       # Publisher
       element c:publisher { html-rtf },
