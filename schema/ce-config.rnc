@@ -3,7 +3,7 @@ namespace c = "urn:cen.eu:en16931:cius-extension:2018"
 namespace html = "http://www.w3.org/1999/xhtml"
 
 start =
-  # CIUS configuration
+  # CIUS definition
   element c:cius {
     
     # Metadata
