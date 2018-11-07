@@ -78,6 +78,8 @@ codelist =
   # Codelist
   element c:codelist {
     name?,
+    listURI?, 
+    listVersion?,
     term+,
     codelist-value+
   }
@@ -120,6 +122,15 @@ codelist-value =
 term =
   # Reference to business term (i.e. BT-NN)
   element c:term { text }
+
+  
+listURI = 
+  # Reference to original codelist
+  element c:listURI { text }
+  
+listVersion =
+  # Version of codelist
+  element c:listVersion { text }
 
 synonyms =
   # Synonyms of term
