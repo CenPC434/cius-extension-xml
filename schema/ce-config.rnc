@@ -3,51 +3,51 @@ namespace c = "urn:cen.eu:en16931:cius-extension:2018"
 namespace html = "http://www.w3.org/1999/xhtml"
 
 start =
-  # CIUS definition
+  ## CIUS definition
   element c:cius {
     
-    # Metadata
+    ## Metadata
     element c:meta {
-      # Short identifier
+      ## Short identifier
       element c:shortName { text },
-      # Name of CUIS/extension
+      ## Name of CUIS/extension
       element c:name { text },
-      # Identifier as defined in 7.6 Identification of core invoice usage specifications
+      ## Identifier as defined in 7.6 Identification of core invoice usage specifications
       element c:id { text },
-      # Identifier of specification that is being extended
+      ## Identifier of specification that is being extended
       element c:extends { text }?,
-      # Underlying specification
+      ## Underlying specification
       element c:specification { text }?,
-      # Version number
+      ## Version number
       element c:version { text },
-      # Status of CUIS/extension
+      ## Status of CUIS/extension
       element c:status { "planned" | "development" | "active" | "revoked" },
-      # Date of publication
+      ## Date of publication
       element c:date { xsd:date },
-      # Publisher
+      ## Publisher
       element c:publisher { html-rtf },
-      # Governonr
+      ## Governonr
       element c:governor { html-rtf },
-      # Country to which CIUS/extension applies
+      ## Country to which CIUS/extension applies
       element c:country { text }?,
-      # Sector to which CIUS/extension applies
+      ## Sector to which CIUS/extension applies
       element c:sector { text }?,
-      # Contact email for any questions and bug reports against CUIS/extension
+      ## Contact email for any questions and bug reports against CUIS/extension
       element c:contact { text },
-      # Short description of CIUS/extensions
+      ## Short description of CIUS/extensions
       element c:abstract { attribute xml:lang { text }?, html-rtf },
-      # Link for more information
+      ## Link for more information
       element c:link { xsd:anyURI }?,
-      # Information about a review process
+      ## Information about a review process
       element c:review { attribute startDate { xsd:date }?, attribute endDate { xsd:date }?, html-rtf }?
     },
-    # Text description
+    ## Text description
     description*,
-    # Business rules imposed by CIUS/extension
+    ## Business rules imposed by CIUS/extension
     element c:rules {
-      # Business rule
+      ## Business rule
       element c:rule {
-        # Unique ID for business rule (BR-{country}-{id} pattern is recommended)
+        ## Unique ID for business rule (BR-{country}-{id} pattern is recommended)
         attribute id { text },
         description+,
         restrictions?,        
@@ -57,15 +57,15 @@ start =
   }
 
 description =
-  # Human readable description can contain mix of text and HTML markup if formatting is needed
+  ## Human readable description can contain mix of text and HTML markup if formatting is needed
   element c:description { attribute xml:lang { text }?, html-rtf }
 
 restrictions =
-  # Restrictions that are further applied
+  ## Restrictions that are further applied
   element c:restrictions { (cardinality | technical | codelist | value | other | synonyms)+ }
 
 cardinality = 
-  # Constaint on cardinality
+  ## Constaint on cardinality
   element c:cardinality {
     attribute maxOccurs { xsd:integer | "unbounded" }?,
     attribute minOccurs { xsd:integer }?,
@@ -73,11 +73,11 @@ cardinality =
   }
 
 technical =
-  # Technical constaint
+  ## Technical constaint
   element c:technical { empty }
 
 codelist =
-  # Codelist
+  ## Codelist
   element c:codelist {
     name?,
     listURI?, 
@@ -87,61 +87,60 @@ codelist =
   }
 
 value =
-  # Restricted value domain
-  # Restriction can be made using attributes similar to W3C XML Schema facets
+  ## Restricted value domain
+  ## Restriction can be made using attributes similar to W3C XML Schema facets
   element c:value {
-    # Regular expression describing allowed values
+    ## Regular expression describing allowed values
     attribute pattern { text }?,
-    # Required length of value
+    ## Required length of value
     attribute length { xsd:nonNegativeInteger }?,
-    # Maximum length of value
+    ## Maximum length of value
     attribute maxLength { xsd:nonNegativeInteger }?,
-    # Maximal number of fraction digits
+    ## Maximal number of fraction digits
     attribute fractionDigits { xsd:nonNegativeInteger }?,
-    # Maximal number of fraction digits
+    ## Maximal number of fraction digits
     attribute totalDigits { xsd:nonNegativeInteger }?,
-    # Minimum allowed value
+    ## Minimum allowed value
     attribute minInclusive { xsd:decimal }?,
-    # Maximum allowed value
+    ## Maximum allowed value
     attribute maxInclusive { xsd:decimal }?,
     term+
   }
   
 other =
-  # FIXME: what should be content model here
+  ## FIXME: what should be content model here
   element c:other {
     term+
   }  
   
 name = 
-  # Name 
+  ## Name 
   element c:name { text }
 
 codelist-value =
-  # Allowed value
+  ## Allowed value
   element c:value { text }
 
 term =
-  # Reference to business term (i.e. BT-NN)
+  ## Reference to business term (i.e. BT-NN)
   element c:term { text }
 
   
 listURI = 
-  # Reference to original codelist
+  ## Reference to original codelist
   element c:listURI { text }
   
 listVersion =
-  # Version of codelist
+  ## Version of codelist
   element c:listVersion { text }
 
 synonyms =
-  # Synonyms of term
+  ## Synonyms of term
   element c:synonyms { term+, synonym+ }
   
 synonym =
-  # Synonym of term
+  ## Synonym of term
   element c:synonym { attribute xml:lang { text }?, text }
-
 
 html-rtf = text & any-html*
 
@@ -149,9 +148,9 @@ any-html = element html:* { any-attribute*, (any-html* & text) }
 any-attribute = attribute * { text }
 
 implementation =
-  # Technical implementation of constraint in any schema language, usually in Schematron
+  ## Technical implementation of constraint in any schema language, usually in Schematron
   element c:implementation {
-    # To which syntax implementation applies?
+    ## To which syntax implementation applies?
     attribute syntax { "UBL-2.1" | "CII-D16B" }, 
     any 
   }
