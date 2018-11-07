@@ -152,7 +152,7 @@ implementation =
   # Technical implementation of constraint in any schema language, usually in Schematron
   element c:implementation {
     # To which syntax implementation applies?
-    attribute syntax { "UBL" | "CII" }, 
+    attribute syntax { "UBL-2.1" | "CII-D16B" }, 
     any 
   }
 
