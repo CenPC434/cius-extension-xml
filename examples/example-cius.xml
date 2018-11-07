@@ -6,7 +6,8 @@
   structure -->
 <!-- Fulfils criterium: instances shall be fully compliant see README.md for
   more details -->
-<cius xmlns="urn:cen.eu:en16931:cius-extension:2018">
+<cius xmlns="urn:cen.eu:en16931:cius-extension:2018"
+      xmlns:html="http://www.w3.org/1999/xhtml">
   <meta>
     <shortName>cius demonstration</shortName>
     <name>A demonstration of how to define a CIUS using this XML structure</name>
@@ -29,6 +30,12 @@
       a EN16931-1:2017 compliant description of a CIUS is made possible by this
       XML structure as defined by an XSD</abstract>
     <link>https://github.com/itplr-kosit/ce-config/blob/cius-rule-and-bt-model/schema/ce-config.xsd</link>
+    <review endDate="2019-05-30">
+      CIUS is currently under the review. You can send your comments until May 30th, 2019 to
+      email address <html:a href="mailto:cius-comments@example.com">cius-comments@example.com</html:a>. 
+      Alternatively you can log your comments <html:a href="http://example.com/submit-cius-comment">using 
+        electronic form</html:a>.
+    </review>
   </meta>
 
   <!-- Fulfils criterium: give a clear statement on the business function or legal requirements -->

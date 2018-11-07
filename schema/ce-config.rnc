@@ -37,7 +37,9 @@ start =
       # Short description of CIUS/extensions
       element c:abstract { attribute xml:lang { text }?, html-rtf },
       # Link for more information
-      element c:link { xsd:anyURI }?
+      element c:link { xsd:anyURI }?,
+      # Information about a review process
+      element c:review { attribute startDate { xsd:date }?, attribute endDate { xsd:date }?, html-rtf }?
     },
     # Text description
     description*,
