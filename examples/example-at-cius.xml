@@ -74,8 +74,8 @@
     <c:cardinality minOccurs="M" maxOccurs="N">
       <c:term>BT-XYZ</c:term>
     </c:cardinality>
-      - allows changing cardinality of term occurence, term can be made mandatory, can be forbidden 
-        or maximum occurences can be changed from infinity to smaller number, typically 1
+      - allows changing cardinality of term occurrence, term can be made mandatory, can be forbidden 
+        or maximum occurrences can be changed from infinity to smaller number, typically 1
         
     <c:codelist>
       <c:term>BT-XYZ</c:term>
@@ -96,7 +96,7 @@
       - it's not necessary to link such constraint to term 
       
     <c:other>
-      - some other restriction, for example co-occurence, semantic definition
+      - some other restriction, for example co-occurrence, semantic definition
       
     <c:synonyms>
       - synonyms of term
