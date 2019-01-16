@@ -11,7 +11,11 @@
   -->
 <?xml-model href="../schema/ce-config.rnc"?>
 <c:cius xmlns:c="urn:cen.eu:en16931:cius-extension:2018"
-  xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns="http://www.w3.org/1999/xhtml">
+  xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+  xmlns:invoice="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+  xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+  xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"    
+  xmlns="http://www.w3.org/1999/xhtml">
 
   <!-- meta element contains basic metainformation about CIUS/Extension -->
   <c:meta>
@@ -155,12 +159,18 @@
     <c:rule id="BR-AT-4">
       <c:description>Actual delivery date or invoicing period must be provided</c:description>
       <c:restrictions>
-        <c:cardinality minOccurs="1">
+        <c:other>
           <c:term>BT-72</c:term>
           <c:term>BT-73</c:term>
           <c:term>BT-74</c:term>
-        </c:cardinality>
+        </c:other>
       </c:restrictions>
+      <c:implementation syntax="UBL-2.1">
+        <sch:rule context="invoice:Invoice">
+          <sch:assert test="cac:Delivery/cbc:ActualDeliveryDate or 
+                            (cac:InvoicePeriod/cbc:StartDate and cac:InvoicePeriod/cbc:EndDate)">Actual delivery date or invoicing period must be provided</sch:assert>
+        </sch:rule>
+      </c:implementation>
     </c:rule>
 
     <c:rule id="BR-AT-5">
