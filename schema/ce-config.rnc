@@ -65,7 +65,7 @@ restrictions =
   element c:restrictions { (cardinality | technical | codelist | value | other | synonyms)+ }
 
 cardinality = 
-  ## Constaint on cardinality
+  ## Constraint on cardinality
   element c:cardinality {
     attribute maxOccurs { xsd:integer | "unbounded" }?,
     attribute minOccurs { xsd:integer }?,
@@ -73,7 +73,7 @@ cardinality =
   }
 
 technical =
-  ## Technical constaint
+  ## Technical constraint
   element c:technical { empty }
 
 codelist =
@@ -108,7 +108,8 @@ value =
   }
   
 other =
-  ## FIXME: what should be content model here
+  ## Restriction that can not be formally expressed
+  ## However for purposes of better analysis affected terms should be listed
   element c:other {
     term+
   }  
