@@ -58,7 +58,7 @@ start =
 
 description =
   ## Human readable description can contain mix of text and HTML markup if formatting is needed
-  element c:description { attribute xml:lang { text }?, html-rtf }
+  element c:description { attribute xml:lang { xsd:language }?, html-rtf }
 
 restrictions =
   ## Restrictions that are further applied
