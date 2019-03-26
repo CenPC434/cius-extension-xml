@@ -2,6 +2,10 @@ default namespace = "http://www.w3.org/1999/xhtml"
 namespace c = "urn:cen.eu:en16931:cius-extension:2018"
 namespace html = "http://www.w3.org/1999/xhtml"
 
+# This schema defines a machine readable XML format for describing Core Invoice Usage Specifications (CIUS) 
+# fully compliant to the methodology and rules of EU electronic invoicing (EN 16931-1:2017)
+# Any issues found in the schema should be reported at https://github.com/CenPC434/cius-extension-xml/issues
+
 start =
   ## CIUS definition
   element c:cius {

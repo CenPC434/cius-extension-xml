@@ -7,6 +7,11 @@
               schemaLocation="xml.xsd"/>
    <xs:element name="cius" type="c:ciusType">
       <xs:annotation>
+         <xs:documentation xmlns="http://www.w3.org/1999/xhtml">
+            <p>This schema defines a machine readable XML format for describing Core Invoice Usage Specifications (CIUS)</p>
+            <p>fully compliant to the methodology and rules of EU electronic invoicing (EN 16931-1:2017)</p>
+            <p>Any issues found in the schema should be reported at https://github.com/CenPC434/cius-extension-xml/issues</p>
+         </xs:documentation>
          <xs:documentation>CIUS definition</xs:documentation>
       </xs:annotation>
    </xs:element>
