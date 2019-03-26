@@ -35,7 +35,7 @@ start =
       ## Contact email for any questions and bug reports against CUIS/extension
       element c:contact { text },
       ## Short description of CIUS/extensions
-      element c:abstract { attribute xml:lang { text }?, html-rtf },
+      element c:abstract { attribute xml:lang { xsd:language }?, html-rtf },
       ## Link for more information
       element c:link { xsd:anyURI }?,
       ## Information about a review process
@@ -138,7 +138,7 @@ version =
   
 genericode =
   ## Link to Genericode version of codelist
-  element c:version {
+  element c:genericode {
     ## Reference to column that contains values for the codelist
     attribute column { text }?,
     xsd:anyURI 
@@ -150,7 +150,7 @@ synonyms =
   
 synonym =
   ## Synonym of term
-  element c:synonym { attribute xml:lang { text }?, text }
+  element c:synonym { attribute xml:lang { xsd:language }?, text }
 
 html-rtf = text & any-html*
 
