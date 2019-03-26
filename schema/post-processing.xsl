@@ -24,7 +24,10 @@
       </doc:ul>
     </doc:desc>
   </doc:doc>
-  
+
+  <xsl:strip-space elements="*"/>
+  <xsl:preserve-space elements="xs:documentation"/>
+
   <doc:doc scope="component">		
     <doc:desc>
       <doc:p>Key for quick lookup of element declarations</doc:p>
@@ -415,6 +418,8 @@
       <xsl:when test="@type = 'c:html-rtf'">
         <xs:complexType>
           <xsl:attribute name="name" select="concat(@name, 'Type')"/>
+          <!-- Annotations are moved into type declaration when element declaration is removed -->
+          <xsl:apply-templates select="xs:annotation" mode="remove-slices"/>
           <xs:complexContent>
             <xs:extension base="c:html-rtf"/>
           </xs:complexContent>
@@ -424,6 +429,8 @@
       <xsl:when test="@type">
         <xs:simpleType>
           <xsl:attribute name="name" select="concat(@name, 'Type')"/>
+          <!-- Annotations are moved into type declaration when element declaration is removed -->
+          <xsl:apply-templates select="xs:annotation" mode="remove-slices"/>
           <xs:restriction base="{@type}"/>
         </xs:simpleType>        
       </xsl:when>
@@ -460,6 +467,10 @@
           <xsl:attribute name="type" select="concat(@ref, 'Type')"/>
         </xsl:otherwise>
       </xsl:choose>
+      <!-- Copy annotation from the referenced element if there is no existing annotation -->
+      <xsl:if test="not(xs:annotation)">
+        <xsl:copy-of select="ancestor::xs:schema/xs:element[local-name-from-QName($ref-qname) = @name]/xs:annotation"/>  
+      </xsl:if>      
       <xsl:apply-templates mode="remove-slices"/>
     </xsl:copy>
   </xsl:template>

@@ -5,6 +5,5 @@
            targetNamespace="http://www.w3.org/XML/1998/namespace">
    <xs:import namespace="urn:cen.eu:en16931:cius-extension:2018"
               schemaLocation="ce-config.xsd"/>
-  
-  <xs:attribute name="lang"/>
+   <xs:attribute name="lang" type="xs:language"/>
 </xs:schema>

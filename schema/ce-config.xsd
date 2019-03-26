@@ -1,345 +1,542 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:c="urn:cen.eu:en16931:cius-extension:2018"
-  elementFormDefault="qualified"
-  targetNamespace="urn:cen.eu:en16931:cius-extension:2018">
-  
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
-
-  <xs:element name="cius" type="c:ciusType">
-    <xs:annotation>
-      <xs:documentation>CIUS definition</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  
-  <xs:complexType name="ciusType">
-    <xs:annotation>
-      <xs:documentation>CIUS definition</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="meta" type="c:metaType"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="description" type="c:descriptionType">
-        <xs:annotation>
-          <xs:documentation>Text description</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="rules" type="c:rulesType"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="metaType">
-    <xs:annotation>
-      <xs:documentation>Metadata</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="shortName" type="c:shortNameType"/>
-      <xs:element name="name" type="xs:string">
-        <xs:annotation>
-          <xs:documentation>Name of CUIS/extension</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="id" type="c:idType"/>
-      <xs:element minOccurs="0" name="extends" type="c:extendsType"/>
-      <xs:element minOccurs="0" name="specification" type="c:specificationType"/>
-      <xs:element name="version" type="c:versionType"/>
-      <xs:element name="status" type="c:statusType"/>
-      <xs:element name="date" type="c:dateType"/>
-      <xs:element name="publisher" type="c:publisherType"/>
-      <xs:element name="governor" type="c:governorType"/>
-      <xs:element minOccurs="0" name="country" type="c:countryType"/>
-      <xs:element minOccurs="0" name="sector" type="c:sectorType"/>
-      <xs:element name="contact" type="c:contactType"/>
-      <xs:element name="abstract" type="c:abstractType"/>
-      <xs:element minOccurs="0" name="link" type="c:linkType"/>
-      <xs:element minOccurs="0" name="review" type="c:reviewType"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:simpleType name="shortNameType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="idType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="extendsType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="specificationType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="versionType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="statusType">
-    <xs:annotation>
-      <xs:documentation>Status of CUIS/extension</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="planned"/>
-      <xs:enumeration value="development"/>
-      <xs:enumeration value="active"/>
-      <xs:enumeration value="revoked"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="dateType">
-    <xs:restriction base="xs:date"/>
-  </xs:simpleType>
-  <xs:complexType name="publisherType">
-    <xs:complexContent>
-      <xs:extension base="c:html-rtf"/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="governorType">
-    <xs:complexContent>
-      <xs:extension base="c:html-rtf"/>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:simpleType name="countryType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="sectorType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="contactType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:complexType name="abstractType">
-    <xs:annotation>
-      <xs:documentation>Short description of CIUS/extensions</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="c:html-rtf">
-        <xs:attribute ref="xml:lang"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:simpleType name="linkType">
-    <xs:restriction base="xs:anyURI"/>
-  </xs:simpleType>
-  <xs:complexType name="reviewType">
-    <xs:annotation>
-      <xs:documentation>Information about a review process</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="c:html-rtf">
-        <xs:attribute name="startDate" type="xs:date"/>
-        <xs:attribute name="endDate" type="xs:date"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="rulesType">
-    <xs:annotation>
-      <xs:documentation>Business rules imposed by CIUS/extension</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="rule" type="c:ruleType"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="ruleType">
-    <xs:annotation>
-      <xs:documentation>Business rule</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="description" type="c:descriptionType"/>
-      <xs:element minOccurs="0" name="restrictions" type="c:restrictionsType"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="implementation"
-        type="c:implementationType"/>
-    </xs:sequence>
-    <xs:attribute name="id" use="required">
+           xmlns:c="urn:cen.eu:en16931:cius-extension:2018"
+           elementFormDefault="qualified"
+           targetNamespace="urn:cen.eu:en16931:cius-extension:2018">
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+              schemaLocation="xml.xsd"/>
+   <xs:element name="cius" type="c:ciusType">
       <xs:annotation>
-        <xs:documentation>Unique ID for business rule (BR-{country}-{id} pattern is
-          recommended)</xs:documentation>
+         <xs:documentation>CIUS definition</xs:documentation>
       </xs:annotation>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:complexType name="descriptionType">
-    <xs:annotation>
-      <xs:documentation>Human readable description can contain mix of text and HTML markup if
-        formatting is needed</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="c:html-rtf">
-        <xs:attribute ref="xml:lang"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="restrictionsType">
-    <xs:annotation>
-      <xs:documentation>Restrictions that are further applied</xs:documentation>
-    </xs:annotation>
-    <xs:choice maxOccurs="unbounded">
-      <xs:element name="cardinality" type="c:cardinalityType"/>
-      <xs:element name="technical" type="c:technicalType"/>
-      <xs:element name="codelist" type="c:codelistType"/>
-      <xs:group ref="c:value"/>
-      <xs:element name="other" type="c:otherType"/>
-      <xs:element name="synonyms" type="c:synonymsType"/>
-    </xs:choice>
-  </xs:complexType>
-  <xs:complexType name="cardinalityType">
-    <xs:annotation>
-      <xs:documentation>Constaint on cardinality</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="term" type="c:termType"/>
-    </xs:sequence>
-    <xs:attribute name="maxOccurs">
-      <xs:simpleType>
-        <xs:union memberTypes="xs:integer">
-          <xs:simpleType>
-            <xs:restriction base="xs:token">
-              <xs:enumeration value="unbounded"/>
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="minOccurs" type="xs:integer"/>
-  </xs:complexType>
-  <xs:complexType name="technicalType">
-    <xs:annotation>
-      <xs:documentation>Technical constaint</xs:documentation>
-    </xs:annotation>
-  </xs:complexType>
-  <xs:complexType name="codelistType">
-    <xs:annotation>
-      <xs:documentation>Codelist</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="name" type="c:nameType"/>
-      <xs:element minOccurs="0" name="listURI" type="c:listURIType"/>
-      <xs:element minOccurs="0" name="listVersion" type="c:listVersionType"/>
-      <xs:element maxOccurs="unbounded" name="term" type="c:termType"/>
-      <xs:group maxOccurs="unbounded" ref="c:codelist-value"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:group name="value">
-    <xs:sequence>
-      <xs:element name="value">
-        <xs:annotation>
-          <xs:documentation>Restricted value domain Restriction can be made using attributes similar
-            to W3C XML Schema facets</xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="term" type="c:termType"/>
-          </xs:sequence>
-          <xs:attribute name="pattern">
+   </xs:element>
+   <xs:complexType name="ciusType">
+      <xs:annotation>
+         <xs:documentation>CIUS definition</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="meta" type="c:metaType">
             <xs:annotation>
-              <xs:documentation>Regular expression describing allowed values</xs:documentation>
+               <xs:documentation>Metadata</xs:documentation>
             </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="length" type="xs:nonNegativeInteger">
+         </xs:element>
+         <xs:element minOccurs="0"
+                     maxOccurs="unbounded"
+                     name="description"
+                     type="c:descriptionType">
             <xs:annotation>
-              <xs:documentation>Required length of value</xs:documentation>
+               <xs:documentation>Text description</xs:documentation>
             </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="maxLength" type="xs:nonNegativeInteger">
+         </xs:element>
+         <xs:element name="rules" type="c:rulesType">
             <xs:annotation>
-              <xs:documentation>Maximum length of value</xs:documentation>
+               <xs:documentation>Business rules imposed by CIUS/extension</xs:documentation>
             </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="fractionDigits" type="xs:nonNegativeInteger">
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="metaType">
+      <xs:annotation>
+         <xs:documentation>Metadata</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="shortName" type="c:shortNameType">
             <xs:annotation>
-              <xs:documentation>Maximal number of fraction digits</xs:documentation>
+               <xs:documentation>Short identifier</xs:documentation>
             </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="totalDigits" type="xs:nonNegativeInteger">
+         </xs:element>
+         <xs:element name="name" type="xs:string">
             <xs:annotation>
-              <xs:documentation>Maximal number of fraction digits</xs:documentation>
+               <xs:documentation>Name of CUIS/extension</xs:documentation>
             </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="minInclusive" type="xs:decimal">
+         </xs:element>
+         <xs:element name="id" type="c:idType">
             <xs:annotation>
-              <xs:documentation>Minimum allowed value</xs:documentation>
+               <xs:documentation>Identifier as defined in 7.6 Identification of core invoice usage specifications</xs:documentation>
             </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="maxInclusive" type="xs:decimal">
+         </xs:element>
+         <xs:element minOccurs="0" name="extends" type="c:extendsType">
             <xs:annotation>
-              <xs:documentation>Maximum allowed value</xs:documentation>
+               <xs:documentation>Identifier of specification that is being extended</xs:documentation>
             </xs:annotation>
-          </xs:attribute>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-  </xs:group>
-  <xs:complexType name="otherType">
-    <xs:annotation>
-      <xs:documentation>FIXME: what should be content model here</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="term" type="c:termType"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:simpleType name="nameType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:group name="codelist-value">
-    <xs:sequence>
-      <xs:element name="value" type="xs:string">
-        <xs:annotation>
-          <xs:documentation>Allowed value</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:group>
-  <xs:simpleType name="termType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="listURIType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:simpleType name="listVersionType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:complexType name="synonymsType">
-    <xs:annotation>
-      <xs:documentation>Synonyms of term</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="term" type="c:termType"/>
-      <xs:element maxOccurs="unbounded" name="synonym" type="c:synonymType"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType mixed="true" name="synonymType">
-    <xs:annotation>
-      <xs:documentation>Synonym of term</xs:documentation>
-    </xs:annotation>
-    <xs:attribute ref="xml:lang"/>
-  </xs:complexType>
-  <xs:complexType name="html-rtf" mixed="true">
-    <xs:group minOccurs="0" maxOccurs="unbounded" ref="c:any-html"/>
-  </xs:complexType>
-  <xs:group name="any-html">
-    <xs:sequence>
-      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
-    </xs:sequence>
-  </xs:group>
-  <xs:attributeGroup name="any-attribute">
-    <xs:anyAttribute processContents="skip"/>
-  </xs:attributeGroup>
-  <xs:complexType name="implementationType">
-    <xs:annotation>
-      <xs:documentation>Technical implementation of constraint in any schema language, usually in
-        Schematron</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="c:any">
-        <xs:attribute name="syntax" use="required">
-          <xs:annotation>
-            <xs:documentation>To which syntax implementation applies?</xs:documentation>
-          </xs:annotation>
-          <xs:simpleType>
-            <xs:restriction base="xs:token">
-              <xs:enumeration value="UBL-2.1"/>
-              <xs:enumeration value="CII-D16B"/>
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:attribute>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="any">
-    <xs:sequence>
-      <xs:any processContents="skip"/>
-    </xs:sequence>
-  </xs:complexType>
+         </xs:element>
+         <xs:element minOccurs="0" name="specification" type="c:specificationType">
+            <xs:annotation>
+               <xs:documentation>Underlying specification</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="version" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>Version number</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="status" type="c:statusType">
+            <xs:annotation>
+               <xs:documentation>Status of CUIS/extension</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="date" type="c:dateType">
+            <xs:annotation>
+               <xs:documentation>Date of publication</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="publisher" type="c:publisherType">
+            <xs:annotation>
+               <xs:documentation>Publisher</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="governor" type="c:governorType">
+            <xs:annotation>
+               <xs:documentation>Governor</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="country" type="c:countryType">
+            <xs:annotation>
+               <xs:documentation>Country to which CIUS/extension applies</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="sector" type="c:sectorType">
+            <xs:annotation>
+               <xs:documentation>Sector to which CIUS/extension applies</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="contact" type="c:contactType">
+            <xs:annotation>
+               <xs:documentation>Contact email for any questions and bug reports against CUIS/extension</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="abstract" type="c:abstractType">
+            <xs:annotation>
+               <xs:documentation>Short description of CIUS/extensions</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="link" type="xs:anyURI">
+            <xs:annotation>
+               <xs:documentation>Link for more information</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="review" type="c:reviewType">
+            <xs:annotation>
+               <xs:documentation>Information about a review process</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="shortNameType">
+      <xs:annotation>
+         <xs:documentation>Short identifier</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="idType">
+      <xs:annotation>
+         <xs:documentation>Identifier as defined in 7.6 Identification of core invoice usage specifications</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="extendsType">
+      <xs:annotation>
+         <xs:documentation>Identifier of specification that is being extended</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="specificationType">
+      <xs:annotation>
+         <xs:documentation>Underlying specification</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="statusType">
+      <xs:annotation>
+         <xs:documentation>Status of CUIS/extension</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:token">
+         <xs:enumeration value="planned"/>
+         <xs:enumeration value="development"/>
+         <xs:enumeration value="active"/>
+         <xs:enumeration value="revoked"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="dateType">
+      <xs:annotation>
+         <xs:documentation>Date of publication</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:date"/>
+   </xs:simpleType>
+   <xs:complexType name="publisherType">
+      <xs:annotation>
+         <xs:documentation>Publisher</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="c:html-rtf"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="governorType">
+      <xs:annotation>
+         <xs:documentation>Governor</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="c:html-rtf"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:simpleType name="countryType">
+      <xs:annotation>
+         <xs:documentation>Country to which CIUS/extension applies</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="sectorType">
+      <xs:annotation>
+         <xs:documentation>Sector to which CIUS/extension applies</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="contactType">
+      <xs:annotation>
+         <xs:documentation>Contact email for any questions and bug reports against CUIS/extension</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:complexType name="abstractType">
+      <xs:annotation>
+         <xs:documentation>Short description of CIUS/extensions</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="c:html-rtf">
+            <xs:attribute ref="xml:lang"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="reviewType">
+      <xs:annotation>
+         <xs:documentation>Information about a review process</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="c:html-rtf">
+            <xs:attribute name="startDate" type="xs:date"/>
+            <xs:attribute name="endDate" type="xs:date"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="rulesType">
+      <xs:annotation>
+         <xs:documentation>Business rules imposed by CIUS/extension</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" name="rule" type="c:ruleType">
+            <xs:annotation>
+               <xs:documentation>Business rule</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ruleType">
+      <xs:annotation>
+         <xs:documentation>Business rule</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" name="description" type="c:descriptionType">
+            <xs:annotation>
+               <xs:documentation>Human readable description can contain mix of text and HTML markup if formatting is needed</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="restrictions" type="c:restrictionsType">
+            <xs:annotation>
+               <xs:documentation>Restrictions that are further applied</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0"
+                     maxOccurs="unbounded"
+                     name="implementation"
+                     type="c:implementationType">
+            <xs:annotation>
+               <xs:documentation>Technical implementation of constraint in any schema language, usually in Schematron</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" use="required">
+         <xs:annotation>
+            <xs:documentation>Unique ID for business rule (BR-{country}-{id} pattern is recommended)</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="descriptionType">
+      <xs:annotation>
+         <xs:documentation>Human readable description can contain mix of text and HTML markup if formatting is needed</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="c:html-rtf">
+            <xs:attribute ref="xml:lang"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="restrictionsType">
+      <xs:annotation>
+         <xs:documentation>Restrictions that are further applied</xs:documentation>
+      </xs:annotation>
+      <xs:choice maxOccurs="unbounded">
+         <xs:element name="cardinality" type="c:cardinalityType">
+            <xs:annotation>
+               <xs:documentation>Constraint on cardinality</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="technical" type="c:technicalType">
+            <xs:annotation>
+               <xs:documentation>Technical constraint</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="codelist" type="c:codelistType">
+            <xs:annotation>
+               <xs:documentation>Codelist</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:group ref="c:value"/>
+         <xs:element name="other" type="c:otherType">
+            <xs:annotation>
+               <xs:documentation>Restriction that can not be formally expressed
+However for purposes of better analysis affected terms should be listed</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="synonyms" type="c:synonymsType">
+            <xs:annotation>
+               <xs:documentation>Synonyms of term</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="cardinalityType">
+      <xs:annotation>
+         <xs:documentation>Constraint on cardinality</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" name="term" type="c:termType">
+            <xs:annotation>
+               <xs:documentation>Reference to business term (i.e. BT-NN)</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="maxOccurs">
+         <xs:simpleType>
+            <xs:union memberTypes="xs:integer">
+               <xs:simpleType>
+                  <xs:restriction base="xs:token">
+                     <xs:enumeration value="unbounded"/>
+                  </xs:restriction>
+               </xs:simpleType>
+            </xs:union>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="minOccurs" type="xs:integer"/>
+   </xs:complexType>
+   <xs:complexType name="technicalType">
+      <xs:annotation>
+         <xs:documentation>Technical constraint</xs:documentation>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="codelistType">
+      <xs:annotation>
+         <xs:documentation>Codelist</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element minOccurs="0" name="name" type="c:nameType">
+            <xs:annotation>
+               <xs:documentation>Name </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="link" type="c:linkType">
+            <xs:annotation>
+               <xs:documentation>Reference to original codelist</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="version" type="c:versionType">
+            <xs:annotation>
+               <xs:documentation>Version of codelist</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="genericode" type="c:genericodeType">
+            <xs:annotation>
+               <xs:documentation>Link to Genericode version of codelist</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element maxOccurs="unbounded" name="term" type="c:termType">
+            <xs:annotation>
+               <xs:documentation>Reference to business term (i.e. BT-NN)</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:group maxOccurs="unbounded" ref="c:codelist-value"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:group name="value">
+      <xs:sequence>
+         <xs:element name="value">
+            <xs:annotation>
+               <xs:documentation>Restricted value domain
+Restriction can be made using attributes similar to W3C XML Schema facets</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="term" type="c:termType">
+                     <xs:annotation>
+                        <xs:documentation>Reference to business term (i.e. BT-NN)</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+               <xs:attribute name="pattern">
+                  <xs:annotation>
+                     <xs:documentation>Regular expression describing allowed values</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="length" type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Required length of value</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="maxLength" type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Maximum length of value</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="fractionDigits" type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Maximal number of fraction digits</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="totalDigits" type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Maximal number of fraction digits</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="minInclusive" type="xs:decimal">
+                  <xs:annotation>
+                     <xs:documentation>Minimum allowed value</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="maxInclusive" type="xs:decimal">
+                  <xs:annotation>
+                     <xs:documentation>Maximum allowed value</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:group>
+   <xs:complexType name="otherType">
+      <xs:annotation>
+         <xs:documentation>Restriction that can not be formally expressed
+However for purposes of better analysis affected terms should be listed</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" name="term" type="c:termType">
+            <xs:annotation>
+               <xs:documentation>Reference to business term (i.e. BT-NN)</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="nameType">
+      <xs:annotation>
+         <xs:documentation>Name </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:group name="codelist-value">
+      <xs:sequence>
+         <xs:element name="value" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>Allowed value</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:group>
+   <xs:simpleType name="termType">
+      <xs:annotation>
+         <xs:documentation>Reference to business term (i.e. BT-NN)</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:simpleType name="linkType">
+      <xs:annotation>
+         <xs:documentation>Reference to original codelist</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:anyURI"/>
+   </xs:simpleType>
+   <xs:simpleType name="versionType">
+      <xs:annotation>
+         <xs:documentation>Version of codelist</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>
+   <xs:complexType name="genericodeType">
+      <xs:annotation>
+         <xs:documentation>Link to Genericode version of codelist</xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:anyURI">
+            <xs:attribute name="column">
+               <xs:annotation>
+                  <xs:documentation>Reference to column that contains values for the codelist</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="synonymsType">
+      <xs:annotation>
+         <xs:documentation>Synonyms of term</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" name="term" type="c:termType">
+            <xs:annotation>
+               <xs:documentation>Reference to business term (i.e. BT-NN)</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element maxOccurs="unbounded" name="synonym" type="c:synonymType">
+            <xs:annotation>
+               <xs:documentation>Synonym of term</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType mixed="true" name="synonymType">
+      <xs:annotation>
+         <xs:documentation>Synonym of term</xs:documentation>
+      </xs:annotation>
+      <xs:attribute ref="xml:lang"/>
+   </xs:complexType>
+   <xs:complexType name="html-rtf" mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="c:any-html"/>
+   </xs:complexType>
+   <xs:group name="any-html">
+      <xs:sequence>
+         <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="skip"/>
+      </xs:sequence>
+   </xs:group>
+   <xs:attributeGroup name="any-attribute">
+      <xs:anyAttribute processContents="skip"/>
+   </xs:attributeGroup>
+   <xs:complexType name="implementationType">
+      <xs:annotation>
+         <xs:documentation>Technical implementation of constraint in any schema language, usually in Schematron</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="c:any">
+            <xs:attribute name="syntax" use="required">
+               <xs:annotation>
+                  <xs:documentation>To which syntax implementation applies?</xs:documentation>
+               </xs:annotation>
+               <xs:simpleType>
+                  <xs:restriction base="xs:token">
+                     <xs:enumeration value="UBL-2.1"/>
+                     <xs:enumeration value="CII-D16B"/>
+                  </xs:restriction>
+               </xs:simpleType>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="any">
+      <xs:sequence>
+         <xs:any processContents="skip"/>
+      </xs:sequence>
+   </xs:complexType>
 </xs:schema>
