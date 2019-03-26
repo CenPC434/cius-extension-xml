@@ -30,7 +30,7 @@
          </xs:element>
          <xs:element name="rules" type="c:rulesType">
             <xs:annotation>
-               <xs:documentation>Business rules imposed by CIUS/extension</xs:documentation>
+               <xs:documentation>Business rules imposed by CIUS</xs:documentation>
             </xs:annotation>
          </xs:element>
       </xs:sequence>
@@ -47,7 +47,7 @@
          </xs:element>
          <xs:element name="name" type="xs:string">
             <xs:annotation>
-               <xs:documentation>Name of CUIS/extension</xs:documentation>
+               <xs:documentation>Name of CUIS</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="id" type="c:idType">
@@ -72,7 +72,7 @@
          </xs:element>
          <xs:element name="status" type="c:statusType">
             <xs:annotation>
-               <xs:documentation>Status of CUIS/extension</xs:documentation>
+               <xs:documentation>Status of CUIS</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="date" type="c:dateType">
@@ -92,22 +92,22 @@
          </xs:element>
          <xs:element minOccurs="0" name="country" type="c:countryType">
             <xs:annotation>
-               <xs:documentation>Country to which CIUS/extension applies</xs:documentation>
+               <xs:documentation>Country to which CIUS applies</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element minOccurs="0" name="sector" type="c:sectorType">
             <xs:annotation>
-               <xs:documentation>Sector to which CIUS/extension applies</xs:documentation>
+               <xs:documentation>Sector to which CIUS applies</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="contact" type="c:contactType">
             <xs:annotation>
-               <xs:documentation>Contact email for any questions and bug reports against CUIS/extension</xs:documentation>
+               <xs:documentation>Contact email for any questions and bug reports against CUIS</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="abstract" type="c:abstractType">
             <xs:annotation>
-               <xs:documentation>Short description of CIUS/extensions</xs:documentation>
+               <xs:documentation>Short description of CIUS</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element minOccurs="0" name="link" type="xs:anyURI">
@@ -148,7 +148,7 @@
    </xs:simpleType>
    <xs:simpleType name="statusType">
       <xs:annotation>
-         <xs:documentation>Status of CUIS/extension</xs:documentation>
+         <xs:documentation>Status of CUIS</xs:documentation>
       </xs:annotation>
       <xs:restriction base="xs:token">
          <xs:enumeration value="planned"/>
@@ -181,25 +181,25 @@
    </xs:complexType>
    <xs:simpleType name="countryType">
       <xs:annotation>
-         <xs:documentation>Country to which CIUS/extension applies</xs:documentation>
+         <xs:documentation>Country to which CIUS applies</xs:documentation>
       </xs:annotation>
       <xs:restriction base="xs:string"/>
    </xs:simpleType>
    <xs:simpleType name="sectorType">
       <xs:annotation>
-         <xs:documentation>Sector to which CIUS/extension applies</xs:documentation>
+         <xs:documentation>Sector to which CIUS applies</xs:documentation>
       </xs:annotation>
       <xs:restriction base="xs:string"/>
    </xs:simpleType>
    <xs:simpleType name="contactType">
       <xs:annotation>
-         <xs:documentation>Contact email for any questions and bug reports against CUIS/extension</xs:documentation>
+         <xs:documentation>Contact email for any questions and bug reports against CUIS</xs:documentation>
       </xs:annotation>
       <xs:restriction base="xs:string"/>
    </xs:simpleType>
    <xs:complexType name="abstractType">
       <xs:annotation>
-         <xs:documentation>Short description of CIUS/extensions</xs:documentation>
+         <xs:documentation>Short description of CIUS</xs:documentation>
       </xs:annotation>
       <xs:complexContent>
          <xs:extension base="c:html-rtf">
@@ -220,7 +220,7 @@
    </xs:complexType>
    <xs:complexType name="rulesType">
       <xs:annotation>
-         <xs:documentation>Business rules imposed by CIUS/extension</xs:documentation>
+         <xs:documentation>Business rules imposed by CIUS</xs:documentation>
       </xs:annotation>
       <xs:sequence>
          <xs:element maxOccurs="unbounded" name="rule" type="c:ruleType">

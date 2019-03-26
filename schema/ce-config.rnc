@@ -10,7 +10,7 @@ start =
     element c:meta {
       ## Short identifier
       element c:shortName { text },
-      ## Name of CUIS/extension
+      ## Name of CUIS
       element c:name { text },
       ## Identifier as defined in 7.6 Identification of core invoice usage specifications
       element c:id { text },
@@ -20,7 +20,7 @@ start =
       element c:specification { text }?,
       ## Version number
       element c:version { text },
-      ## Status of CUIS/extension
+      ## Status of CUIS
       element c:status { "planned" | "development" | "active" | "revoked" },
       ## Date of publication
       element c:date { xsd:date },
@@ -28,13 +28,13 @@ start =
       element c:publisher { html-rtf },
       ## Governor
       element c:governor { html-rtf },
-      ## Country to which CIUS/extension applies
+      ## Country to which CIUS applies
       element c:country { text }?,
-      ## Sector to which CIUS/extension applies
+      ## Sector to which CIUS applies
       element c:sector { text }?,
-      ## Contact email for any questions and bug reports against CUIS/extension
+      ## Contact email for any questions and bug reports against CUIS
       element c:contact { text },
-      ## Short description of CIUS/extensions
+      ## Short description of CIUS
       element c:abstract { attribute xml:lang { xsd:language }?, html-rtf },
       ## Link for more information
       element c:link { xsd:anyURI }?,
@@ -43,7 +43,7 @@ start =
     },
     ## Text description
     description*,
-    ## Business rules imposed by CIUS/extension
+    ## Business rules imposed by CIUS
     element c:rules {
       ## Business rule
       element c:rule {
