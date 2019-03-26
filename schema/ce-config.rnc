@@ -26,7 +26,7 @@ start =
       element c:date { xsd:date },
       ## Publisher
       element c:publisher { html-rtf },
-      ## Governonr
+      ## Governor
       element c:governor { html-rtf },
       ## Country to which CIUS/extension applies
       element c:country { text }?,
