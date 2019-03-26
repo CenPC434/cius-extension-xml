@@ -80,8 +80,9 @@ codelist =
   ## Codelist
   element c:codelist {
     name?,
-    listURI?, 
-    listVersion?,
+    link?, 
+    version?,
+    genericode?,
     term+,
     codelist-value+
   }
@@ -127,13 +128,21 @@ term =
   element c:term { text }
 
   
-listURI = 
+link = 
   ## Reference to original codelist
-  element c:listURI { text }
+  element c:link { xsd:anyURI }
   
-listVersion =
+version =
   ## Version of codelist
-  element c:listVersion { text }
+  element c:version { text }
+  
+genericode =
+  ## Link to Genericode version of codelist
+  element c:version {
+    ## Reference to column that contains values for the codelist
+    attribute column { text }?,
+    xsd:anyURI 
+  }
 
 synonyms =
   ## Synonyms of term
